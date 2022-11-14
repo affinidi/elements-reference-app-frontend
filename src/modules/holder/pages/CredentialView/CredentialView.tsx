@@ -60,7 +60,7 @@ export const CredentialView: FC<CredentialViewProps> = ({ sharedCredentialId }) 
         path={PATHS.HOLDER.HOME}
       />
       {isLoading && <Spinner />}
-      {data && (
+      {(data as StoredW3CCredential)?.credentialSubject && (
         <Container fullWidth>
           <S.QrCodeContainer>
             <img src={shareCredentialData?.qrCode} alt="QR Code" />
@@ -71,7 +71,10 @@ export const CredentialView: FC<CredentialViewProps> = ({ sharedCredentialId }) 
             </S.Label>
             {/* TODO decide which field from VC should get p1 Typography variant */}
             {/* <Typography variant="p1">{credential.description}</Typography> */}
-            {getDetails((data as StoredW3CCredential)?.credentialSubject.data)}
+            {getDetails(
+              (data as StoredW3CCredential)?.credentialSubject.data ||
+                (data as StoredW3CCredential)?.credentialSubject,
+            )}
           </div>
         </Container>
       )}
