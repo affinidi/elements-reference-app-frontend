@@ -149,7 +149,11 @@ export const ConfirmSignIn: FC = () => {
         ...authState,
         status: AppAuthStateStatus.AUTHORIZED,
       })
-      if (!error) navigate(PATHS.HOLDER.HOME)
+      if (authState.vcOfferToken) {
+        navigate(PATHS.HOLDER.CLAIM_VC)
+      } else if (authState.vcHash && authState.vcKey) {
+        navigate(PATHS.HOLDER.ONBOARD)
+      } else navigate(PATHS.HOLDER.HOME)
     }
     if (authState.username === '') {
       navigate(PATHS.HOLDER.SIGNIN)

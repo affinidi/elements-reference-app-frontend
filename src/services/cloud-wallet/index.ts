@@ -3,7 +3,12 @@ import {
   clearSessionStorage,
   getItemFromSessionStorage,
 } from 'modules/holder/pages/hooks/useSessionStorage'
-import { Api as CloudWalletApi, ConfirmSignInInput, SignInInput } from './cloud-wallet.api'
+import {
+  Api as CloudWalletApi,
+  ConfirmSignInInput,
+  SaveCredentialInput,
+  SignInInput,
+} from './cloud-wallet.api'
 
 class CloudWalletService {
   constructor(
@@ -49,6 +54,19 @@ class CloudWalletService {
     }
   }
 
+  getDid = async () => {
+    try {
+      const response = await this.client.users.getDid({
+        headers: {
+          Authorization: getItemFromSessionStorage('accessToken') || '',
+        },
+      })
+      return response.data
+    } catch (error: any) {
+      throw new Error(error?.error?.message)
+    }
+  }
+
   getAllCredentials = async () => {
     try {
       const response = await this.client.wallet.getCredentials(
@@ -72,6 +90,37 @@ class CloudWalletService {
           Authorization: getItemFromSessionStorage('accessToken') || '',
         },
       })
+      return response.data
+    } catch (error: any) {
+      throw new Error(error?.error?.message)
+    }
+  }
+
+  deleteCredentialById = async (id: string) => {
+    try {
+      const response = await this.client.wallet.deleteCredential(id, {
+        headers: {
+          Authorization: getItemFromSessionStorage('accessToken') || '',
+        },
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error?.error?.message)
+    }
+  }
+
+  claimCredential = async (token: string) => {
+    try {
+      const response = await this.client.wallet.claimCredentials(
+        {
+          credentialOfferRequestToken: token,
+        },
+        {
+          headers: {
+            Authorization: getItemFromSessionStorage('accessToken') || '',
+          },
+        },
+      )
       return response.data
     } catch (error: any) {
       throw new Error(error?.error?.message)
@@ -104,9 +153,9 @@ class CloudWalletService {
     }
   }
 
-  getDid = async () => {
+  storeCredentials = async (data: SaveCredentialInput) => {
     try {
-      const response = await this.client.users.getDid({
+      const response = await this.client.wallet.storeCredentials(data, {
         headers: {
           Authorization: getItemFromSessionStorage('accessToken') || '',
         },

@@ -3,7 +3,7 @@
   "description": "Affinidi Elements. Reference Application",
   "author": "affinidi.com",
   "version": "0.0.1",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "scripts": {
     "prestart": "npm install",
     "start": "GENERATE_SOURCEMAP=false react-scripts start",

@@ -52,6 +52,9 @@ export type UserState = {
   accessToken: string
   did: string
   status: AppAuthStateStatus
+  vcHash: string
+  vcKey: string
+  vcOfferToken: string
 }
 
 const BASIC_STATE: UserState = {
@@ -60,6 +63,9 @@ const BASIC_STATE: UserState = {
   did: '',
   refreshToken: '',
   status: AppAuthStateStatus.LOADING,
+  vcHash: '',
+  vcKey: '',
+  vcOfferToken: '',
 }
 
 export const useAuthentication = () => {

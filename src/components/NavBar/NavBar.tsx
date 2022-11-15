@@ -20,6 +20,7 @@ const NavBar: FC = () => {
     updateAuthState({ refreshToken: '' })
     setIsMenuOpen(false)
     window.location.reload()
+    navigate(PATHS.HOME)
   }
 
   return (

@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router'
 import { PATHS } from 'router/paths'
 import { W3CCredential } from 'services/verifier/verifier.api'
 import { useVerifyCredentialsMutation } from 'modules/verifier/hooks/useVerification'
-import { useRetrieveSharedCredential } from 'modules/holder/pages/hooks/useCredentials'
+import { useRetrieveSharedCredentialQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Button, Container, Header, Spinner, Typography } from 'components'
 import { BackIcon } from 'assets'
 import { ResultContent } from './ResultContent'
@@ -12,7 +12,7 @@ export const Result: FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { data, isLoading, error } = useRetrieveSharedCredential(
+  const { data, isLoading, error } = useRetrieveSharedCredentialQuery(
     location.state.hash,
     location.state.key,
   )
