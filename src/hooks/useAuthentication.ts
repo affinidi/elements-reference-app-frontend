@@ -1,12 +1,14 @@
 import { useMutation } from '@tanstack/react-query'
 import { Dispatch, SetStateAction, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+
 import { cloudWalletService } from 'services/cloud-wallet'
+import { userManagementService, AuthConfirmationInput, isHttpError } from 'services/user-management'
 import {
   ConfirmSignInInput,
   ConfirmSignInOutput,
   SignInInput,
 } from 'services/cloud-wallet/cloud-wallet.api'
-import { AppAuthStateStatus } from 'state/state'
 
 export type ErrorResponse = {
   name: string
@@ -18,31 +20,93 @@ export type ErrorResponse = {
     location: string
   }
 }
-export const signIn = ({ username }: SignInInput) => {
+export const holderSignIn = ({ username }: SignInInput) => {
   return cloudWalletService.signInPasswordless({ username })
 }
 
-export const confirmSignin = ({ token, confirmationCode }: ConfirmSignInInput) => {
+export const issuerSignInOrSignUp = async ({ username }: SignInInput) => {
+  try {
+    const token = await userManagementService.signIn({ username })
+
+    return {
+      token,
+      signup: false,
+    }
+  } catch (error: unknown) {
+    if (!isHttpError(error)) {
+      throw error
+    }
+
+    if (error.status === 404 || error.status === 422) {
+      const token = await userManagementService.signupUser({ username })
+
+      return {
+        token,
+        signup: true,
+      }
+    }
+
+    throw new Error(error?.error?.message)
+  }
+}
+
+export const holderConfirmSignin = ({ token, confirmationCode }: ConfirmSignInInput) => {
   return cloudWalletService.confirmSignInPasswordless({ token, confirmationCode })
 }
 
-export const logOut = () => {
-  return cloudWalletService.logOut()
+export const issuerConfirmSigninOrSignup = ({
+  token,
+  confirmationCode,
+  signup,
+}: AuthConfirmationInput) => {
+  if (signup) {
+    return userManagementService.signupConfirmation({ token, confirmationCode })
+  }
+
+  return userManagementService.signInConfirmation({ token, confirmationCode })
 }
 
-export const getDid = () => {
-  return cloudWalletService.getDid()
+export const logout = async (authState: UserState) => {
+  if (authState.authorizedAsHolder) {
+    try {
+      await cloudWalletService.logOut()
+    } catch (e) {}
+  }
+
+  if (authState.authorizedAsIssuer) {
+    try {
+      await userManagementService.logout()
+    } catch (e) {}
+  }
 }
 
-export const useSignInMutation = () => {
+export const useHolderSignInMutation = () => {
   return useMutation<string, ErrorResponse, SignInInput, () => void>((data: SignInInput) =>
-    signIn(data),
+    holderSignIn(data),
   )
+}
+
+export const useIssuerSignInMutation = () => {
+  return useMutation<
+    {
+      token: string
+      signup: boolean
+    },
+    ErrorResponse,
+    SignInInput,
+    () => void
+  >((data: SignInInput) => issuerSignInOrSignUp(data))
 }
 
 export const useConfirmSignInMutation = () => {
   return useMutation<ConfirmSignInOutput, ErrorResponse, ConfirmSignInInput, () => void>(
-    (data: ConfirmSignInInput) => confirmSignin(data),
+    (data: ConfirmSignInInput) => holderConfirmSignin(data),
+  )
+}
+
+export const useIssuerConfirmSignInMutation = () => {
+  return useMutation<boolean, ErrorResponse, AuthConfirmationInput, () => void>(
+    (data: AuthConfirmationInput) => issuerConfirmSigninOrSignup(data),
   )
 }
 
@@ -51,10 +115,13 @@ export type UserState = {
   refreshToken: string
   accessToken: string
   did: string
-  status: AppAuthStateStatus
+  authorizedAsIssuer: boolean
+  authorizedAsHolder: boolean
+  loading: boolean
   vcHash: string
   vcKey: string
   vcOfferToken: string
+  appFlow: 'holder' | 'issuer' | 'verifier' | null
 }
 
 const BASIC_STATE: UserState = {
@@ -62,14 +129,18 @@ const BASIC_STATE: UserState = {
   accessToken: '',
   did: '',
   refreshToken: '',
-  status: AppAuthStateStatus.LOADING,
+  authorizedAsHolder: false,
+  authorizedAsIssuer: false,
+  loading: true,
   vcHash: '',
   vcKey: '',
   vcOfferToken: '',
+  appFlow: null,
 }
 
 export const useAuthentication = () => {
   const [authState, setAuthState] = useState<UserState>(BASIC_STATE)
+  const location = useLocation()
 
   const updatePartiallyState =
     <T>(updateFunction: Dispatch<SetStateAction<T>>) =>
@@ -79,13 +150,26 @@ export const useAuthentication = () => {
   const updateAuthState = updatePartiallyState<typeof authState>(setAuthState)
 
   const authenticate = async () => {
+    if (location.pathname.includes('/issuer')) {
+      try {
+        const response = await userManagementService.me()
+        if (response) {
+          updateAuthState({ loading: false, authorizedAsIssuer: true })
+        }
+      } catch (error) {
+        updateAuthState({ loading: false, authorizedAsIssuer: false })
+      }
+
+      return
+    }
+
     try {
-      const response = await getDid()
+      const response = await cloudWalletService.getDid()
       if (response) {
-        updateAuthState({ status: AppAuthStateStatus.AUTHORIZED })
+        updateAuthState({ loading: false, authorizedAsHolder: true })
       }
     } catch (error) {
-      updateAuthState({ status: AppAuthStateStatus.UNAUTHORIZED })
+      updateAuthState({ loading: false, authorizedAsHolder: false })
     }
   }
 

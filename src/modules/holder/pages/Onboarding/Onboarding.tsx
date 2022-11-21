@@ -8,7 +8,6 @@ import {
 import { getQueryParams } from 'utils'
 import { Button, Container, Header, Spinner, Typography } from 'components'
 import { Credential } from 'modules/holder/components/Credential'
-import { AppAuthStateStatus } from 'state/state'
 import { PATHS } from 'router/paths'
 import * as S from './Onboarding.styled'
 
@@ -47,7 +46,7 @@ export const Onboarding: FC = () => {
     if (!params) return
     if (params!.hash && params!.key) {
       updateAuthState({ vcHash: params!.hash, vcKey: params!.key })
-      if (authState.status === AppAuthStateStatus.UNAUTHORIZED) {
+      if (!authState.authorizedAsHolder) {
         navigate(PATHS.HOLDER.SIGNIN)
       }
     }
@@ -83,7 +82,7 @@ export const Onboarding: FC = () => {
       <Container fullWidthLeft>
         {data && (
           <>
-            <Credential credentialData={data} />
+            <Credential credentialSubject={data.credentialSubject} />
             <S.ButtonContainer direction="row" justifyContent="space-between">
               <Button onClick={() => handleStoreCredential()}>Save</Button>
               <Button variant="outlined" onClick={() => handleDeleteCredential()}>

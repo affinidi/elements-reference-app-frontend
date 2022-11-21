@@ -1,5 +1,0 @@
-export enum AppAuthStateStatus {
-  LOADING = 'LOADING',
-  AUTHORIZED = 'AUTHORIZED',
-  UNAUTHORIZED = 'UNAUTHORIZED',
-}

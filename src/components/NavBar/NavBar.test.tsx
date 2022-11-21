@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { AppAuthStateStatus } from 'state/state'
 
 import * as auth from '../../hooks/useAuthContext'
 import { useAuthentication } from '../../hooks/useAuthentication'
@@ -29,7 +28,8 @@ describe('<NavBar />', () => {
           username: '',
           accessToken: '',
           did: '',
-          status: AppAuthStateStatus.AUTHORIZED,
+          loading: false,
+          authorizedAsIssuer: true,
         },
       } as ReturnType<typeof useAuthentication>)
       render(<NavBar />, { wrapper: BrowserRouter })

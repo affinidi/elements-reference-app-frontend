@@ -10,63 +10,43 @@ import { getTitles } from 'utils'
 import { PATHS } from 'router/paths'
 
 import { BackIcon } from 'assets'
-import { Container, Header, Spinner, Typography } from 'components'
+import { Container, Header, Spinner } from 'components'
 import { Credential } from 'modules/holder/components/Credential'
 
 export const CredentialView: FC = () => {
   const { credentialId } = useParams()
-  const { data, error, isLoading } = useGetCredentialQuery(credentialId || '')
+  const { data, isLoading } = useGetCredentialQuery(credentialId || '')
   const { data: shareCredentialData, mutateAsync } = useShareCredentialMutation()
 
   useEffect(() => {
-    if (credentialId) mutateAsync(credentialId)
+    if (credentialId) {
+      mutateAsync(credentialId)
+    }
   }, [mutateAsync, credentialId])
 
   if (isLoading) {
-    return (
-      <>
-        <Header title="" icon={<BackIcon />} path={PATHS.HOLDER.HOME} />
-        <Container>
-          <Spinner />
-        </Container>
-      </>
-    )
+    return <Spinner />
   }
-  if (error) {
-    return (
-      <>
-        <Header
-          title={getTitles((data as StoredW3CCredential)?.type) || ''}
-          icon={<BackIcon />}
-          path={PATHS.HOLDER.HOME}
-        />
-        <Container>
-          <Typography variant="e1">{error.message}</Typography>
-        </Container>
-      </>
-    )
+
+  if (!(data as StoredW3CCredential).type) {
+    return null
   }
+
+  const credential = data as StoredW3CCredential
 
   return (
     <>
       <Header
-        title={getTitles((data as StoredW3CCredential)?.type) || ''}
+        title={getTitles(credential.type) || ''}
         icon={<BackIcon />}
         path={PATHS.HOLDER.HOME}
       />
-      {/* {isLoading && <Spinner />} */}
-
-      {data && (
-        <Container fullWidth>
-          <Credential credentialData={data} qrCode={shareCredentialData?.qrCode} />
-        </Container>
-      )}
-
-      {/* {error && (
-        <Container>
-          <Typography variant="e1">{error.message}</Typography>
-        </Container>
-      )} */}
+      <Container fullWidth>
+        <Credential
+          credentialSubject={credential.credentialSubject}
+          qrCode={shareCredentialData?.qrCode}
+        />
+      </Container>
     </>
   )
 }

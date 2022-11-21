@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Typography } from 'components'
+import Typography from '../Typography/Typography'
 import { pxToRem } from 'utils'
 
 export const ResultTitle = styled(Typography)<{ $isVerified?: boolean }>`

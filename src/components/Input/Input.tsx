@@ -1,7 +1,4 @@
 import React, { forwardRef, InputHTMLAttributes } from 'react'
-
-import Typography from '../Typography/Typography'
-
 import * as S from './Input.styled'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -12,9 +9,13 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, error, isGroup, className, units, ...props }, ref) => (
+  ({ label, error, isGroup, className, units, disabled, ...props }, ref) => (
     <S.Wrapper direction="column" gap={4} className={className}>
-      {label && <Typography variant="p4">{label}</Typography>}
+      {label && (
+        <S.Label variant="p4" $disabled={disabled}>
+          {label}
+        </S.Label>
+      )}
 
       {props.type === 'range' && (
         <S.Range alignItems="flex-end">
@@ -23,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       )}
 
       <S.Input
+        disabled={disabled}
         $hasError={!!error}
         ref={ref}
         {...(props.type === 'range' && {

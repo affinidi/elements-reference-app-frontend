@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useClaimCredentialQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Container, Header, Spinner } from 'components'
-import { AppAuthStateStatus } from 'state/state'
 import { PATHS } from 'router/paths'
 
 export const ClaimVc: FC = () => {
@@ -17,7 +16,7 @@ export const ClaimVc: FC = () => {
     if (credentialOfferRequestToken !== null) {
       updateAuthState({ vcOfferToken: credentialOfferRequestToken as string })
     }
-    if (authState.status === AppAuthStateStatus.UNAUTHORIZED) {
+    if (!authState.authorizedAsHolder) {
       navigate(PATHS.HOLDER.SIGNIN)
     }
     refetch()

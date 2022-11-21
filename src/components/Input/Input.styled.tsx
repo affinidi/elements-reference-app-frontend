@@ -37,6 +37,8 @@ export const Input = styled.input<{ $hasError?: boolean }>`
 
   &[disabled] {
     cursor: default;
+    color: #989daa;
+    border-color: #989daa;
   }
 
   &[type='range'] {
@@ -112,4 +114,7 @@ export const Error = styled(Typography)`
 
 export const Range = styled(Box)`
   margin: ${pxToRem(8)} 0 ${pxToRem(4)};
+`
+export const Label = styled(Typography)<{ $disabled?: boolean }>`
+  ${(props) => (props.$disabled ? `color: #989daa;` : null)}
 `

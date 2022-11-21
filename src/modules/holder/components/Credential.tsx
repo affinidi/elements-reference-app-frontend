@@ -1,43 +1,56 @@
 import { FC } from 'react'
-import {
-  StoredCredential,
-  StoredW3CCredential,
-  UnsignedW3CCredential,
-} from 'services/cloud-wallet/cloud-wallet.api'
+import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { Typography } from 'components'
+
 import * as S from './Credential.styled'
 
 export type CredentialProps = {
-  credentialData: StoredCredential | StoredW3CCredential | UnsignedW3CCredential
+  credentialSubject: AnyData
   qrCode?: string
 }
 
-export const Credential: FC<CredentialProps> = ({ credentialData, qrCode }) => {
-  const getDetails = (detailsObject: Record<string, string>) => {
-    return Object.entries(detailsObject).map(([key, value], index) => {
-      if (key !== '@type') {
-        if (value.constructor === Array) {
-          return (
-            <div key={index}>
-              <S.SmallHeading variant="c1">{key}</S.SmallHeading>
-              <Typography variant="p4">{JSON.stringify(value)}</Typography>
-            </div>
-          )
-        }
-        if (typeof value === 'string') {
-          return (
-            <div key={index}>
-              <S.SmallHeading variant="c1">{key}</S.SmallHeading>
-              <Typography variant="p4">{value}</Typography>
-            </div>
-          )
-        }
-      }
-
-      return null
-    })
+export const renderLiteral = (value: unknown): string => {
+  if (typeof value !== 'string') {
+    return `${value}`
   }
 
+  const parsedDate = Date.parse(value)
+  if (!parsedDate) {
+    return value
+  }
+
+  const d = new Date(parsedDate)
+  return d.toDateString()
+}
+
+const getDetails = (detailsObject: unknown, nested = false) => {
+  if (Array.isArray(detailsObject)) {
+    return (
+      <S.Div nested={nested}>
+        {detailsObject.map((value, index) => (
+          <S.Div key={index}>{getDetails(value, true)}</S.Div>
+        ))}
+      </S.Div>
+    )
+  }
+
+  if (typeof detailsObject === 'object' && detailsObject !== null) {
+    return Object.entries(detailsObject)
+      .filter(([key]) => key !== '@type')
+      .map(([key, value], index) => {
+        return (
+          <S.Div key={index} nested={nested}>
+            <S.SmallHeading variant="c1">{key}</S.SmallHeading>
+            <S.Div>{getDetails(value, true)}</S.Div>
+          </S.Div>
+        )
+      })
+  }
+
+  return <S.Div>{renderLiteral(detailsObject)}</S.Div>
+}
+
+export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) => {
   return (
     <>
       {qrCode && (
@@ -45,17 +58,12 @@ export const Credential: FC<CredentialProps> = ({ credentialData, qrCode }) => {
           <img src={qrCode} alt="QR Code" />
         </S.QrCodeContainer>
       )}
-      <div>
+      <S.Div>
         <S.Label>
           <Typography variant="b1">CREDENTIAL</Typography>
         </S.Label>
-        {/* TODO decide which field from VC should get p1 Typography variant */}
-        {/* <Typography variant="p1">{credential.description}</Typography> */}
-        {getDetails(
-          (credentialData as StoredW3CCredential)?.credentialSubject.data ||
-            (credentialData as StoredW3CCredential)?.credentialSubject,
-        )}
-      </div>
+        {getDetails(credentialSubject)}
+      </S.Div>
     </>
   )
 }
