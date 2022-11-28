@@ -6,6 +6,7 @@ import { Button, Container, Header, Spinner, Typography } from 'components'
 import { BackIcon } from 'assets'
 import { ResultContent } from './ResultContent'
 import { ErrorResponse } from 'hooks/useAuthentication'
+import * as S from './Result.styled'
 
 export type ResultProps = {
   isLoading: boolean
@@ -58,11 +59,12 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
       />
       <Container fullWidthLeft>
         <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
-        <Typography variant="p4">
+        <S.ResultPara variant="p4">
           {authState.appFlow === 'verifier'
             ? 'Credential successfully checked.'
             : 'Your credential has been issued.'}
-        </Typography>
+        </S.ResultPara>
+
         <Button variant="outlined" onClick={() => navigate(pathTo)}>
           {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT CREDENTIAL'}
         </Button>

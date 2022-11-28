@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
 export const Container = styled.div`
+  cursor: pointer;
   width: auto;
   min-height: ${pxToRem(168)};
   display: flex;
@@ -9,14 +10,10 @@ export const Container = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 8px;
-  padding: ${pxToRem(24)} ${pxToRem(12)};
-  border-radius: ${pxToRem(2)};
+  padding: ${pxToRem(24)};
+  border-radius: ${pxToRem(8)};
   box-shadow: 0 ${pxToRem(4)} ${pxToRem(20)} 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   overflow-wrap: anywhere;
   margin-bottom: ${pxToRem(24)};
-
-  @media (min-width: ${pxToRem(500)}) {
-    width: ${pxToRem(328)};
-  }
 `

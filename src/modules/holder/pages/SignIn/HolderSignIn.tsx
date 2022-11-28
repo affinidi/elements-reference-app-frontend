@@ -5,7 +5,8 @@ import { SignInForm } from 'modules/shared/SignInForm'
 import { useHolderSignIn } from './useHolderSignIn'
 
 export const HolderSignIn: FC = () => {
-  const { handleSignIn, setSignInInput, disabled, error, isLoading } = useHolderSignIn()
+  const { handleSignIn, setSignInInput, disabled, error, isLoading, inputError, setInputError } =
+    useHolderSignIn()
 
   return (
     <SignInForm
@@ -14,6 +15,8 @@ export const HolderSignIn: FC = () => {
       disabled={disabled}
       isLoading={isLoading}
       error={error}
+      inputError={inputError}
+      setInputError={setInputError}
       role="holder"
     />
   )

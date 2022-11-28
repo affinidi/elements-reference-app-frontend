@@ -2,8 +2,10 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { PATHS } from 'router/paths'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { Container, Header, Typography } from 'components'
-import { IssuerFlowIcon, HolderFlowIcon, VerifierFlowIcon } from '../../assets'
+import { Container, Header } from 'components'
+import holderFlowIcon from '../../assets/svg/holderFlowIcon.svg'
+import issuerFlowIcon from '../../assets/svg/issuerFlowIcon.svg'
+import verifierFlowIcon from '../../assets/svg/verifierFlowIcon.svg'
 import * as S from './Home.styled'
 
 export const Home: FC = () => {
@@ -21,11 +23,11 @@ export const Home: FC = () => {
         >
           <S.Details>
             <S.Heading variant="h7">Collect credential</S.Heading>
-            <Typography variant="p2">
+            <S.Para variant="p2">
               Collect your credentials or view credentials stored in your wallet
-            </Typography>
+            </S.Para>
           </S.Details>
-          <HolderFlowIcon />
+          <S.Icon src={holderFlowIcon} />
         </S.Card>
 
         <S.Card
@@ -36,9 +38,9 @@ export const Home: FC = () => {
         >
           <S.Details>
             <S.Heading variant="h7">Verify credential</S.Heading>
-            <Typography variant="p2">Verify credentials with a QR code scanner</Typography>
+            <S.Para variant="p2">Verify credentials with a QR code scanner</S.Para>
           </S.Details>
-          <VerifierFlowIcon />
+          <S.Icon src={verifierFlowIcon} />
         </S.Card>
 
         <S.Card
@@ -49,9 +51,9 @@ export const Home: FC = () => {
         >
           <S.Details>
             <S.Heading variant="h7">Issue credential</S.Heading>
-            <Typography variant="p2">Issue credentials to your customers easily</Typography>
+            <S.Para variant="p2">Issue credentials to your customers easily</S.Para>
           </S.Details>
-          <IssuerFlowIcon />
+          <S.Icon src={issuerFlowIcon} />
         </S.Card>
       </Container>
     </>

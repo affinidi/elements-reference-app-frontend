@@ -15,7 +15,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
-    "generate:api": "node scripts/generate-api.cjs"
+    "generate:api": "node scripts/generate-api.cjs",
+    "checkLicenses": "npx license-checker --production --failOn 'AGPL 3.0;LGPL 2.1'"
+
   },
   "dependencies": {
     "@fontsource/montserrat": "^4.5.13",

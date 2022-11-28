@@ -1,4 +1,4 @@
-import { FC, FormEvent } from 'react'
+import { Dispatch, FC, FormEvent, SetStateAction } from 'react'
 
 import {
   Button,
@@ -16,6 +16,8 @@ type SignInFormProps = {
   disabled: boolean
   isLoading: boolean
   error: Error | null
+  inputError: string | null
+  setInputError: Dispatch<SetStateAction<string | null>>
   role: 'holder' | 'issuer'
 }
 
@@ -24,6 +26,8 @@ export const SignInForm: FC<SignInFormProps> = ({
   setSignInInput,
   disabled,
   error,
+  inputError,
+  setInputError,
   isLoading,
   role,
 }) => {
@@ -38,8 +42,11 @@ export const SignInForm: FC<SignInFormProps> = ({
             id="username"
             label="Email address"
             placeholder="Enter your email address"
-            onChange={(e) => setSignInInput({ username: e.target.value })}
-            error={error?.message}
+            onChange={(e) => {
+              setInputError(null)
+              setSignInInput({ username: e.target.value })
+            }}
+            error={inputError || error?.message}
           ></Input>
           <Button disabled={disabled} type="submit">
             send verification code

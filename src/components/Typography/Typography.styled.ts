@@ -110,6 +110,7 @@ export const Typography = styled.p<{
       case 'h7':
       case 'p4':
         return '700'
+      case 'b1':
       case 'b3':
         return '600'
       case 'b2':
