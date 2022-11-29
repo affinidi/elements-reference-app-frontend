@@ -30,7 +30,7 @@ Please refer to the documentation of [@affinidi/cli](https://www.npmjs.com/packa
 
 You may also clone this repository and run it separately, but in this case you need to follow these steps:
 
-(You may skip first 3 steps if you already created a project before and know your api-key, projectId and projectDid)
+(You may skip first 3 steps if you already created a project before and know your Api-Key Hash, Project ID and Wallet DID)
 
 1. Install `@affinidi/cli` and create a project:
     ```bash
