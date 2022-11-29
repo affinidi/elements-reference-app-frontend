@@ -32,7 +32,7 @@ You may also clone this repository and run it separately, but in this case you n
 
 (You may skip first 3 steps if you already created a project before and know your Api-Key Hash, Project ID and Wallet DID)
 
-1. Install `@affinidi/cli` and create a project:
+1. Install `@affinidi/cli`:
     ```bash
     npm install -g @affinidi/cli
     ```
