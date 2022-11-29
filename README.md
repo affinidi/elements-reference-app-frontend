@@ -2,6 +2,10 @@
 
 Frontend template for [@affinidi/cli](https://www.npmjs.com/package/@affinidi/cli)
 
+## Demo:
+
+https://holder-reference-app.stg.affinidi.com/
+
 ## Context
 
 Affinidi’s vision is to empower communities with control and ownership of their data,
