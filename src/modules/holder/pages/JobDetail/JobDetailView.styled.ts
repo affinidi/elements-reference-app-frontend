@@ -29,3 +29,12 @@ export const MenuContainer = styled.div`
 export const ButtonContainer = styled.div`
   cursor: pointer;
 `
+export const Button = styled.button`
+  background-color: #0e1533;
+  color: white;
+  font-size: 20px;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;

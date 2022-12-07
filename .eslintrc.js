@@ -10,7 +10,10 @@ module.exports = {
   ],
   "rules": {
     "prettier/prettier": "warn",
-    "no-console": "error",
+    "no-console": [
+      "warn",
+      { "allow": ["clear", "info", "error", "dir", "trace", "log"] }
+     ],
 
     // Temporarily disabled rules
     "@typescript-eslint/no-explicit-any": "off",
