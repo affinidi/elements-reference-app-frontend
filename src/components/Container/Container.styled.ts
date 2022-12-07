@@ -29,7 +29,7 @@ export const Frame = styled(Box)<{
     props.$fullWidthCenter
       ? `@media (min-width: ${pxToRem(500)}) {
         padding: ${pxToRem(40)} ${pxToRem(100)};
-        max-width: ${pxToRem(600)};
+        width: ${pxToRem(600)};
         margin: 0 auto;
       }`
       : null}
@@ -52,18 +52,19 @@ export const Frame = styled(Box)<{
       ? `@media (min-width: ${pxToRem(500)}) {
         padding: ${pxToRem(40)} ${pxToRem(100)};
         max-width: none;
-        display: grid;
-        grid-template-columns: repeat( auto-fit, ${pxToRem(325)});
-        grid-column-gap: ${pxToRem(40)};
-        grid-row-gap: ${pxToRem(16)};
-        width: 100%;
+            display: grid;
+            grid-template-columns: repeat( 3, 1fr);
+            grid-column-gap: ${pxToRem(40)};
+            grid-row-gap: ${pxToRem(16)};
+            width: 100%;
       }`
       : null}
 
       ${(props) =>
     props.$isHome
-      ? `@media (min-width: ${pxToRem(500)}) {
-            padding: ${pxToRem(40)} ${pxToRem(100)};
+      ? `padding-top: 0;
+      @media (min-width: ${pxToRem(500)}) {
+            padding: 0 ${pxToRem(100)} ${pxToRem(40)};
             max-width: none;
             display: grid;
             grid-template-columns: repeat( 3, 1fr);

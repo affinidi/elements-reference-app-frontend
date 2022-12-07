@@ -6,10 +6,18 @@ import {
 import {
   Api as CloudWalletApi,
   ConfirmSignInInput,
+  ErrorObject,
   SaveCredentialInput,
   SignInInput,
 } from './cloud-wallet.api'
 
+export const isHttpError = (
+  object: unknown,
+): object is {
+  error: ErrorObject
+} => {
+  return Object.prototype.hasOwnProperty.call(object, 'error')
+}
 class CloudWalletService {
   constructor(
     private readonly client = new CloudWalletApi({
@@ -36,8 +44,15 @@ class CloudWalletService {
     try {
       const result = await this.client.users.confirmSignIn(input)
       return result.data
-    } catch (error: any) {
-      throw new Error(error?.error?.message)
+    } catch (error: unknown) {
+      if (!isHttpError(error)) {
+        throw error
+      }
+      if (error?.error.code === 'COR-5') {
+        throw new Error('Code is incorrect, please try again.')
+      }
+
+      throw new Error(error?.error.message)
     }
   }
 

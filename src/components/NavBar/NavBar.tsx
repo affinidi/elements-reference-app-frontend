@@ -2,7 +2,9 @@ import { FC } from 'react'
 
 import { PATHS } from 'router/paths'
 import { Typography } from 'components'
-import { CloseIcon, DWalletLogoIcon, MenuIcon } from 'assets'
+import dWalletLogoIcon from '../../assets/svg/dApp-Logo-Wordmark.svg'
+import iconClose from '../../assets/svg/icon-close.svg'
+import iconOpen from '../../assets/svg/icon-menu.svg'
 
 import { useNavBar } from './useNavBar'
 
@@ -12,29 +14,48 @@ const NavBar: FC = () => {
   const { isMenuOpen, setIsMenuOpen, handleLogOut, navigate, isAuthorized } = useNavBar()
 
   return (
-    <S.Container $isOpen={isMenuOpen}>
-      <S.NavContainer>
-        <S.ButtonContainer onClick={() => navigate(PATHS.HOME)}>
-          <DWalletLogoIcon aria-label="wallet-logo" />
-        </S.ButtonContainer>
+    <>
+      <S.Container>
+        <S.Logo
+          onClick={() => navigate(PATHS.HOME)}
+          src={dWalletLogoIcon}
+          aria-label="wallet-logo"
+        />
+
         {isAuthorized && (
           <div>
             {isMenuOpen ? (
-              <CloseIcon aria-label="menu-close-icon" onClick={() => setIsMenuOpen(false)} />
+              <S.Icon
+                aria-label="menu-close-icon"
+                onClick={() => setIsMenuOpen(false)}
+                src={iconClose}
+              />
             ) : (
-              <MenuIcon aria-label="menu-open-icon" onClick={() => setIsMenuOpen(true)} />
+              <S.Icon
+                aria-label="menu-open-icon"
+                onClick={() => setIsMenuOpen(true)}
+                src={iconOpen}
+              />
             )}
           </div>
         )}
-      </S.NavContainer>
+      </S.Container>
       {isAuthorized && isMenuOpen && (
-        <S.MenuContainer>
+        <S.MenuContainer $isOpen={isMenuOpen}>
+          <S.ButtonContainer
+            onClick={() => {
+              setIsMenuOpen(false)
+              navigate(PATHS.HOME)
+            }}
+          >
+            <Typography variant="h6">Home</Typography>
+          </S.ButtonContainer>
           <S.ButtonContainer onClick={() => handleLogOut()}>
             <Typography variant="h6">Log out</Typography>
           </S.ButtonContainer>
         </S.MenuContainer>
       )}
-    </S.Container>
+    </>
   )
 }
 

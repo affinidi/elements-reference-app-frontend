@@ -5,6 +5,7 @@ import { PATHS } from 'router/paths'
 import { extractHashAndKeyFromVSShareUrl } from 'utils'
 import { useScanner } from 'modules/verifier/hooks/useScanner'
 import { Typography } from '../../../../components'
+import * as S from './QrScanner.styled'
 
 type QrScannerProps = {}
 
@@ -47,7 +48,8 @@ const QrScanner: FC<QrScannerProps> = () => {
 
   return (
     <>
-      <video muted id={videoElementId}></video>
+      <S.VideoElement muted id={videoElementId} />
+      <S.Overlay />
       {!!scanError && <Typography variant="e1">{scanError}</Typography>}
     </>
   )

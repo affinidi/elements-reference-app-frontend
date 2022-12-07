@@ -5,7 +5,8 @@ import { SignInForm } from 'modules/shared/SignInForm'
 import { useIssuerSignIn } from './useIssuerSignIn'
 
 export const IssuerSignIn: FC = () => {
-  const { handleSignIn, setSignInInput, disabled, error, isLoading } = useIssuerSignIn()
+  const { handleSignIn, setSignInInput, disabled, error, isLoading, inputError, setInputError } =
+    useIssuerSignIn()
 
   return (
     <SignInForm
@@ -15,6 +16,8 @@ export const IssuerSignIn: FC = () => {
       isLoading={isLoading}
       error={error}
       role="issuer"
+      inputError={inputError}
+      setInputError={setInputError}
     />
   )
 }

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { Box, Button, Container, Header, Typography } from 'components'
+import { Button, Container, Header, Typography } from 'components'
 
 import * as S from './ConfirmSignInForm.styled'
 
@@ -30,14 +30,8 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
           Verification code
         </S.Label>
         <form id="confirmation" onSubmit={onSubmit}>
-          <Box justifyContent="center" direction="row">
-            {inputs}
-          </Box>
-          {error && (
-            <Typography variant="e1">
-              {error?.message || 'Verification code is incorrect, please try again'}
-            </Typography>
-          )}
+          <S.VerificationFieldContainer>{inputs}</S.VerificationFieldContainer>
+          {error && <Typography variant="e1">{error?.message}</Typography>}
         </form>
         <Button form="confirmation" type="submit" disabled={isButtonDisabled}>
           Sign in
