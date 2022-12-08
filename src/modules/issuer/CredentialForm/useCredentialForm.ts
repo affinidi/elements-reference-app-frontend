@@ -32,7 +32,8 @@ export const initialValues: EventSubjectData = {
   email: '',
 }
 
-export const schema = 'https://schema.affinidi.com/EventElegibilityV1-0.json'
+export const schemaUrl = 'https://schema.affinidi.com/EventElegibilityV1-0.json'
+export const schema = 'EventEligibility Schema V1'
 
 export const useCredentialForm = () => {
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ export const useCredentialForm = () => {
       const projectId = process.env.REACT_APP_PROJECT_ID || ''
 
       const apiKeyHash = process.env.REACT_APP_API_KEY || ''
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(schema)
+      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(schemaUrl)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {
