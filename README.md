@@ -17,7 +17,7 @@ within their apps. With our tooling, you can start creating a privacy-preserving
 
 ## What are privacy-preserving apps?
 
-Privacy-preserving apps make it easy to manage and store customer information while giving your customers more control over how this information is used and shared. We enable this data ownership and control through Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs).
+Privacy-preserving apps make it easy to give your customers more control over how their information is used and shared. We enable this data ownership and control through Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs).
 
 Learn more about [VCs](https://academy.affinidi.com/what-are-verifiable-credentials-79f1846a7b9), [trust triangle](https://academy.affinidi.com/what-is-the-trust-triangle-9a9caf36b321), [Decentralized Identifiers (DIDs)](https://academy.affinidi.com/demystifying-decentralized-identifiers-dids-2dc6fc3148fd), and [selective disclosure](https://academy.affinidi.com/a-detailed-guide-on-selective-disclosure-87b89cea1602).
 
@@ -30,7 +30,7 @@ Please refer to the documentation of [@affinidi/cli](https://www.npmjs.com/packa
 
 You may also clone this repository and run it separately, but in this case you need to follow these steps:
 
-(You may skip first 3 steps if you already created a project before and know your Api-Key Hash, Project ID and Wallet DID)
+(You may skip the first 3 steps if you already created a project before and know your Api-Key Hash, Project ID and Wallet DID)
 
 1. Install `@affinidi/cli`:
     ```bash
