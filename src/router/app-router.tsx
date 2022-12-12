@@ -4,6 +4,8 @@ import { AuthRoute } from 'components/Authorisation/AuthRoute'
 import { PATHS } from './paths'
 import { useAuthContext } from 'hooks/useAuthContext'
 
+import {Jobs as HolderJobs} from 'modules/holder/pages/Jobs/Jobs'
+import {JobDetail} from 'modules/holder/pages/JobDetail/JobDetailView'
 import { Home } from 'pages/Home/Home'
 import { Home as HolderHome } from 'modules/holder/pages/Home/Home'
 import { HolderConfirmSignIn } from 'modules/holder/pages/ConfirmSignIn/HolderConfirmSignIn'
@@ -53,6 +55,9 @@ const AppRouter: FC = () => {
             </AuthRoute>
           }
         />
+
+        <Route path={PATHS.HOLDER.JOBS} element = {<AuthRoute><HolderJobs /></AuthRoute>} />
+        <Route path={`${PATHS.HOLDER.JOBDETAIL}/:jobId`}  element= {<AuthRoute><JobDetail/></AuthRoute>}/>
 
         <Route
           path={`${PATHS.HOLDER.CREDENTIAL}/:credentialId`}

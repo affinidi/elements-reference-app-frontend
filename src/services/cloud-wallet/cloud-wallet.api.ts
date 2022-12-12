@@ -738,6 +738,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     shareCredential: (id: string, data: ShareCredentialInput, params: RequestParams = {}) =>
+    
       this.request<ShareCredentialOutput, ErrorObject>({
         path: `/wallet/credentials/${id}/share`,
         method: 'POST',

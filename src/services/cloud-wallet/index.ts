@@ -144,6 +144,7 @@ class CloudWalletService {
 
   shareCredential = async (id: string) => {
     try {
+      console.log("credenyial ID = " + id);
       const response = await this.client.wallet.shareCredential(
         id,
         {},

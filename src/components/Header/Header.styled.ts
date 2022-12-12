@@ -17,12 +17,7 @@ export const IconWrapper = styled.div`
 export const Container = styled.div`
   background: #262c47;
   position: relative;
-  height: ${pxToRem(164)};
 
-  @media (min-width: ${pxToRem(500)}) {
-    height: ${pxToRem(144)};
-  }
-`
 
 export const Title = styled(Typography)`
 padding: ${pxToRem(84)} ${pxToRem(24)} ${pxToRem(24)}};

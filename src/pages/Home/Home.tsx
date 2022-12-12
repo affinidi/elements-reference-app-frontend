@@ -18,6 +18,20 @@ export const Home: FC = () => {
         <S.Card
           onClick={() => {
             updateAuthState({ appFlow: 'holder' })
+            navigate(PATHS.HOLDER.JOBS)
+          }}
+        >
+          <S.Details>
+            <S.Heading variant="h7">Apply For a Job</S.Heading>
+            <Typography variant="p2">
+              use your credentials to apply for job at DSEP                   
+            </Typography>
+          </S.Details>
+          <HolderFlowIcon />
+        </S.Card>
+        <S.Card
+          onClick={() => {
+            updateAuthState({ appFlow: 'holder' })
             navigate(PATHS.HOLDER.HOME)
           }}
         >
@@ -29,8 +43,7 @@ export const Home: FC = () => {
           </S.Details>
           <S.Icon src={holderFlowIcon} />
         </S.Card>
-
-        <S.Card
+        {/* <S.Card
           onClick={() => {
             updateAuthState({ appFlow: 'verifier' })
             navigate(PATHS.VERIFIER.WELCOME)
@@ -40,10 +53,9 @@ export const Home: FC = () => {
             <S.Heading variant="h7">Verify credential</S.Heading>
             <S.Para variant="p2">Verify credentials with a QR code scanner</S.Para>
           </S.Details>
-          <S.Icon src={verifierFlowIcon} />
-        </S.Card>
 
-        <S.Card
+
+        {/* <S.Card
           onClick={() => {
             updateAuthState({ appFlow: 'issuer' })
             navigate(PATHS.ISSUER.CREDENTIAL_FORM)
@@ -53,8 +65,7 @@ export const Home: FC = () => {
             <S.Heading variant="h7">Issue credential</S.Heading>
             <S.Para variant="p2">Issue credentials to your customers easily</S.Para>
           </S.Details>
-          <S.Icon src={issuerFlowIcon} />
-        </S.Card>
+
       </Container>
     </>
   )

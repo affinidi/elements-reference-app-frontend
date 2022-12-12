@@ -20,22 +20,7 @@ export const Container = styled.div`
   }
 `
 
-export const MenuContainer = styled.div<{ $isOpen: boolean }>`
-  position: fixed;
-  top: ${pxToRem(64)};
-  right: 0;
-  height: 100vh;
-  width: ${pxToRem(524)};
-  z-index: 100;
-  background: #0e1533;
-  padding: ${pxToRem(40)} ${pxToRem(24)};
-  text-align: right;
-  transform: ${(props) =>
-    props.$isOpen ? `translateX(${pxToRem(0)})` : `translateX(${pxToRem(524)})`};
-  @media (min-width: ${pxToRem(500)}) {
-    padding: ${pxToRem(108)} ${pxToRem(100)};
-  }
-`
+
 
 export const ButtonContainer = styled.div`
   cursor: pointer;

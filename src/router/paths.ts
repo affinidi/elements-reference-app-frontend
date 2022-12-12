@@ -13,6 +13,8 @@ export const PATHS = {
     CREDENTIAL: '/holder/credential',
     ONBOARD: '/holder/onboard',
     CLAIM_VC: '/holder/claim',
+    JOBS: '/holder/jobs/',
+    JOBDETAIL:'/holder/jobdetail'
   },
   VERIFIER: {
     WELCOME: '/verifier/',
