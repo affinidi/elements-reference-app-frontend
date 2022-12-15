@@ -9,7 +9,7 @@ export const AuthRoute: FC = ({ children }) => {
 
   const isIssuer = location.pathname.includes('/issuer')
 
-  if ((isIssuer && authState.authorizedAsIssuer) || authState.authorizedAsHolder) {
+  if ((isIssuer && authState.authorizedAsIssuer) || (!isIssuer && authState.authorizedAsHolder)) {
     return <>{children}</>
   }
 
