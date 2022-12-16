@@ -17,6 +17,19 @@ export const Home: FC = () => {
       <Container isHome title="Please select one of the following options">
         <S.Card
           onClick={() => {
+            updateAuthState({ appFlow: 'issuer' })
+            navigate(PATHS.ISSUER.CREDENTIAL_FORM)
+          }}
+        >
+          <S.Details>
+            <S.Heading variant="h7">Issue credential</S.Heading>
+            <S.Para variant="p2">Issue credentials to your customers easily</S.Para>
+          </S.Details>
+          <S.Icon src={issuerFlowIcon} />
+        </S.Card>
+
+        <S.Card
+          onClick={() => {
             updateAuthState({ appFlow: 'holder' })
             navigate(PATHS.HOLDER.HOME)
           }}
@@ -41,19 +54,6 @@ export const Home: FC = () => {
             <S.Para variant="p2">Verify credentials with a QR code scanner</S.Para>
           </S.Details>
           <S.Icon src={verifierFlowIcon} />
-        </S.Card>
-
-        <S.Card
-          onClick={() => {
-            updateAuthState({ appFlow: 'issuer' })
-            navigate(PATHS.ISSUER.CREDENTIAL_FORM)
-          }}
-        >
-          <S.Details>
-            <S.Heading variant="h7">Issue credential</S.Heading>
-            <S.Para variant="p2">Issue credentials to your customers easily</S.Para>
-          </S.Details>
-          <S.Icon src={issuerFlowIcon} />
         </S.Card>
       </Container>
     </>
