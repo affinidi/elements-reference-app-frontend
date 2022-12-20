@@ -17,7 +17,7 @@ export const isHttpError = (
     message: string
   }
 } => {
-  return Object.prototype.hasOwnProperty.call(error, 'status')
+  return Object.prototype.hasOwnProperty.call(error, 'error')
 }
 
 class UserManagementService {
