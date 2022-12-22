@@ -3,10 +3,10 @@ import { Api as VerifierApi, W3CCredential } from './verifier.api'
 class VerifierService {
   constructor(
     private readonly client = new VerifierApi({
-      baseUrl: `${process.env.REACT_APP_VERIFIER_URL}/api/v1`,
+      baseUrl: `${import.meta.env.VITE_VERIFIER_URL}/api/v1`,
       baseApiParams: {
         headers: {
-          'Api-Key': `${process.env.REACT_APP_API_KEY}`,
+          'Api-Key': `${import.meta.env.VITE_API_KEY}`,
           'Content-Type': 'application/json',
         },
       },
