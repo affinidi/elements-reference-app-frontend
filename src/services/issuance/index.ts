@@ -9,7 +9,7 @@ import {
 class IssuanceService {
   constructor(
     private readonly client = new IssuanceAPI({
-      baseUrl: `${process.env.REACT_APP_ISSUANCE_URL}/api/v1`,
+      baseUrl: `${import.meta.env.VITE_ISSUANCE_URL}/api/v1`,
       baseApiParams: {
         credentials: 'include',
       },

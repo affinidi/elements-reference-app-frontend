@@ -23,7 +23,7 @@ export const isHttpError = (
 class UserManagementService {
   constructor(
     private readonly client = new Api({
-      baseUrl: `${process.env.REACT_APP_USER_MANAGEMENT_URL}/api/v1`,
+      baseUrl: `${import.meta.env.VITE_USER_MANAGEMENT_URL}/api/v1`,
       baseApiParams: {
         credentials: 'include',
       },

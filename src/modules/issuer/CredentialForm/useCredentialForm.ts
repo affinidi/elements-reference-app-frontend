@@ -40,10 +40,10 @@ export const useCredentialForm = () => {
   const handleSubmit = useCallback(
     async (values: EventSubjectData) => {
       const walletUrl = `${window.location.origin}/holder/claim`
-      const issuerDid = process.env.REACT_APP_PROJECT_DID || ''
-      const projectId = process.env.REACT_APP_PROJECT_ID || ''
+      const issuerDid = import.meta.env.VITE_PROJECT_DID || ''
+      const projectId = import.meta.env.VITE_PROJECT_ID || ''
 
-      const apiKeyHash = process.env.REACT_APP_API_KEY || ''
+      const apiKeyHash = import.meta.env.VITE_API_KEY || ''
       const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(schema)
 
       const issuanceJson: CreateIssuanceInput = {
