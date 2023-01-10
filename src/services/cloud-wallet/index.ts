@@ -21,10 +21,10 @@ export const isHttpError = (
 class CloudWalletService {
   constructor(
     private readonly client = new CloudWalletApi({
-      baseUrl: `${process.env.REACT_APP_CLOUD_WALLET_URL}/api/v1`,
+      baseUrl: `${import.meta.env.VITE_CLOUD_WALLET_URL}/api/v1`,
       baseApiParams: {
         headers: {
-          'Api-Key': `${process.env.REACT_APP_API_KEY}`,
+          'Api-Key': `${import.meta.env.VITE_API_KEY}`,
           'Content-Type': 'application/json',
         },
       },
