@@ -61,7 +61,9 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
         <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
         <S.ResultPara variant="p4">
           {authState.appFlow === 'verifier'
-            ? 'Credential successfully checked.'
+            ? isValid
+              ? 'Ticket successfully checked.'
+              : 'Ticket is invalid'
             : 'Your credential has been issued.'}
         </S.ResultPara>
 
