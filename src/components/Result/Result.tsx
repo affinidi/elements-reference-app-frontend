@@ -57,7 +57,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
         title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Credential Issued'}
         icon={<BackIcon />}
       />
-      <Container fullWidthLeft>
+      <Container fullWidthCenter>
         <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
         <S.ResultPara variant="p4">
           {authState.appFlow === 'verifier'
