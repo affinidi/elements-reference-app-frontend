@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { NegResultIcon, PosResultIcon } from 'assets'
+import { ValidCredential, InvalidCredential, IssuedIcon } from 'assets'
 import * as S from './Result.styled'
 
 export type ResultContentProps = {
@@ -9,8 +9,8 @@ export type ResultContentProps = {
 export const ResultContent: FC<ResultContentProps> = ({ isValid, isIssuance }) => {
   return (
     <>
-      {isValid ? <PosResultIcon /> : <NegResultIcon />}
-      <S.ResultTitle variant="h5" $isVerified={isValid}>
+      {isValid ? isIssuance ? <IssuedIcon /> : <ValidCredential /> : <InvalidCredential />}
+      <S.ResultTitle variant="h5" $isVerified={isValid} $isIssuance={isIssuance}>
         {isValid
           ? isIssuance
             ? 'Credential successfully issued'

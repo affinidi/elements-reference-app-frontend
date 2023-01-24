@@ -37,7 +37,7 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
       case 'ghost':
         return '#fff'
       default:
-        return '#6af6ff'
+        return '#060f5f'
     }
   }};
 
@@ -46,9 +46,9 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
       case 'ghost':
         return '#fff'
       case 'outlined':
-        return '#000770'
+        return '#e0e1e5'
       default:
-        return '#6af6ff'
+        return '#060f5f'
     }
   }};
 
@@ -56,9 +56,9 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
     switch (props.$variant) {
       case 'ghost':
       case 'outlined':
-        return '#000770'
+        return '#279af1'
       default:
-        return '#313a55'
+        return '#fff'
     }
   }};
 
@@ -109,9 +109,9 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
         case 'ghost':
           return '#e0e1e5'
         case 'outlined':
-          return '#d9daea'
+          return '#dff0fd'
         default:
-          return '#97f9ff'
+          return '#51578f'
       }
     }};
 
@@ -120,9 +120,9 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
         case 'ghost':
           return '#e0e1e5'
         case 'outlined':
-          return '#4c519b'
+          return '#e0e1e5'
         default:
-          return '#97f9ff'
+          return '#51578f'
       }
     }};
   }
