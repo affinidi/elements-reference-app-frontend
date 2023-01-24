@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { PATHS } from 'router/paths'
 import { Typography } from 'components'
-import dWalletLogoIcon from '../../assets/svg/dApp-Logo-Wordmark.svg'
+import eventiLogoIcon from '../../assets/svg/eventi-logo-icon.svg'
 import iconClose from '../../assets/svg/icon-close.svg'
 import iconOpen from '../../assets/svg/icon-menu.svg'
 
@@ -18,7 +18,7 @@ const NavBar: FC = () => {
       <S.Container>
         <S.Logo
           onClick={() => navigate(PATHS.HOME)}
-          src={dWalletLogoIcon}
+          src={eventiLogoIcon}
           aria-label="wallet-logo"
         />
 
@@ -41,6 +41,7 @@ const NavBar: FC = () => {
         )}
       </S.Container>
       {isAuthorized && isMenuOpen && (
+        <S.NavBar $isMenuOpen={isMenuOpen}>
         <S.MenuContainer $isOpen={isMenuOpen}>
           <S.ButtonContainer
             onClick={() => {
@@ -54,6 +55,7 @@ const NavBar: FC = () => {
             <Typography variant="h6">Log out</Typography>
           </S.ButtonContainer>
         </S.MenuContainer>
+        </S.NavBar>
       )}
     </>
   )

@@ -30,7 +30,7 @@ export const VerificationField = styled(Input)<InputProps>`
 
   input {
     text-align: center;
-    padding: ${pxToRem(10)};
+    padding: ${pxToRem(4)} ${pxToRem(8)};
     border-radius: ${pxToRem(8)};
     font-family: Montserrat;
     font-size: ${pxToRem(28)};
