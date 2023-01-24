@@ -7,7 +7,7 @@ import Box from '../Box/Box'
 import Typography from '../Typography/Typography'
 
 export const Wrapper = styled(Box)`
-  margin: ${pxToRem(24)} 0 ${pxToRem(20)};
+  margin-top: ${pxToRem(24)};
 `
 
 export const Input = styled.input<{ $hasError?: boolean }>`
@@ -27,7 +27,11 @@ export const Input = styled.input<{ $hasError?: boolean }>`
   &:not([disabled]) {
     &:hover,
     &:focus {
-      border: 1px solid ${(props) => (props.$hasError ? '#e42648' : '#1a207e')};
+      border: 1px solid
+        ${(props) =>
+          props.$hasError
+            ? props.theme.colors.utility.danger['100']
+            : props.theme.colors.brand.primary['90']};
     }
 
     ::placeholder {

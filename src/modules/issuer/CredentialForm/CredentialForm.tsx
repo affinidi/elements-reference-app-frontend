@@ -35,6 +35,7 @@ export const CredentialForm: FC = () => {
               <S.FormSection>
                 <S.LongInput
                   label="Event name*"
+                  placeholder="Enter event name"
                   name="eventName"
                   maxLength={100}
                   value={formikProps.values.eventName}
@@ -43,6 +44,7 @@ export const CredentialForm: FC = () => {
                 />
                 <S.LongInput
                   label="Event location*"
+                  placeholder="Enter event location"
                   name="eventLocation"
                   maxLength={500}
                   value={formikProps.values.eventLocation}
@@ -52,20 +54,26 @@ export const CredentialForm: FC = () => {
                 <S.LongInput
                   label="Event date*"
                   name="eventDate"
-                  type="datetime-local"
+                  placeholder="DD/MM/YYYY"
                   value={formikProps.values.eventDate}
                   onChange={formikProps.handleChange}
                   error={formikProps.touched.eventDate ? formikProps.errors.eventDate : ''}
                 />
                 <S.LongInput
+                  label="Event time*"
+                  name="eventTime"
+                  placeholder="HH:MM-HH:MM"
+                  value={formikProps.values.eventDate}
+                  onChange={formikProps.handleChange}
+                  error={formikProps.touched.eventTime ? formikProps.errors.eventTime : ''}
+                />
+                <S.TextAreaInput
                   label="Event description"
                   name="eventDescription"
+                  placeholder="Enter event description"
                   maxLength={1000}
                   value={formikProps.values.eventDescription}
                   onChange={formikProps.handleChange}
-                  error={
-                    formikProps.touched.eventDescription ? formikProps.errors.eventDescription : ''
-                  }
                 />
               </S.FormSection>
               <S.Heading variant="h7">Ticket holder information</S.Heading>
@@ -74,6 +82,7 @@ export const CredentialForm: FC = () => {
                   label="Ticket holder name*"
                   name="name"
                   maxLength={100}
+                  placeholder="Enter ticket holder name"
                   value={formikProps.values.name}
                   onChange={formikProps.handleChange}
                   error={formikProps.touched.name ? formikProps.errors.name : ''}
@@ -82,6 +91,7 @@ export const CredentialForm: FC = () => {
                   label="Ticket holder email*"
                   name="email"
                   type="email"
+                  placeholder="Enter ticket holder email"
                   maxLength={100}
                   value={formikProps.values.email}
                   onChange={formikProps.handleChange}

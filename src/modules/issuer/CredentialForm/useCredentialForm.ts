@@ -18,6 +18,7 @@ export type EventSubjectData = {
   eventName: string
   eventLocation: string
   eventDate: string
+  eventTime: string
   eventDescription: string
   name: string
   email: string
@@ -27,6 +28,7 @@ export const initialValues: EventSubjectData = {
   eventName: '',
   eventLocation: '',
   eventDate: '',
+  eventTime: '',
   eventDescription: '',
   name: '',
   email: '',
