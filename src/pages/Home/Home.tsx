@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { PATHS } from 'router/paths'
 import { useAuthContext } from 'hooks/useAuthContext'
-import { Container, Header } from 'components'
+import { Container, Header, Ticket } from 'components'
 import holderFlowIcon from '../../assets/svg/holderFlowIcon.svg'
 import issuerFlowIcon from '../../assets/svg/issuerFlowIcon.svg'
 import verifierFlowIcon from '../../assets/svg/verifierFlowIcon.svg'
@@ -15,6 +15,8 @@ export const Home: FC = () => {
     <>
       <Header title="Home" />
       <Container isHome title="Please select one of the following options">
+
+        <Ticket>hey</Ticket>
         <S.Card
           onClick={() => {
             updateAuthState({ appFlow: 'holder' })
