@@ -12,7 +12,7 @@ export const Home: FC = () => {
   if (isLoading) {
     return (
       <>
-        <Header title="Your credentials" />
+        <Header title="Your tickets" />
         <Container fullWidth>
           <Spinner />
         </Container>
@@ -23,7 +23,7 @@ export const Home: FC = () => {
   if (error) {
     return (
       <>
-        <Header title="Your credentials" />
+        <Header title="Your tickets" />
         <Container fullWidth>
           {error && <Typography variant="e1">{error?.message}</Typography>}
         </Container>
@@ -34,16 +34,16 @@ export const Home: FC = () => {
   if (data.length === 0) {
     return (
       <>
-        <Header title="Your credentials" />
+        <Header title="Your tickets" />
         <Container fullWidth>
-          <Typography variant="p2">You don't have any credentials yet.</Typography>
+          <Typography variant="p2">You don't have any tickets yet.</Typography>
         </Container>
       </>
     )
   }
   return (
     <>
-      <Header title="Your credentials" />
+      <Header title="Your tickets" />
 
       <Container isGrid>
         {data &&

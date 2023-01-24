@@ -99,7 +99,7 @@ export const CredentialForm: FC = () => {
                 />
               </S.FormSection>
               <Button type="submit" form="form">
-                Issue credential
+                Issue ticket
               </Button>
             </S.Form>
           )}

@@ -1,8 +1,21 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
-export const Container = styled.div`
+export const NavBar = styled.div<{ $isMenuOpen: boolean }>`
+  position: fixed;
+  top: ${pxToRem(64)};
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 50;
   background: #0e1533;
+  @media (min-width: ${pxToRem(500)}) {
+    padding: ${pxToRem(108)} ${pxToRem(100)};
+  }
+  background-color: ${(props) => (props.$isMenuOpen ? `rgba(6, 15, 95, 0.5)` : `none`)};
+`
+
+export const Container = styled.div`
   padding: ${pxToRem(20)} ${pxToRem(24)};
   height: ${pxToRem(64)};
   text-align: right;
