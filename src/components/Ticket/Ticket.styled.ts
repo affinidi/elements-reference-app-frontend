@@ -2,67 +2,84 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
 export const Ticket = styled.div`
-  width: 650px;
-  height: 320px;
-  margin: 100px auto;
+  width: ${pxToRem(392)};
+  height: ${pxToRem(176)};
+  margin: ${pxToRem(24)} ${pxToRem(40)} ${pxToRem(26)} ${pxToRem(0)};
   position: relative;
+  background-color: none;
   transition: all 300ms cubic-bezier(0.03, 0.98, 0.53, 0.99) 0s;
-  background: #fff;
-  border-radius: 20px;
-  padding: 5px;
-  z-index: 5;
-
-  &:before,
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 130px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    z-index: 2;
-    background-color:  #fff;
+  border-radius: 15px;
+  // z-index: 5;
+  cursor: pointer;
+  background-image: url(./src/assets/svg/ticket-preview-desktop.svg);
+  &:hover {
+    box-shadow: 0 4px 29px 0 rgba(0, 0, 0, 0.15);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 
-  &:before {
-    border-top-color: transparent;
-    border-left-color: transparent;
-    transform: rotate(-45deg);
-    left: -35px;
-  }
+  // &:before,
+  // &:after {
+  //   content: '';
+  //   display: block;
+  //   position: absolute;
+  //   top: ${pxToRem(70)};
+  //   width: ${pxToRem(30)};
+  //   height: ${pxToRem(30)};
+  //   border-radius: 50%;
+  //   z-index: 2;
+  //   background-color: #fff;
+  // }
 
-  &:after {
-    border: 5px solid  #fff;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    transform: rotate(135deg);
-    right: -35px;
-  }
+  // &:before {
+  //   border-top-color: transparent;
+  //   border-left-color: transparent;
+  //   transform: rotate(-45deg);
+  //   left: ${pxToRem(-20)};
+  // }
+
+  // &:after {
+  //   border-top-color: transparent;
+  //   border-left-color: transparent;
+  //   transform: rotate(135deg);
+  //   right: ${pxToRem(-20)};
+  // }
 `
 
 export const TicketWrapper = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background: yellow;
-  border-radius: 15px;
+  // border-radius: 15px;
 `
 
-export const TicketHeader = styled.div`
-  width: 15%;
+export const TicketHeader = styled.div<{ $isActive: boolean }>`
+  width: ${pxToRem(84)};
   height: 100%;
-  position: relative;
-//   background: blue;
-  background-image: url(./src/assets/svg/watermark.svg);
-  border-radius: 15px;
-  z-index: 1
+  position: absolute;
+  right: 0;
+  background-image: ${(props) =>
+    props.$isActive
+      ? `url(./src/assets/svg/watermark.svg)`
+      : `url(./src/assets/svg/watermark.svg)`};
+  // border-radius: 15px;
+  // z-index: 1;
+`
+
+export const TicketLine = styled.div<{ $isActive: boolean }>`
+  width: ${pxToRem(20)};
+  height: 100%;
+  position: absolute;
+  left: 0;
+  //background: ${(props) => (props.$isActive ? `#279af1` : `#989daa`)};
+  background-image: url(./src/assets/svg/ticket-preview-highlight.svg);
+  // border-radius: 15px 0 0 15px;
+  // z-index: 1;
 `
 
 export const Box = styled.div`
-  width: 15%;
-  top: 15px;
-  left: 20px;
+  margin: ${pxToRem(0)} ${pxToRem(40)} ${pxToRem(26)} ${pxToRem(0)};
+  top: ${pxToRem(24)};
+  left: ${pxToRem(40)};
   position: absolute;
-  z-index: 1;
+  // z-index: 1;
 `
