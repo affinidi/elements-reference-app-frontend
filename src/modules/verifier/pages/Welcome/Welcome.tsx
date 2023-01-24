@@ -14,7 +14,7 @@ export const Welcome: FC = () => {
         <S.IconContainer>
           <ScanQr />
         </S.IconContainer>
-        <Typography variant="p1">
+        <Typography variant="p1" align="center">
           Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
         </Typography>
         <Button onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</Button>
