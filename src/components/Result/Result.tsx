@@ -27,7 +27,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     return (
       <>
         <Header
-          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Credential Issued'}
+          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
           icon={<BackIcon />}
         />
         <Container fullWidthLeft>
@@ -41,7 +41,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     return (
       <>
         <Header
-          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Credential Issued'}
+          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
           icon={<BackIcon />}
         />
         <Container fullWidthLeft>
@@ -54,7 +54,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
   return (
     <>
       <Header
-        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Credential Issued'}
+        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
         icon={<BackIcon />}
       />
       <Container fullWidthCenter>
@@ -64,11 +64,11 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
             ? isValid
               ? 'Ticket successfully checked.'
               : 'Ticket is invalid'
-            : 'Your credential has been issued.'}
+            : 'Your ticket has been issued.'}
         </S.ResultPara>
 
         <Button variant="outlined" onClick={() => navigate(pathTo)}>
-          {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT CREDENTIAL'}
+          {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
         </Button>
       </Container>
     </>

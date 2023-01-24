@@ -17,28 +17,13 @@ export const Home: FC = () => {
       <Container isHome title="Please select one of the following options">
         <S.Card
           onClick={() => {
-            updateAuthState({ appFlow: 'issuer' })
-            navigate(PATHS.ISSUER.CREDENTIAL_FORM)
-          }}
-        >
-          <S.Details>
-            <S.Heading variant="h7">Issue credential</S.Heading>
-            <S.Para variant="p2">Issue credentials to your customers easily</S.Para>
-          </S.Details>
-          <S.Icon src={issuerFlowIcon} />
-        </S.Card>
-
-        <S.Card
-          onClick={() => {
             updateAuthState({ appFlow: 'holder' })
             navigate(PATHS.HOLDER.HOME)
           }}
         >
           <S.Details>
-            <S.Heading variant="h7">Collect credential</S.Heading>
-            <S.Para variant="p2">
-              Collect your credentials or view credentials stored in your wallet
-            </S.Para>
+            <S.Heading variant="h7">Collect tickets</S.Heading>
+            <S.Para variant="p2">Collect your tickets or view tickets stored in your wallet</S.Para>
           </S.Details>
           <S.Icon src={holderFlowIcon} />
         </S.Card>
@@ -50,10 +35,23 @@ export const Home: FC = () => {
           }}
         >
           <S.Details>
-            <S.Heading variant="h7">Verify credential</S.Heading>
-            <S.Para variant="p2">Verify credentials with a QR code scanner</S.Para>
+            <S.Heading variant="h7">Verify tickets</S.Heading>
+            <S.Para variant="p2">Verify tickets with a QR code scanner</S.Para>
           </S.Details>
           <S.Icon src={verifierFlowIcon} />
+        </S.Card>
+
+        <S.Card
+          onClick={() => {
+            updateAuthState({ appFlow: 'issuer' })
+            navigate(PATHS.ISSUER.CREDENTIAL_FORM)
+          }}
+        >
+          <S.Details>
+            <S.Heading variant="h7">Issue ticket</S.Heading>
+            <S.Para variant="p2">Issue tickets to your customers easily</S.Para>
+          </S.Details>
+          <S.Icon src={issuerFlowIcon} />
         </S.Card>
       </Container>
     </>

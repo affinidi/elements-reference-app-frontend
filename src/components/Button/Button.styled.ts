@@ -19,6 +19,7 @@ export const Button = styled.button<{ $variant: Variant; $round: boolean }>`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin: ${pxToRem(40)} 0;
+  width: 100%;
 
   ${({ $round }) =>
     $round &&
