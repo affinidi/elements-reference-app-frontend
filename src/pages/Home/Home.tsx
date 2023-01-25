@@ -16,7 +16,7 @@ export const Home: FC = () => {
       <Header title="Home" />
       <Container isHome title="Please select one of the following options">
 
-        <Ticket>hey</Ticket>
+        <Ticket>ticket</Ticket>
         <S.Card
           onClick={() => {
             updateAuthState({ appFlow: 'holder' })
