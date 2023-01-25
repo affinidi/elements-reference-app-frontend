@@ -6,6 +6,18 @@ import { pxToRem } from 'utils'
 import Box from '../Box/Box'
 import Typography from '../Typography/Typography'
 
+const getTextColor = (props) => {
+  if (props.$hasError) {
+    return props.theme.colors.utility.danger['100']
+  }
+
+  if (props.$disabled) {
+    return props.theme.colors.neutral.primary['30']
+  }
+
+  return ''
+}
+
 export const Wrapper = styled(Box)`
   margin-top: ${pxToRem(24)};
 `
@@ -119,6 +131,7 @@ export const Error = styled(Typography)`
 export const Range = styled(Box)`
   margin: ${pxToRem(8)} 0 ${pxToRem(4)};
 `
-export const Label = styled(Typography)<{ $disabled?: boolean }>`
-  ${(props) => (props.$disabled ? `color: #989daa;` : null)}
+
+export const Label = styled(Typography)<{ $disabled?: boolean; $hasError?: boolean }>`
+  color: ${getTextColor};
 `

@@ -8,14 +8,14 @@ export interface TextareaProps
   variant?: string
   hasError?: boolean
   helpText?: string
-  onChange?: (value: string) => void
+  onChange?: (value: string, e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ onChange, hasError, helpText, label, className, ...props }, ref) => {
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (onChange) {
-        onChange(e.target.value)
+        onChange(e.target.value, e)
       }
     }
 

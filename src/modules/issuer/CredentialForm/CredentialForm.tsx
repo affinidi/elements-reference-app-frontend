@@ -73,7 +73,9 @@ export const CredentialForm: FC = () => {
                   placeholder="Enter event description"
                   maxLength={1000}
                   value={formikProps.values.eventDescription}
-                  onChange={formikProps.handleChange}
+                  onChange={(value, e) => formikProps.handleChange(e)}
+                  hasError={!!formikProps.errors.eventDescription}
+                  helpText={formikProps.errors.eventDescription}
                 />
               </S.FormSection>
               <S.Heading variant="h7">Ticket holder information</S.Heading>
