@@ -99,7 +99,7 @@ export const useCredentialForm = () => {
 
     if (!values.eventDate) {
       errors.eventDate = 'Mandatory field'
-    } else if (!moment(values.eventDate, 'MM/DD/YYYY', true).isValid()) {
+    } else if (!moment(values.eventDate, 'DD/MM/YYYY', true).isValid()) {
       errors.eventDate = 'Please enter a valid date'
     }
 
@@ -119,7 +119,9 @@ export const useCredentialForm = () => {
       errors.email = 'Mandatory field'
     }
 
-    if (!EmailValidator.validate(values.email)) {
+    if (!values.email) {
+      errors.email = 'Mandatory field'
+    } else if (!EmailValidator.validate(values.email)) {
       errors.email = 'Invalid email'
     }
 

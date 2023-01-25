@@ -81,7 +81,7 @@ export const CredentialForm: FC = () => {
               <S.Heading variant="h7">Ticket holder information</S.Heading>
               <S.FormSection>
                 <S.LongInput
-                  label="Ticket holder name*"
+                  label="Ticket holder name"
                   name="name"
                   maxLength={100}
                   placeholder="Enter ticket holder name"
@@ -90,7 +90,7 @@ export const CredentialForm: FC = () => {
                   error={formikProps.touched.name ? formikProps.errors.name : ''}
                 />
                 <S.LongInput
-                  label="Ticket holder email*"
+                  label="Ticket holder email"
                   name="email"
                   type="email"
                   placeholder="Enter ticket holder email"

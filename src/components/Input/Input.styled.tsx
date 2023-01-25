@@ -28,7 +28,7 @@ export const Input = styled.input<{ $hasError?: boolean }>`
   padding: ${pxToRem(13)} ${pxToRem(16)};
   border: 1px solid ${(props) => (props.$hasError ? '#e42648' : '#e0e1e5')};
   background: #fff;
-  color: ${(props) => (props.$hasError ? '#e42648' : '#464e66')};
+  color: ${(props) => props.theme.colors.neutral.primary['90']};
   font-family: 'Roboto', sans-serif;
   font-size: ${pxToRem(16)};
   border-radius: 4px;
