@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { format } from 'date-fns'
+import { format, isMatch } from 'date-fns'
 import { useCallback } from 'react'
 import * as EmailValidator from 'email-validator'
 
@@ -11,7 +11,6 @@ import {
 } from 'services/issuance/issuance.api'
 import { issuanceService } from 'services/issuance'
 import { PATHS } from 'router/paths'
-import moment from 'moment'
 
 import { adjustForUTCOffset } from './CredentialForm'
 
@@ -99,7 +98,7 @@ export const useCredentialForm = () => {
 
     if (!values.eventDate) {
       errors.eventDate = 'Mandatory field'
-    } else if (!moment(values.eventDate, 'DD/MM/YYYY', true).isValid()) {
+    } else if (!isMatch(values.eventDate, 'dd/MM/yyyy')) {
       errors.eventDate = 'Please enter a valid date'
     }
 
