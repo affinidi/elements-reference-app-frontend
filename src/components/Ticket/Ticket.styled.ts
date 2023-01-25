@@ -15,6 +15,33 @@ export const Ticket = styled.div`
     box-shadow: 0 4px 29px 0 rgba(0, 0, 0, 0.15);
     background-color: rgba(0, 0, 0, 0.05);
   }
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: ${pxToRem(70)};
+    width: ${pxToRem(30)};
+    height: ${pxToRem(30)};
+    border-radius: 50%;
+    z-index: 2;
+    background-color: #fff;
+  }
+
+  &:before {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(-45deg);
+    left: ${pxToRem(-20)};
+  }
+
+  &:after {
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(135deg);
+    right: ${pxToRem(-20)};
+  }
 `
 
 export const TicketWrapper = styled.div`
@@ -32,6 +59,7 @@ export const TicketHeader = styled.div<{ $isActive: boolean }>`
     props.$isActive
       ? `url(./src/assets/svg/watermark.svg)`
       : `url(./src/assets/svg/watermark.svg)`};
+  border-radius: 0px 15px 15px 0px;
 `
 
 export const TicketLine = styled.div<{ $isActive: boolean }>`
@@ -39,7 +67,8 @@ export const TicketLine = styled.div<{ $isActive: boolean }>`
   height: 100%;
   position: absolute;
   left: 0;
-  background-image: url(./src/assets/svg/ticket-preview-highlight.svg);
+  background: ${(props) => (props.$isActive ? `#279af1` : `#989daa`)};
+  border-radius: 15px 0 0 15px;
 `
 
 export const Box = styled.div`
