@@ -11,6 +11,7 @@ import {
 } from 'services/issuance/issuance.api'
 import { issuanceService } from 'services/issuance'
 import { PATHS } from 'router/paths'
+import moment from 'moment'
 
 import { adjustForUTCOffset } from './CredentialForm'
 
@@ -71,7 +72,8 @@ export const useCredentialForm = () => {
           },
         },
         credentialSubject: {
-          date: format(adjustForUTCOffset(new Date(values.eventDate)), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
+          date: format(new Date(values.eventDate), 'yyyy-MM-dd'),
+          time: values.eventTime,
           place: values.eventLocation,
           eventName: values.eventName,
           eventDescription: values.eventDescription,
@@ -97,6 +99,12 @@ export const useCredentialForm = () => {
 
     if (!values.eventDate) {
       errors.eventDate = 'Mandatory field'
+    } else if (!moment(values.eventDate, 'MM/DD/YYYY', true).isValid()) {
+      errors.eventDate = 'Please enter a valid date'
+    }
+
+    if (!values.eventTime) {
+      errors.eventTime = 'Mandatory field'
     }
 
     if (!values.eventLocation) {

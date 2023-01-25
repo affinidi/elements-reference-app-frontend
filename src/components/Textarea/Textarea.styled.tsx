@@ -39,6 +39,7 @@ export const Textarea = styled.textarea<{ $hasError?: boolean }>`
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'text')};
   transition: all 0.125s ease-in-out;
   outline: none;
+  resize: none;
   border: 1px solid ${(props) => props.theme.colors.neutral.primary['15']};
 
   ${(props) =>

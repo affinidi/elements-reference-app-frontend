@@ -31,6 +31,5 @@ export const LongInput = styled(Input)`
 `
 
 export const TextAreaInput = styled(Textarea)`
-  resize: none;
   width: 100%;
 `

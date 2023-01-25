@@ -34,7 +34,7 @@ export const CredentialForm: FC = () => {
               <S.Heading variant="h7">Event details</S.Heading>
               <S.FormSection>
                 <S.LongInput
-                  label="Event name*"
+                  label="Event name"
                   placeholder="Enter event name"
                   name="eventName"
                   maxLength={100}
@@ -43,7 +43,7 @@ export const CredentialForm: FC = () => {
                   error={formikProps.touched.eventName ? formikProps.errors.eventName : ''}
                 />
                 <S.LongInput
-                  label="Event location*"
+                  label="Event location"
                   placeholder="Enter event location"
                   name="eventLocation"
                   maxLength={500}
@@ -52,7 +52,7 @@ export const CredentialForm: FC = () => {
                   error={formikProps.touched.eventLocation ? formikProps.errors.eventLocation : ''}
                 />
                 <S.LongInput
-                  label="Event date*"
+                  label="Event date"
                   name="eventDate"
                   placeholder="DD/MM/YYYY"
                   value={formikProps.values.eventDate}
@@ -60,10 +60,10 @@ export const CredentialForm: FC = () => {
                   error={formikProps.touched.eventDate ? formikProps.errors.eventDate : ''}
                 />
                 <S.LongInput
-                  label="Event time*"
+                  label="Event time"
                   name="eventTime"
                   placeholder="HH:MM-HH:MM"
-                  value={formikProps.values.eventDate}
+                  value={formikProps.values.eventTime}
                   onChange={formikProps.handleChange}
                   error={formikProps.touched.eventTime ? formikProps.errors.eventTime : ''}
                 />
