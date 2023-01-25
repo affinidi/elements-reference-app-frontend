@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { format } from 'date-fns'
+import { format, isMatch } from 'date-fns'
 import { useCallback } from 'react'
 import * as EmailValidator from 'email-validator'
 
@@ -18,6 +18,7 @@ export type EventSubjectData = {
   eventName: string
   eventLocation: string
   eventDate: string
+  eventTime: string
   eventDescription: string
   name: string
   email: string
@@ -27,6 +28,7 @@ export const initialValues: EventSubjectData = {
   eventName: '',
   eventLocation: '',
   eventDate: '',
+  eventTime: '',
   eventDescription: '',
   name: '',
   email: '',
@@ -70,6 +72,7 @@ export const useCredentialForm = () => {
         },
         credentialSubject: {
           date: format(adjustForUTCOffset(new Date(values.eventDate)), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
+          time: values.eventTime,
           place: values.eventLocation,
           eventName: values.eventName,
           eventDescription: values.eventDescription,
@@ -95,6 +98,12 @@ export const useCredentialForm = () => {
 
     if (!values.eventDate) {
       errors.eventDate = 'Mandatory field'
+    } else if (!isMatch(values.eventDate, 'dd/MM/yyyy')) {
+      errors.eventDate = 'Please enter a valid date'
+    }
+
+    if (!values.eventTime) {
+      errors.eventTime = 'Mandatory field'
     }
 
     if (!values.eventLocation) {
@@ -109,7 +118,9 @@ export const useCredentialForm = () => {
       errors.email = 'Mandatory field'
     }
 
-    if (!EmailValidator.validate(values.email)) {
+    if (!values.email) {
+      errors.email = 'Mandatory field'
+    } else if (!EmailValidator.validate(values.email)) {
       errors.email = 'Invalid email'
     }
 

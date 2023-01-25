@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import AppRouter from 'router/app-router'
 import { AuthProvider } from 'contexts/AuthContext'
+import { ThemeProvider } from 'styled-components'
+import { theme } from 'utils/theme'
 import { Bootstrap } from 'bootstrap'
 
 const queryClient = new QueryClient({
@@ -16,15 +18,17 @@ const queryClient = new QueryClient({
 
 const App: FC = () => {
   return (
-    <QueryClientProvider client={queryClient} contextSharing={true}>
-      <BrowserRouter>
-        <AuthProvider>
-          <Bootstrap>
-            <AppRouter />
-          </Bootstrap>
-        </AuthProvider>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient} contextSharing={true}>
+        <BrowserRouter>
+          <AuthProvider>
+            <Bootstrap>
+              <AppRouter />
+            </Bootstrap>
+          </AuthProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ThemeProvider>
   )
 }
 
