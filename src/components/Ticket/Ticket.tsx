@@ -6,14 +6,9 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
 }
 
-const Ticket: React.FC<BoxProps> = ({ children, isActive = true, ...props }) => (
-  <S.Ticket {...props}>
-    <S.TicketWrapper>
-      <S.TicketLine $isActive={isActive} />
-      <S.TicketHeader $isActive={isActive} />
-      <S.Box>{children}</S.Box>
-    </S.TicketWrapper>
-  </S.Ticket>
+const Ticket: React.FC<BoxProps> = ({ children, ...props }) => (
+  <S.Ticket {...props}>{children}</S.Ticket>
 )
+
 
 export default Ticket
