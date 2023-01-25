@@ -72,7 +72,7 @@ export const useCredentialForm = () => {
           },
         },
         credentialSubject: {
-          date: format(new Date(values.eventDate), 'yyyy-MM-dd'),
+          date: format(adjustForUTCOffset(new Date(values.eventDate)), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
           time: values.eventTime,
           place: values.eventLocation,
           eventName: values.eventName,
