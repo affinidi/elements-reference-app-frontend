@@ -1,7 +1,7 @@
 import { Typography } from 'components'
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
-import { Container } from '../../modules/holder/pages/Home/Card/Card.styled'
+import { Container } from '../../modules/holder/pages/Home/TicketCard/TicketCard.styled'
 
 export const Card = styled(Container)<{ $disabled?: boolean }>`
   display: flex;

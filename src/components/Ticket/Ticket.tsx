@@ -10,5 +10,4 @@ const Ticket: React.FC<BoxProps> = ({ children, ...props }) => (
   <S.Ticket {...props}>{children}</S.Ticket>
 )
 
-
 export default Ticket

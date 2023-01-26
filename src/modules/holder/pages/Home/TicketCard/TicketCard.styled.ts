@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
+import { Box as styledBox} from 'components'
 
 export const Container = styled.div`
   cursor: pointer;
@@ -16,4 +17,8 @@ export const Container = styled.div`
   background-color: #ffffff;
   overflow-wrap: anywhere;
   margin-bottom: ${pxToRem(24)};
+`
+
+export const Box = styled(styledBox)`
+  margin-right: ${pxToRem(32)};
 `
