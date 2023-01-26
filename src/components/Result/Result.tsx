@@ -54,22 +54,24 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
   return (
     <>
       <Header
-        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
+        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket issued'}
         icon={<BackIcon />}
       />
       <Container fullWidthCenter>
-        <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
-        <S.ResultPara variant="p4">
-          {authState.appFlow === 'verifier'
-            ? isValid
-              ? 'Ticket successfully checked.'
-              : 'Ticket is invalid'
-            : 'Your ticket has been issued.'}
-        </S.ResultPara>
+        <S.CenterDiv className="col-12 col-sm-4 offset-sm-4">
+          <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
+          <S.ResultPara variant="p1">
+            {authState.appFlow === 'verifier'
+              ? isValid
+                ? 'Ticket successfully checked.'
+                : 'Ticket is invalid'
+              : 'Your ticket has been issued.'}
+          </S.ResultPara>
 
-        <Button variant="outlined" onClick={() => navigate(pathTo)}>
-          {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
-        </Button>
+          <Button variant="outlined" onClick={() => navigate(pathTo)}>
+            {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
+          </Button>
+        </S.CenterDiv>
       </Container>
     </>
   )

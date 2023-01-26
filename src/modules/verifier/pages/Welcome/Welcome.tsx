@@ -10,14 +10,16 @@ export const Welcome: FC = () => {
   return (
     <>
       <Header title="Welcome" icon={<BackIcon />} />
-      <Container fullWidthCenter>
-        <S.IconContainer>
-          <ScanQr />
-        </S.IconContainer>
-        <Typography variant="p1" align="center">
-          Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
-        </Typography>
-        <Button onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</Button>
+      <Container>
+        <S.CenterDiv className="col-12 col-sm-4 offset-sm-4">
+          <S.IconContainer>
+            <ScanQr />
+          </S.IconContainer>
+          <Typography variant="p1">
+            Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
+          </Typography>
+          <Button onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</Button>
+        </S.CenterDiv>
       </Container>
     </>
   )

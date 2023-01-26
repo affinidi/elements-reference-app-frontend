@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 import { pxToRem } from 'utils'
-// import CalendarIcon from 'assets/svg/calendar.svg'
 
 import Box from '../Box/Box'
 import Typography from '../Typography/Typography'
