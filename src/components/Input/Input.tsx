@@ -12,7 +12,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, isGroup, className, units, disabled, ...props }, ref) => (
     <S.Wrapper direction="column" gap={4} className={className}>
       {label && (
-        <S.Label variant="p4" $disabled={disabled}>
+        <S.Label variant="p4" $disabled={disabled} $hasError={!!error}>
           {label}
         </S.Label>
       )}

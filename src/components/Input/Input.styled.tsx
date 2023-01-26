@@ -6,8 +6,20 @@ import { pxToRem } from 'utils'
 import Box from '../Box/Box'
 import Typography from '../Typography/Typography'
 
+const getTextColor = (props) => {
+  if (props.$hasError) {
+    return props.theme.colors.utility.danger['100']
+  }
+
+  if (props.$disabled) {
+    return props.theme.colors.neutral.primary['30']
+  }
+
+  return ''
+}
+
 export const Wrapper = styled(Box)`
-  margin: ${pxToRem(24)} 0 ${pxToRem(20)};
+  margin-top: ${pxToRem(24)};
 `
 
 export const Input = styled.input<{ $hasError?: boolean }>`
@@ -16,7 +28,7 @@ export const Input = styled.input<{ $hasError?: boolean }>`
   padding: ${pxToRem(13)} ${pxToRem(16)};
   border: 1px solid ${(props) => (props.$hasError ? '#e42648' : '#e0e1e5')};
   background: #fff;
-  color: ${(props) => (props.$hasError ? '#e42648' : '#464e66')};
+  color: ${(props) => props.theme.colors.neutral.primary['90']};
   font-family: 'Roboto', sans-serif;
   font-size: ${pxToRem(16)};
   border-radius: 4px;
@@ -27,7 +39,11 @@ export const Input = styled.input<{ $hasError?: boolean }>`
   &:not([disabled]) {
     &:hover,
     &:focus {
-      border: 1px solid ${(props) => (props.$hasError ? '#e42648' : '#1a207e')};
+      border: 1px solid
+        ${(props) =>
+          props.$hasError
+            ? props.theme.colors.utility.danger['100']
+            : props.theme.colors.brand.primary['90']};
     }
 
     ::placeholder {
@@ -115,6 +131,7 @@ export const Error = styled(Typography)`
 export const Range = styled(Box)`
   margin: ${pxToRem(8)} 0 ${pxToRem(4)};
 `
-export const Label = styled(Typography)<{ $disabled?: boolean }>`
-  ${(props) => (props.$disabled ? `color: #989daa;` : null)}
+
+export const Label = styled(Typography)<{ $disabled?: boolean; $hasError?: boolean }>`
+  color: ${getTextColor};
 `
