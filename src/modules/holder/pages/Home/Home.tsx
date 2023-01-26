@@ -41,14 +41,14 @@ export const Home: FC = () => {
     )
   }
 
-  const validTickets = data.filter((credentialItem, index) => {
+  const validTickets = data.filter((credentialItem) => {
     const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
     if (Date.parse(credentialSubject?.eventDate) > Date.now()) {
       return credentialItem
     }
   })
 
-  const expiredTickets = data.filter((credentialItem, index) => {
+  const expiredTickets = data.filter((credentialItem) => {
     const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
     if (Date.parse(credentialSubject?.eventDate) <= Date.now()) {
       return credentialItem
