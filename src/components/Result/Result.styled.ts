@@ -17,6 +17,9 @@ export const ResultPara = styled(Typography)`
 
 export const CenterDiv = styled.div`
   text-align: center;
+  svg {
+    max-width: 100%;
+  }
 `
 export const IssueTicketButton = styled(Button)`
   width: 100%;
