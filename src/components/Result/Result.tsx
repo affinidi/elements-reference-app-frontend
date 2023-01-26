@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { PATHS } from 'router/paths'
-import { Button, Container, Header, Spinner, Typography } from 'components'
+import { Container, Header, Spinner, Typography } from 'components'
 import { BackIcon } from 'assets'
 import { ResultContent } from './ResultContent'
 import { ErrorResponse } from 'hooks/useAuthentication'
@@ -58,7 +58,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
         icon={<BackIcon />}
       />
       <Container fullWidthCenter>
-        <S.CenterDiv className="col-12 col-sm-4 offset-sm-4">
+        <S.CenterDiv>
           <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
           <S.ResultPara variant="p1">
             {authState.appFlow === 'verifier'
@@ -68,9 +68,9 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
               : 'Your ticket has been issued.'}
           </S.ResultPara>
 
-          <Button variant="outlined" onClick={() => navigate(pathTo)}>
+          <S.IssueTicketButton variant="outlined" onClick={() => navigate(pathTo)}>
             {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
-          </Button>
+          </S.IssueTicketButton>
         </S.CenterDiv>
       </Container>
     </>

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Typography from '../Typography/Typography'
 import { pxToRem } from 'utils'
+import { Button } from 'components'
 
 export const ResultTitle = styled(Typography)<{ $isVerified?: boolean; $isIssuance?: boolean }>`
   color: ${(props) =>
@@ -16,4 +17,7 @@ export const ResultPara = styled(Typography)`
 
 export const CenterDiv = styled.div`
   text-align: center;
+`
+export const IssueTicketButton = styled(Button)`
+  width: 100%;
 `
