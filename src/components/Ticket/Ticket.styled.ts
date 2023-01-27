@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
-export const Ticket = styled.div<{ isActive: boolean }>`
+export const Ticket = styled.div<{ isValid: boolean }>`
   position: relative;
   height: ${pxToRem(176)};
   padding: ${pxToRem(24)} ${pxToRem(40)};
@@ -31,7 +31,7 @@ export const Ticket = styled.div<{ isActive: boolean }>`
     position: absolute;
     left: 0;
     background-image: ${(props) =>
-      props.isActive
+      props.isValid
         ? `url(../src/assets/svg/ticket-preview-highlight-blue.svg)`
         : `url(../src/assets/svg/ticket-preview-highlight-gray.svg)`};
     border-radius: 15px 0 0 15px;
@@ -43,7 +43,7 @@ export const Ticket = styled.div<{ isActive: boolean }>`
     position: absolute;
     right: 0;
     background-image: ${(props) =>
-      props.isActive
+      props.isValid
         ? `url(../src/assets/svg/watermark-blue.svg)`
         : `url(../src/assets/svg/watermark-gray.svg)`};
     border-radius: 0 15px 15px 0;

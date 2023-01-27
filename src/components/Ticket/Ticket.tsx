@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react'
 import * as S from './Ticket.styled'
 
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
-  isActive: boolean
+  isValid: boolean
   children: React.ReactNode
 }
 

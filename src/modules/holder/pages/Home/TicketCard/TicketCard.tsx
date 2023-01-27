@@ -5,33 +5,32 @@ import { Credential } from 'modules/holder/pages/types'
 import { PATHS } from 'router/paths'
 
 import { Typography, Ticket, Box } from 'components'
-import * as S from './TicketCard.styled'
 
 export type TicketCardProps = {
   credential: Credential
-  isActive: boolean
+  isValid: boolean
 }
 
-const TicketCard: FC<TicketCardProps> = ({ credential, isActive }) => {
+const TicketCard: FC<TicketCardProps> = ({ credential, isValid }) => {
   const navigate = useNavigate()
 
   return (
     <Ticket
-      isActive={isActive}
+      isValid={isValid}
       onClick={() => navigate(`${PATHS.HOLDER.CREDENTIAL}/${credential.credentialId}`)}
     >
       <Typography variant="h6">{credential.title}</Typography>
       <Typography variant="s2">Entry Ticket</Typography>
 
-      <Box direction='row'>
-        <S.Box>
+      <Box direction="row">
+        <Box gap={32}>
           <Typography variant="c1">Start Date</Typography>
           <Typography variant="p4">{credential.date}</Typography>
-        </S.Box>
-        <S.Box>
+        </Box>
+        <Box gap={32}>
           <Typography variant="c1">Start Time</Typography>
           <Typography variant="p4">{credential.time}</Typography>
-        </S.Box>
+        </Box>
       </Box>
     </Ticket>
   )
