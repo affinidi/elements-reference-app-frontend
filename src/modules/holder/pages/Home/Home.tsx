@@ -11,6 +11,8 @@ import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { Container, Header, Spinner, Typography } from 'components'
 import TicketCard from './TicketCard/TicketCard'
 
+import { formatDate } from 'utils'
+
 export const Home: FC = () => {
   const { data, error, isLoading } = useCredentialsQuery()
 
@@ -36,7 +38,12 @@ export const Home: FC = () => {
     )
   }
 
-  if (data.length === 0) {
+  const tickets = data.filter((credentialItem) => {
+    const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
+    return credentialSchema?.id === 'https://schema.affinidi.com/EventEligibilityV1-0.json'
+  })
+
+  if (tickets.length === 0) {
     return (
       <>
         <Header title="Your tickets" />
@@ -48,22 +55,22 @@ export const Home: FC = () => {
   }
 
   // @ts-ignore
-  const validTickets: StoredW3CCredential[] = data.filter((credentialItem) => {
+  const validTickets: StoredW3CCredential[] = tickets.filter((credentialItem) => {
     const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
-    return Date.parse(credentialSubject?.eventDate) > Date.now()
+    return Date.parse(credentialSubject?.startDate) >= Date.now()
   })
 
   // @ts-ignore
-  const expiredTickets: StoredW3CCredential[] = data.filter((credentialItem) => {
+  const expiredTickets: StoredW3CCredential[] = tickets.filter((credentialItem) => {
     const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
-    return Date.parse(credentialSubject?.eventDate) <= Date.now()
+    return Date.parse(credentialSubject?.startDate) < Date.now()
   })
 
   const getCredential = (credentialSubject: AnyData, credentialItem: StoredW3CCredential) => {
     const credential: Credential = {
       title: credentialSubject?.eventName,
-      date: credentialSubject?.eventDate,
-      time: credentialSubject?.eventTime,
+      date: formatDate(new Date(credentialSubject?.startDate).toISOString().substring(0, 10)),
+      time: new Date(credentialSubject?.startDate).toISOString().substring(11, 16),
       credentialId: credentialItem?.id,
     }
 

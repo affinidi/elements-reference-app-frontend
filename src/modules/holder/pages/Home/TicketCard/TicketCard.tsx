@@ -22,12 +22,12 @@ const TicketCard: FC<TicketCardProps> = ({ credential, isValid }) => {
       <Typography variant="h6">{credential.title}</Typography>
       <Typography variant="s2">Entry Ticket</Typography>
 
-      <Box direction="row">
-        <Box gap={32}>
+      <Box direction="row" gap={32}>
+        <Box>
           <Typography variant="c1">Start Date</Typography>
           <Typography variant="p4">{credential.date}</Typography>
         </Box>
-        <Box gap={32}>
+        <Box>
           <Typography variant="c1">Start Time</Typography>
           <Typography variant="p4">{credential.time}</Typography>
         </Box>

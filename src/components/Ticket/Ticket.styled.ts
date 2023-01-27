@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
+import ticketPreviewHighlightBlue from '../../assets/svg/ticket-preview-highlight-blue.svg'
+import ticketPreviewHighlightGray from '../../assets/svg/ticket-preview-highlight-gray.svg'
+
 export const Ticket = styled.div<{ isValid: boolean }>`
   position: relative;
   height: ${pxToRem(176)};
@@ -32,8 +35,8 @@ export const Ticket = styled.div<{ isValid: boolean }>`
     left: 0;
     background-image: ${(props) =>
       props.isValid
-        ? `url(../src/assets/svg/ticket-preview-highlight-blue.svg)`
-        : `url(../src/assets/svg/ticket-preview-highlight-gray.svg)`};
+        ? `url(/src/assets/svg/ticket-preview-highlight-blue.svg)`
+        : `url(/src/assets/svg/ticket-preview-highlight-gray.svg)`};
     border-radius: 15px 0 0 15px;
   }
 
@@ -44,8 +47,8 @@ export const Ticket = styled.div<{ isValid: boolean }>`
     right: 0;
     background-image: ${(props) =>
       props.isValid
-        ? `url(../src/assets/svg/watermark-blue.svg)`
-        : `url(../src/assets/svg/watermark-gray.svg)`};
+        ? `url(/src/assets/svg/watermark-blue.svg)`
+        : `url(/src/assets/svg/watermark-gray.svg)`};
     border-radius: 0 15px 15px 0;
   }
 `
