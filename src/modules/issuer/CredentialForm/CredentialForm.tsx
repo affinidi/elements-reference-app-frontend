@@ -54,7 +54,6 @@ export const CredentialForm: FC = () => {
                 <S.LongInput
                   label="Start date & time"
                   name="eventStartDateTime"
-                  placeholder="DD/MM/YYYY"
                   type="datetime-local"
                   value={formikProps.values.eventStartDateTime}
                   onChange={formikProps.handleChange}
@@ -67,7 +66,6 @@ export const CredentialForm: FC = () => {
                 <S.LongInput
                   label="End date & time"
                   name="eventEndDateTime"
-                  placeholder="DD/MM/YYYY"
                   type="datetime-local"
                   value={formikProps.values.eventEndDateTime}
                   onChange={formikProps.handleChange}

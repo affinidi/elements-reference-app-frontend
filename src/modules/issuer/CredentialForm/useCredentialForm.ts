@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { format, isMatch } from 'date-fns'
+import { format } from 'date-fns'
 import { useCallback } from 'react'
 import * as EmailValidator from 'email-validator'
 
@@ -34,7 +34,7 @@ export const initialValues: EventSubjectData = {
   email: '',
 }
 
-export const schema = 'https://schema.affinidi.com/EventElegibilityV1-0.json'
+export const schema = 'https://schema.affinidi.com/EventEligibilityV1-0.json'
 
 export const useCredentialForm = () => {
   const navigate = useNavigate()
