@@ -11,11 +11,7 @@ export const ResultContent: FC<ResultContentProps> = ({ isValid, isIssuance }) =
     <>
       {isValid ? isIssuance ? <IssuedIcon /> : <ValidCredential /> : <InvalidCredential />}
       <S.ResultTitle variant="h5" $isVerified={isValid} $isIssuance={isIssuance}>
-        {isValid
-          ? isIssuance
-            ? 'Credential successfully issued'
-            : 'Valid Credential'
-          : 'Invalid Credential'}
+        {isValid ? (isIssuance ? 'Ticket successfully issued' : 'Valid ticket') : 'Invalid ticket'}
       </S.ResultTitle>
     </>
   )

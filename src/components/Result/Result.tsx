@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { PATHS } from 'router/paths'
-import { Button, Container, Header, Spinner, Typography } from 'components'
+import { Box, Container, Header, Spinner, Typography } from 'components'
 import { BackIcon } from 'assets'
 import { ResultContent } from './ResultContent'
 import { ErrorResponse } from 'hooks/useAuthentication'
@@ -54,22 +54,24 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
   return (
     <>
       <Header
-        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
+        title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket issued'}
         icon={<BackIcon />}
       />
       <Container fullWidthCenter>
-        <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
-        <S.ResultPara variant="p4">
-          {authState.appFlow === 'verifier'
-            ? isValid
-              ? 'Ticket successfully checked.'
-              : 'Ticket is invalid'
-            : 'Your ticket has been issued.'}
-        </S.ResultPara>
+        <Box alignItems="center">
+          <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
+          <S.ResultPara variant="p1">
+            {authState.appFlow === 'verifier'
+              ? isValid
+                ? 'Ticket successfully checked.'
+                : 'Ticket is invalid'
+              : 'Your ticket has been issued.'}
+          </S.ResultPara>
 
-        <Button variant="outlined" onClick={() => navigate(pathTo)}>
-          {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
-        </Button>
+          <S.IssueTicketButton variant="outlined" onClick={() => navigate(pathTo)}>
+            {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
+          </S.IssueTicketButton>
+        </Box>
       </Container>
     </>
   )
