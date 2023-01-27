@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router'
 import { PATHS } from 'router/paths'
-import { Button, Container, Header, Typography } from 'components'
+import { Container, Header, Box } from 'components'
 import { BackIcon, ScanQr } from 'assets'
 import * as S from './Welcome.styled'
 
@@ -11,13 +11,13 @@ export const Welcome: FC = () => {
     <>
       <Header title="Welcome" icon={<BackIcon />} />
       <Container fullWidthCenter>
-        <S.IconContainer>
+        <Box alignItems="center">
           <ScanQr />
-        </S.IconContainer>
-        <Typography variant="p1" align="center">
-          Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
-        </Typography>
-        <Button onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</Button>
+          <S.WelcomeMessage variant="p1">
+            Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
+          </S.WelcomeMessage>
+          <S.ScanButton onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</S.ScanButton>
+        </Box>
       </Container>
     </>
   )
