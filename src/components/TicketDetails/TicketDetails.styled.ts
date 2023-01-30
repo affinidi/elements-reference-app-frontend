@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import Typography from '../Typography/Typography'
+
 import { pxToRem } from 'utils'
+import { Typography } from 'components'
 
 export const TicketDetailsCardLeft = styled.div`
   border-top-left-radius: 8px;
@@ -27,13 +28,13 @@ export const TicketDetailsCardRight = styled.div`
     height: 1em;
     background: ${(props) => props.theme.colors.neutral.secondary['100']};
     border-radius: 50%;
-    left: -0.6em;
+    left: ${pxToRem(-9)};
   }
   &::before {
-    top: -0.4em;
+    top: ${pxToRem(-8)};
   }
   &::after {
-    bottom: -0.4em;
+    bottom: ${pxToRem(-8)};
   }
 `
 
