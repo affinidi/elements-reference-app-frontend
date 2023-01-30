@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { format } from 'date-fns'
-import {
-  StoredW3CCredential,
-} from 'services/cloud-wallet/cloud-wallet.api'
+import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
 import { Container, Header, Spinner, Typography } from 'components'
+import NoTicket from 'assets/noTicket'
 import TicketCard from './TicketCard/TicketCard'
+import * as S from './Home.styled'
 
 import { JSON_SCHEMA_URL } from 'utils'
 
@@ -30,7 +30,7 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidth>
+        <Container fullWidthCenter>
           {error && <Typography variant="e1">{error?.message}</Typography>}
         </Container>
       </>
@@ -46,8 +46,11 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidth>
+        <Container fullWidthCenter>
           <Typography variant="p2">You don't have any tickets yet.</Typography>
+          <S.IconContainer>
+            <NoTicket />
+          </S.IconContainer>
         </Container>
       </>
     )
