@@ -113,7 +113,7 @@ export const useCredentialForm = () => {
     if (
       values.eventStartDateTime &&
       values.eventEndDateTime &&
-      new Date(values.eventStartDateTime).getTime() > new Date(values.eventEndDateTime).getTime()
+      new Date(values.eventStartDateTime) > new Date(values.eventEndDateTime)
     ) {
       errors.eventStartDateTime = 'Start date time must not be greater than end date time'
     }
