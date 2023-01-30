@@ -52,20 +52,26 @@ export const CredentialForm: FC = () => {
                   error={formikProps.touched.eventLocation ? formikProps.errors.eventLocation : ''}
                 />
                 <S.LongInput
-                  label="Event date"
-                  name="eventDate"
-                  placeholder="DD/MM/YYYY"
-                  value={formikProps.values.eventDate}
+                  label="Start date & time"
+                  name="eventStartDateTime"
+                  type="datetime-local"
+                  value={formikProps.values.eventStartDateTime}
                   onChange={formikProps.handleChange}
-                  error={formikProps.touched.eventDate ? formikProps.errors.eventDate : ''}
+                  error={
+                    formikProps.touched.eventStartDateTime
+                      ? formikProps.errors.eventStartDateTime
+                      : ''
+                  }
                 />
                 <S.LongInput
-                  label="Event time"
-                  name="eventTime"
-                  placeholder="HH:MM-HH:MM"
-                  value={formikProps.values.eventTime}
+                  label="End date & time"
+                  name="eventEndDateTime"
+                  type="datetime-local"
+                  value={formikProps.values.eventEndDateTime}
                   onChange={formikProps.handleChange}
-                  error={formikProps.touched.eventTime ? formikProps.errors.eventTime : ''}
+                  error={
+                    formikProps.touched.eventEndDateTime ? formikProps.errors.eventEndDateTime : ''
+                  }
                 />
                 <S.TextAreaInput
                   label="Event description"

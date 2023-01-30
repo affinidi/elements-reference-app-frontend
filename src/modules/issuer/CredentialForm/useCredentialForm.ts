@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router'
-import { format, isMatch } from 'date-fns'
+import { format } from 'date-fns'
 import { useCallback } from 'react'
 import * as EmailValidator from 'email-validator'
 
@@ -19,8 +19,8 @@ import { JSON_SCHEMA_URL } from 'utils'
 export type EventSubjectData = {
   eventName: string
   eventLocation: string
-  eventDate: string
-  eventTime: string
+  eventStartDateTime: string
+  eventEndDateTime: string
   eventDescription: string
   name: string
   email: string
@@ -29,8 +29,8 @@ export type EventSubjectData = {
 export const initialValues: EventSubjectData = {
   eventName: '',
   eventLocation: '',
-  eventDate: '',
-  eventTime: '',
+  eventStartDateTime: '',
+  eventEndDateTime: '',
   eventDescription: '',
   name: '',
   email: '',
@@ -73,8 +73,14 @@ export const useCredentialForm = () => {
           },
         },
         credentialSubject: {
-          date: format(adjustForUTCOffset(new Date(values.eventDate)), "yyyy-MM-dd'T'HH:mm:ss'Z'"),
-          time: values.eventTime,
+          startDate: format(
+            adjustForUTCOffset(new Date(values.eventStartDateTime)),
+            "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          ),
+          endDate: format(
+            adjustForUTCOffset(new Date(values.eventEndDateTime)),
+            "yyyy-MM-dd'T'HH:mm:ss'Z'",
+          ),
           place: values.eventLocation,
           eventName: values.eventName,
           eventDescription: values.eventDescription,
@@ -98,14 +104,20 @@ export const useCredentialForm = () => {
       errors.eventName = 'Mandatory field'
     }
 
-    if (!values.eventDate) {
-      errors.eventDate = 'Mandatory field'
-    } else if (!isMatch(values.eventDate, 'dd/MM/yyyy')) {
-      errors.eventDate = 'Please enter a valid date'
+    if (!values.eventStartDateTime) {
+      errors.eventStartDateTime = 'Mandatory field'
     }
 
-    if (!values.eventTime) {
-      errors.eventTime = 'Mandatory field'
+    if (!values.eventEndDateTime) {
+      errors.eventEndDateTime = 'Mandatory field'
+    }
+
+    if (
+      values.eventStartDateTime &&
+      values.eventEndDateTime &&
+      new Date(values.eventStartDateTime) > new Date(values.eventEndDateTime)
+    ) {
+      errors.eventStartDateTime = 'Start date time must not be greater than end date time'
     }
 
     if (!values.eventLocation) {
@@ -134,3 +146,4 @@ export const useCredentialForm = () => {
     validate,
   }
 }
+
