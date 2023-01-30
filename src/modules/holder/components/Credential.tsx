@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
-import { Typography } from 'components'
+import { format } from 'date-fns'
 
 import * as S from './Credential.styled'
 
@@ -20,7 +20,7 @@ export const renderLiteral = (value: unknown): string => {
   }
 
   const d = new Date(parsedDate)
-  return d.toDateString()
+  return format(d, 'dd.MM.yyyy')
 }
 
 const getDetails = (detailsObject: unknown, nested = false) => {
@@ -35,16 +35,22 @@ const getDetails = (detailsObject: unknown, nested = false) => {
   }
 
   if (typeof detailsObject === 'object' && detailsObject !== null) {
-    return Object.entries(detailsObject)
-      .filter(([key]) => key !== '@type')
-      .map(([key, value], index) => {
-        return (
-          <S.Div key={index} nested={nested}>
-            <S.SmallHeading variant="c1">{key}</S.SmallHeading>
-            <S.Div>{getDetails(value, true)}</S.Div>
-          </S.Div>
-        )
-      })
+    const eventObject = {
+      'Start Date': format(new Date(detailsObject.startDate), 'dd.MM.yyy'),
+      'End Date': format(new Date(detailsObject.endDate), 'dd.MM.yyy'),
+      'Start Time': format(new Date(detailsObject.startDate), 'HH.mm'),
+      'End Time': format(new Date(detailsObject.endDate), 'HH.mm'),
+      Location: detailsObject.place,
+    }
+
+    return Object.entries(eventObject).map(([key, value], index) => {
+      return (
+        <S.Div key={index} nested={nested}>
+          <S.SmallHeading variant="c1">{key}</S.SmallHeading>
+          <S.Div>{getDetails(value, true)}</S.Div>
+        </S.Div>
+      )
+    })
   }
 
   return <S.Div>{renderLiteral(detailsObject)}</S.Div>

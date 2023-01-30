@@ -1,8 +1,9 @@
 import { Typography } from 'components'
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
+import { Box } from 'components'
 
-export const Div = styled.div<{ nested?: boolean }>`
+export const Div = styled(Box)<{ nested?: boolean }>`
   margin-left: ${(props) => (props.nested ? pxToRem(12) : '0')};
 `
 
