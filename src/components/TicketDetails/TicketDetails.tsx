@@ -10,7 +10,7 @@ export type TicketDetailsProps = {
   endDate: string
   startTime: string
   endTime: string
-  qrCode?: string
+  qrCode: string
   location: string
 }
 
