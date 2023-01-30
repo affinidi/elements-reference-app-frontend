@@ -11,6 +11,7 @@ export const TicketDetailsCardLeft = styled.div`
   padding: ${pxToRem(40)};
   background-color: ${(props) => props.theme.colors.utility.info['100']};
 `
+
 export const TicketDetailsCardRight = styled.div`
   background-color: ${(props) => props.theme.colors.utility.info['100']};
   position: relative;
