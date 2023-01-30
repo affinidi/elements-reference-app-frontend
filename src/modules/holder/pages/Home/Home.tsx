@@ -68,22 +68,23 @@ export const Home: FC = () => {
     return Date.parse(credentialSubject?.startDate) < Date.now()
   })
 
-  const getCredential = (credentialSubject: AnyData, credentialItem: StoredW3CCredential) => {
-    const credential: Credential = {
-      title: credentialSubject?.eventName,
-      date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
-      time: format(new Date(credentialSubject?.startDate), 'HH:mm'),
-      credentialId: credentialItem?.id,
-    }
-
-    return credential
-  }
-
-  const getTicketCards = (params: { tickets: StoredW3CCredential[]; isValid: boolean }) => {
-    const { tickets, isValid } = params
+  const getTicketCards = ({
+    tickets,
+    isValid,
+  }: {
+    tickets: StoredW3CCredential[]
+    isValid: boolean
+  }) => {
     return tickets.map((credentialItem: StoredW3CCredential) => {
       const credentialSubject = credentialItem?.credentialSubject
-      const credential = getCredential(credentialSubject, credentialItem)
+
+      const credential: Credential = {
+        title: credentialSubject?.eventName,
+        date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
+        time: format(new Date(credentialSubject?.startDate), 'HH:mm'),
+        credentialId: credentialItem?.id,
+      }
+
       return <TicketCard key={credentialItem.id} credential={credential} isValid={isValid} />
     })
   }
