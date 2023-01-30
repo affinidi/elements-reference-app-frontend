@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { format } from 'date-fns'
 
-import { Container, TicketDetails } from 'components'
+import { TicketDetails } from 'components'
 
 import * as S from './Credential.styled'
 
@@ -46,15 +46,17 @@ const getDetails = ({
 
   if (typeof detailsObject === 'object' && detailsObject !== null) {
     return (
-      <TicketDetails
-        eventName={detailsObject.eventName}
-        startDate={format(new Date(detailsObject.startDate), 'dd.MM.yyy')}
-        endDate={format(new Date(detailsObject.endDate), 'dd.MM.yyy')}
-        startTime={format(new Date(detailsObject.startDate), 'HH.mm')}
-        endTime={format(new Date(detailsObject.endDate), 'HH.mm')}
-        location={detailsObject.place}
-        qrCode={qrCode}
-      />
+      qrCode && (
+        <TicketDetails
+          eventName={detailsObject.eventName}
+          startDate={format(new Date(detailsObject.startDate), 'dd.MM.yyy')}
+          endDate={format(new Date(detailsObject.endDate), 'dd.MM.yyy')}
+          startTime={format(new Date(detailsObject.startDate), 'HH.mm')}
+          endTime={format(new Date(detailsObject.endDate), 'HH.mm')}
+          location={detailsObject.place}
+          qrCode={qrCode}
+        />
+      )
     )
   }
 
@@ -62,9 +64,5 @@ const getDetails = ({
 }
 
 export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) => {
-  return (
-    <Container fullWidthCenter>
-      {getDetails({ detailsObject: credentialSubject, qrCode: qrCode })}
-    </Container>
-  )
+  return <>{getDetails({ detailsObject: credentialSubject, qrCode })}</>
 }
