@@ -1,15 +1,20 @@
 import { Typography } from 'components'
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
-import { Container } from '../../modules/holder/pages/Home/Home.styled'
+import { Box } from 'components'
 
-export const Card = styled(Container)<{ $disabled?: boolean }>`
+export const Card = styled(Box)<{ $disabled?: boolean }>`
   display: flex;
   flex-direction: row;
   padding: ${pxToRem(24)};
   min-height: initial;
   align-items: center;
   cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 ${pxToRem(4)} ${pxToRem(20)} 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  overflow-wrap: anywhere;
+  gap: ${pxToRem(8)};
 
   @media (min-width: ${pxToRem(500)}) {
     width: auto;

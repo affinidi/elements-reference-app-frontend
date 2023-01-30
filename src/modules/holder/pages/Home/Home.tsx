@@ -1,8 +1,7 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 import {
-  StoredCredential,
   StoredW3CCredential,
-  UnsignedW3CCredential,
 } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
@@ -10,8 +9,6 @@ import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
 import { Container, Header, Spinner, Typography } from 'components'
 import TicketCard from './TicketCard/TicketCard'
-
-import { formatDate } from 'utils'
 
 export const Home: FC = () => {
   const { data, error, isLoading } = useCredentialsQuery()
@@ -69,7 +66,7 @@ export const Home: FC = () => {
   const getCredential = (credentialSubject: AnyData, credentialItem: StoredW3CCredential) => {
     const credential: Credential = {
       title: credentialSubject?.eventName,
-      date: formatDate(new Date(credentialSubject?.startDate).toISOString().substring(0, 10)),
+      date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
       time: new Date(credentialSubject?.startDate).toISOString().substring(11, 16),
       credentialId: credentialItem?.id,
     }
@@ -77,12 +74,14 @@ export const Home: FC = () => {
     return credential
   }
 
-  const getTicketCards = (array: StoredW3CCredential[], object: { isValid: boolean }) =>
-    array.map((credentialItem: StoredW3CCredential) => {
+  const getTicketCards = (tickets: { ticketsArray: StoredW3CCredential[]; isValid: boolean }) =>
+    tickets.ticketsArray.map((credentialItem: StoredW3CCredential) => {
       const credentialSubject = credentialItem?.credentialSubject
 
       const credential = getCredential(credentialSubject, credentialItem)
-      return <TicketCard key={credentialItem.id} credential={credential} isValid={object.isValid} />
+      return (
+        <TicketCard key={credentialItem.id} credential={credential} isValid={tickets.isValid} />
+      )
     })
 
   return (
@@ -90,13 +89,13 @@ export const Home: FC = () => {
       <Header title="Your tickets" />
 
       <Container isGrid>
-        {validTickets && getTicketCards(validTickets, { isValid: true })}
+        {validTickets && getTicketCards({ ticketsArray: validTickets, isValid: true })}
       </Container>
 
       {expiredTickets.length !== 0 && <Header title="Expired tickets" />}
 
       <Container isGrid>
-        {expiredTickets && getTicketCards(expiredTickets, { isValid: false })}
+        {expiredTickets && getTicketCards({ ticketsArray: expiredTickets, isValid: false })}
       </Container>
     </>
   )
