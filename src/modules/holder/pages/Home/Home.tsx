@@ -72,21 +72,21 @@ export const Home: FC = () => {
     const credential: Credential = {
       title: credentialSubject?.eventName,
       date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
-      time: new Date(credentialSubject?.startDate).toISOString().substring(11, 16),
+      time: format(new Date(credentialSubject?.startDate), 'HH:mm'),
       credentialId: credentialItem?.id,
     }
 
     return credential
   }
 
-  const getTicketCards = (params: { tickets: StoredW3CCredential[]; isValid: boolean }) =>{
+  const getTicketCards = (params: { tickets: StoredW3CCredential[]; isValid: boolean }) => {
     const { tickets, isValid } = params
-    tickets.map((credentialItem: StoredW3CCredential) => {
+    return tickets.map((credentialItem: StoredW3CCredential) => {
       const credentialSubject = credentialItem?.credentialSubject
-
       const credential = getCredential(credentialSubject, credentialItem)
       return <TicketCard key={credentialItem.id} credential={credential} isValid={isValid} />
     })
+  }
 
   return (
     <>

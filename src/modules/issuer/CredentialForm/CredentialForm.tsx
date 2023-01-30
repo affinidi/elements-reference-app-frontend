@@ -3,8 +3,10 @@ import { Formik } from 'formik'
 
 import { Button, Container, Header, Input, Typography } from 'components'
 
-import { initialValues, schema, useCredentialForm } from './useCredentialForm'
+import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
+
+import { JSON_SCHEMA_URL } from 'utils'
 
 export const adjustForUTCOffset = (date: Date) => {
   return new Date(
@@ -30,7 +32,7 @@ export const CredentialForm: FC = () => {
               <Typography variant="p1">
                 Please fill in the form below to issue a credential.
               </Typography>
-              <Input label="Schema URL" value={schema} disabled />
+              <Input label="Schema URL" value={JSON_SCHEMA_URL} disabled />
               <S.Heading variant="h7">Event details</S.Heading>
               <S.FormSection>
                 <S.LongInput
