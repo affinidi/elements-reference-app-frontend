@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
-import { Typography } from 'components'
+import { format } from 'date-fns'
+
+import { Container, TicketDetails } from 'components'
 
 import * as S from './Credential.styled'
 
@@ -23,28 +25,37 @@ export const renderLiteral = (value: unknown): string => {
   return d.toDateString()
 }
 
-const getDetails = (detailsObject: unknown, nested = false) => {
+const getDetails = ({
+  detailsObject,
+  nested = false,
+  qrCode,
+}: {
+  detailsObject: unknown
+  nested?: boolean
+  qrCode?: string
+}) => {
   if (Array.isArray(detailsObject)) {
     return (
       <S.Div nested={nested}>
         {detailsObject.map((value, index) => (
-          <S.Div key={index}>{getDetails(value, true)}</S.Div>
+          <S.Div key={index}>{getDetails({ detailsObject: value, nested: true })}</S.Div>
         ))}
       </S.Div>
     )
   }
 
   if (typeof detailsObject === 'object' && detailsObject !== null) {
-    return Object.entries(detailsObject)
-      .filter(([key]) => key !== '@type')
-      .map(([key, value], index) => {
-        return (
-          <S.Div key={index} nested={nested}>
-            <S.SmallHeading variant="c1">{key}</S.SmallHeading>
-            <S.Div>{getDetails(value, true)}</S.Div>
-          </S.Div>
-        )
-      })
+    return (
+      <TicketDetails
+        eventName={detailsObject.eventName}
+        startDate={format(new Date(detailsObject.startDate), 'dd.MM.yyy')}
+        endDate={format(new Date(detailsObject.endDate), 'dd.MM.yyy')}
+        startTime={format(new Date(detailsObject.startDate), 'HH.mm')}
+        endTime={format(new Date(detailsObject.endDate), 'HH.mm')}
+        location={detailsObject.place}
+        qrCode={qrCode}
+      />
+    )
   }
 
   return <S.Div>{renderLiteral(detailsObject)}</S.Div>
@@ -52,13 +63,8 @@ const getDetails = (detailsObject: unknown, nested = false) => {
 
 export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) => {
   return (
-    <>
-      {qrCode && (
-        <S.QrCodeContainer>
-          <img src={qrCode} alt="QR Code" />
-        </S.QrCodeContainer>
-      )}
-      <S.Div>{getDetails(credentialSubject)}</S.Div>
-    </>
+    <Container fullWidthCenter>
+      {getDetails({ detailsObject: credentialSubject, qrCode: qrCode })}
+    </Container>
   )
 }
