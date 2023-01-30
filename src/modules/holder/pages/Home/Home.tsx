@@ -79,14 +79,13 @@ export const Home: FC = () => {
     return credential
   }
 
-  const getTicketCards = (tickets: { ticketsArray: StoredW3CCredential[]; isValid: boolean }) =>
-    tickets.ticketsArray.map((credentialItem: StoredW3CCredential) => {
+  const getTicketCards = (params: { tickets: StoredW3CCredential[]; isValid: boolean }) =>{
+    const { tickets, isValid } = params
+    tickets.map((credentialItem: StoredW3CCredential) => {
       const credentialSubject = credentialItem?.credentialSubject
 
       const credential = getCredential(credentialSubject, credentialItem)
-      return (
-        <TicketCard key={credentialItem.id} credential={credential} isValid={tickets.isValid} />
-      )
+      return <TicketCard key={credentialItem.id} credential={credential} isValid={isValid} />
     })
 
   return (
@@ -94,13 +93,13 @@ export const Home: FC = () => {
       <Header title="Your tickets" />
 
       <Container isGrid>
-        {validTickets && getTicketCards({ ticketsArray: validTickets, isValid: true })}
+        {validTickets && getTicketCards({ tickets: validTickets, isValid: true })}
       </Container>
 
       {expiredTickets.length !== 0 && <Header title="Expired tickets" />}
 
       <Container isGrid>
-        {expiredTickets && getTicketCards({ ticketsArray: expiredTickets, isValid: false })}
+        {expiredTickets && getTicketCards({ tickets: expiredTickets, isValid: false })}
       </Container>
     </>
   )
