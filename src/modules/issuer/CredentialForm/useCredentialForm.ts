@@ -36,8 +36,6 @@ export const initialValues: EventSubjectData = {
   email: '',
 }
 
-export const schema = JSON_SCHEMA_URL
-
 export const useCredentialForm = () => {
   const navigate = useNavigate()
 
@@ -48,7 +46,7 @@ export const useCredentialForm = () => {
       const projectId = import.meta.env.VITE_PROJECT_ID || ''
 
       const apiKeyHash = import.meta.env.VITE_API_KEY || ''
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(schema)
+      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSON_SCHEMA_URL)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {
