@@ -14,6 +14,8 @@ import { PATHS } from 'router/paths'
 
 import { adjustForUTCOffset } from './CredentialForm'
 
+import { JSON_SCHEMA_URL } from 'utils'
+
 export type EventSubjectData = {
   eventName: string
   eventLocation: string
@@ -34,7 +36,7 @@ export const initialValues: EventSubjectData = {
   email: '',
 }
 
-export const schema = 'https://schema.affinidi.com/EventElegibilityV1-0.json'
+export const schema = JSON_SCHEMA_URL
 
 export const useCredentialForm = () => {
   const navigate = useNavigate()

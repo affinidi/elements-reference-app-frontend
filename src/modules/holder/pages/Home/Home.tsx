@@ -10,6 +10,8 @@ import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 import { Container, Header, Spinner, Typography } from 'components'
 import TicketCard from './TicketCard/TicketCard'
 
+import { JSON_SCHEMA_URL } from 'utils'
+
 export const Home: FC = () => {
   const { data, error, isLoading } = useCredentialsQuery()
 
@@ -37,7 +39,7 @@ export const Home: FC = () => {
 
   const tickets = data.filter((credentialItem) => {
     const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
-    return credentialSchema?.id === 'https://schema.affinidi.com/EventEligibilityV1-0.json'
+    return credentialSchema?.id === JSON_SCHEMA_URL
   })
 
   if (tickets.length === 0) {

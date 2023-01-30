@@ -4,11 +4,8 @@ import { pxToRem } from 'utils'
 import { Box } from 'components'
 
 export const Card = styled(Box)<{ $disabled?: boolean }>`
-  display: flex;
-  flex-direction: row;
   padding: ${pxToRem(24)};
   min-height: initial;
-  align-items: center;
   cursor: pointer;
   border-radius: 8px;
   box-shadow: 0 ${pxToRem(4)} ${pxToRem(20)} 0 rgba(0, 0, 0, 0.1);
