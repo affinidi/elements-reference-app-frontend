@@ -58,12 +58,7 @@ export const Credential: FC<CredentialProps> = ({ credentialSubject, qrCode }) =
           <img src={qrCode} alt="QR Code" />
         </S.QrCodeContainer>
       )}
-      <S.Div>
-        <S.Label>
-          <Typography variant="b1">CREDENTIAL</Typography>
-        </S.Label>
-        {getDetails(credentialSubject)}
-      </S.Div>
+      <S.Div>{getDetails(credentialSubject)}</S.Div>
     </>
   )
 }

@@ -16,6 +16,8 @@ export const Home: FC = () => {
       <Header title="Home" />
       <Container isHome title="Please select one of the following options">
         <S.Card
+          alignItems={'center'}
+          direction={'row'}
           onClick={() => {
             updateAuthState({ appFlow: 'holder' })
             navigate(PATHS.HOLDER.HOME)
@@ -29,6 +31,8 @@ export const Home: FC = () => {
         </S.Card>
 
         <S.Card
+          alignItems={'center'}
+          direction={'row'}
           onClick={() => {
             updateAuthState({ appFlow: 'verifier' })
             navigate(PATHS.VERIFIER.WELCOME)
@@ -42,6 +46,8 @@ export const Home: FC = () => {
         </S.Card>
 
         <S.Card
+          alignItems={'center'}
+          direction={'row'}
           onClick={() => {
             updateAuthState({ appFlow: 'issuer' })
             navigate(PATHS.ISSUER.CREDENTIAL_FORM)

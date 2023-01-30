@@ -1,11 +1,17 @@
 import { FC } from 'react'
+import { format } from 'date-fns'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
-import { getTitles } from 'utils'
+import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
 import { Container, Header, Spinner, Typography } from 'components'
-import Card from './Card/Card'
+import NoTicket from 'assets/noTicket'
+import TicketCard from './TicketCard/TicketCard'
+import * as S from './Home.styled'
+
+import { JSON_SCHEMA_URL } from 'utils'
+
 export const Home: FC = () => {
   const { data, error, isLoading } = useCredentialsQuery()
 
@@ -24,37 +30,77 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidth>
+        <Container fullWidthCenter>
           {error && <Typography variant="e1">{error?.message}</Typography>}
         </Container>
       </>
     )
   }
 
-  if (data.length === 0) {
+  const tickets = data.filter((credentialItem) => {
+    const credentialSchema = (credentialItem as StoredW3CCredential).credentialSchema
+    return credentialSchema?.id === JSON_SCHEMA_URL
+  })
+
+  if (tickets.length === 0) {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidth>
+        <Container fullWidthCenter>
           <Typography variant="p2">You don't have any tickets yet.</Typography>
+          <S.IconContainer>
+            <NoTicket />
+          </S.IconContainer>
         </Container>
       </>
     )
   }
+
+  // @ts-ignore
+  const validTickets: StoredW3CCredential[] = tickets.filter((credentialItem) => {
+    const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
+    return Date.parse(credentialSubject?.startDate) >= Date.now()
+  })
+
+  // @ts-ignore
+  const expiredTickets: StoredW3CCredential[] = tickets.filter((credentialItem) => {
+    const credentialSubject = (credentialItem as StoredW3CCredential)?.credentialSubject
+    return Date.parse(credentialSubject?.startDate) < Date.now()
+  })
+
+  const getTicketCards = ({
+    tickets,
+    isValid,
+  }: {
+    tickets: StoredW3CCredential[]
+    isValid: boolean
+  }) => {
+    return tickets.map((credentialItem: StoredW3CCredential) => {
+      const credentialSubject = credentialItem?.credentialSubject
+
+      const credential: Credential = {
+        title: credentialSubject?.eventName,
+        date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
+        time: format(new Date(credentialSubject?.startDate), 'HH:mm'),
+        credentialId: credentialItem?.id,
+      }
+
+      return <TicketCard key={credentialItem.id} credential={credential} isValid={isValid} />
+    })
+  }
+
   return (
     <>
       <Header title="Your tickets" />
 
       <Container isGrid>
-        {data &&
-          data.map((credentialItem, index) => {
-            const credential: Credential = {
-              title: getTitles((credentialItem as StoredW3CCredential)?.type),
-              date: (credentialItem as StoredW3CCredential)?.issuanceDate || '',
-              credentialId: (credentialItem as StoredW3CCredential)?.id,
-            }
-            return <Card key={index} credential={credential} />
-          })}
+        {validTickets && getTicketCards({ tickets: validTickets, isValid: true })}
+      </Container>
+
+      {expiredTickets.length !== 0 && <Header title="Expired tickets" />}
+
+      <Container isGrid>
+        {expiredTickets && getTicketCards({ tickets: expiredTickets, isValid: false })}
       </Container>
     </>
   )

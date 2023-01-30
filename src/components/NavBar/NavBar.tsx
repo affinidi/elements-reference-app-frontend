@@ -49,10 +49,10 @@ const NavBar: FC = () => {
               navigate(PATHS.HOME)
             }}
           >
-            <Typography variant="h6">Home</Typography>
+            <Typography variant="b1">HOME</Typography>
           </S.ButtonContainer>
           <S.ButtonContainer onClick={() => handleLogOut()}>
-            <Typography variant="h6">Log out</Typography>
+            <Typography variant="b1">LOG OUT</Typography>
           </S.ButtonContainer>
         </S.MenuContainer>
         </S.NavBar>
