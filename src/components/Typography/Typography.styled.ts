@@ -46,14 +46,16 @@ export const Typography = styled.p<{
       case 'h1':
       case 'p2':
       case 'p4':
-      case 's2':
       case 's3':
       case 'h5':
-      case 'h6':
       case 'h7':
         return '0'
+      case 'h6':
+        return `0 0 ${pxToRem(4)}`
       case 'c1':
         return `0 0 ${pxToRem(8)}`
+      case 's2':
+        return `0 0 ${pxToRem(32)}`
       case 'p1':
       default:
         return `0 0 ${pxToRem(24)}`
@@ -94,9 +96,8 @@ export const Typography = styled.p<{
       case 's3':
       case 'b3':
       case 'b2':
-        return "'Montserrat', sans-serif"
       case 'b1':
-        return "'Poppins', sans-serif"
+        return "'Montserrat', sans-serif"
       default:
         return "'Nunito Sans', sans-serif"
     }
@@ -123,10 +124,12 @@ export const Typography = styled.p<{
 
   font-size: ${(props) => {
     switch (props.$variant) {
-      case 'b1':
       case 'b2':
       case 'c1':
         return pxToRem(10)
+
+      case 'b1':
+        return pxToRem(18)
       case 'h1':
       case 'h5':
         return pxToRem(28)
@@ -170,9 +173,9 @@ export const Typography = styled.p<{
     switch (props.$variant) {
       case 'e1':
         return '#e73c5b'
-      case 'h1':
-      case 'h6':
+      case 'b1':
         return '#fff'
+      case 'h1':
       case 'b2':
         return '#989daa'
       default:

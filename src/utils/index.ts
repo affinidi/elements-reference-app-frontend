@@ -43,3 +43,5 @@ export const extractHashAndKeyFromVSShareUrl = (
   const hash = parser.match(urlWithPathParam).hash
   return { hash, key }
 }
+
+export const JSON_SCHEMA_URL = 'https://schema.affinidi.com/EventEligibilityV1-0.json'

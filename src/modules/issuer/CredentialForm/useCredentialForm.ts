@@ -14,6 +14,8 @@ import { PATHS } from 'router/paths'
 
 import { adjustForUTCOffset } from './CredentialForm'
 
+import { JSON_SCHEMA_URL } from 'utils'
+
 export type EventSubjectData = {
   eventName: string
   eventLocation: string
@@ -34,8 +36,6 @@ export const initialValues: EventSubjectData = {
   email: '',
 }
 
-export const schema = 'https://schema.affinidi.com/EventEligibilityV1-0.json'
-
 export const useCredentialForm = () => {
   const navigate = useNavigate()
 
@@ -46,7 +46,7 @@ export const useCredentialForm = () => {
       const projectId = import.meta.env.VITE_PROJECT_ID || ''
 
       const apiKeyHash = import.meta.env.VITE_API_KEY || ''
-      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(schema)
+      const { schemaType, jsonSchema, jsonLdContext } = parseSchemaURL(JSON_SCHEMA_URL)
 
       const issuanceJson: CreateIssuanceInput = {
         template: {
