@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { pxToRem } from 'utils'
 
-import ticketPreviewHighlightBlue from '../../assets/svg/ticket-preview-highlight-blue.svg'
-import ticketPreviewHighlightGray from '../../assets/svg/ticket-preview-highlight-gray.svg'
-
 export const Ticket = styled.div<{ isValid: boolean }>`
   position: relative;
   height: ${pxToRem(176)};
