@@ -37,7 +37,7 @@ export const CredentialView: FC = () => {
   return (
     <>
       <Header
-        title={getTitles(credential.type) || ''}
+        title={credential.credentialSubject.eventName || ''}
         icon={<BackIcon />}
         path={PATHS.HOLDER.HOME}
       />
