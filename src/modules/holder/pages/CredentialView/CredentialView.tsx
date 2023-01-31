@@ -33,7 +33,11 @@ export const CredentialView: FC = () => {
 
   return (
     <>
-      <Header title={credential.credentialSubject.eventName || ''} path={PATHS.HOLDER.HOME} />
+      <Header
+        title={credential.credentialSubject.eventName || ''}
+        path={PATHS.HOLDER.HOME}
+        hasBackIcon
+      />
 
       <Container>
         <Credential
