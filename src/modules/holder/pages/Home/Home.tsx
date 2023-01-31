@@ -96,15 +96,23 @@ export const Home: FC = () => {
     <>
       <Header title="Your tickets" />
 
-      <Container>
-        {validTickets && getTicketCards({ tickets: validTickets, isValid: true })}
-      </Container>
+      {validTickets.length > 0 && (
+        <Container>
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-16">
+            {getTicketCards({ tickets: validTickets, isValid: true })}
+          </div>
+        </Container>
+      )}
 
-      {expiredTickets.length !== 0 && <Header title="Expired tickets" />}
+      {expiredTickets.length > 0 && (
+        <Container>
+          <S.SubTitle variant="h6">Expired tickets</S.SubTitle>
 
-      <Container>
-        {expiredTickets && getTicketCards({ tickets: expiredTickets, isValid: false })}
-      </Container>
+          <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-16">
+            {getTicketCards({ tickets: expiredTickets, isValid: false })}
+          </div>
+        </Container>
+      )}
     </>
   )
 }
