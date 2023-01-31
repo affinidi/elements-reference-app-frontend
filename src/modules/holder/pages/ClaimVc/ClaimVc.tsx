@@ -24,7 +24,7 @@ export const ClaimVc: FC = () => {
   }, [searchParams])
 
   useEffect(() => {
-    if (data) navigate(PATHS.HOLDER.HOME)
+    if (data) navigate(`${PATHS.HOLDER.CREDENTIAL}/${data.credentialIds[0]}`)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 

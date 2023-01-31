@@ -26,10 +26,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
   if (isLoading) {
     return (
       <>
-        <Header
-          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
-          icon={<BackIcon />}
-        />
+        <Header title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'} />
         <Container fullWidthLeft>
           <Spinner />
         </Container>
@@ -37,20 +34,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     )
   }
 
-  if (error) {
-    return (
-      <>
-        <Header
-          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
-          icon={<BackIcon />}
-        />
-        <Container fullWidthLeft>
-          <Typography variant="e1">There was an error, please try again.</Typography>
-        </Container>
-      </>
-    )
-  }
-
+  const checkValidity = isValid && !error
   return (
     <>
       <Header
@@ -59,10 +43,10 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
       />
       <Container fullWidthCenter>
         <Box alignItems="center">
-          <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
+          <ResultContent isValid={checkValidity} isIssuance={authState.appFlow === 'issuer'} />
           <S.ResultPara variant="p1">
             {authState.appFlow === 'verifier'
-              ? isValid
+              ? checkValidity
                 ? 'Ticket successfully checked.'
                 : 'Ticket is invalid'
               : 'Your ticket has been issued.'}

@@ -5,7 +5,7 @@ import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
 import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
-import { Container, Header, Spinner, Typography } from 'components'
+import { Container, Header, Spinner, Typography, Box } from 'components'
 import NoTicket from 'assets/noTicket'
 import TicketCard from './TicketCard/TicketCard'
 import * as S from './Home.styled'
