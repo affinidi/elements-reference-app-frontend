@@ -6,8 +6,6 @@ export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
 }
 
-const Ticket: React.FC<BoxProps> = ({ children, ...props }) => (
-  <S.Ticket {...props}>{children}</S.Ticket>
-)
+const Ticket: React.FC<BoxProps> = (props) => <S.Ticket {...props} />
 
 export default Ticket

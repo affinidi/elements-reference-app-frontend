@@ -57,20 +57,22 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
         hasBackIcon
       />
       <Container>
-        <Box alignItems="center">
-          <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
-          <S.ResultPara variant="p1">
-            {authState.appFlow === 'verifier'
-              ? isValid
-                ? 'Ticket successfully checked.'
-                : 'Ticket is invalid'
-              : 'Your ticket has been issued.'}
-          </S.ResultPara>
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+          <Box className="lg:col-start-2" alignItems="center">
+            <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
+            <S.ResultPara variant="p1">
+              {authState.appFlow === 'verifier'
+                ? isValid
+                  ? 'Ticket successfully checked.'
+                  : 'Ticket is invalid'
+                : 'Your ticket has been issued.'}
+            </S.ResultPara>
 
-          <S.IssueTicketButton variant="outlined" onClick={() => navigate(pathTo)}>
-            {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
-          </S.IssueTicketButton>
-        </Box>
+            <S.IssueTicketButton variant="outlined" onClick={() => navigate(pathTo)}>
+              {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
+            </S.IssueTicketButton>
+          </Box>
+        </div>
       </Container>
     </>
   )
