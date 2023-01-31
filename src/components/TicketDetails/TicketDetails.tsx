@@ -24,29 +24,30 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
   qrCode,
 }) => (
   <Container>
-    <Box direction="row">
-      <S.TicketDetailsCardLeft>
-        <Box justifyContent="space-between" gap={20}>
-          <Box direction="row" gap={50}>
-            <Box>
+    <S.TicketDetailsCard>
+      <S.DataCard>
+        <Box justifyContent="space-between" gap={24}>
+          <Box direction="row">
+            <S.DetailsBox>
               <Typography variant="c1"> Start Date</Typography>
               <S.Data variant="p4">{startDate} </S.Data>
-            </Box>
-            <Box>
+            </S.DetailsBox>
+            <S.DetailsBox>
               <Typography variant="c1"> End Date</Typography>
               <S.Data variant="p4">{endDate} </S.Data>
-            </Box>
+            </S.DetailsBox>
           </Box>
-          <Box direction="row" gap={50}>
-            <Box alignItems="start">
+          <Box direction="row">
+            <S.DetailsBox>
               <Typography variant="c1"> Start Time</Typography>
               <S.Data variant="p4">{startTime} </S.Data>
-            </Box>
-            <Box>
+            </S.DetailsBox>
+            <S.DetailsBox>
               <Typography variant="c1"> End Time</Typography>
               <S.Data variant="p4">{endTime} </S.Data>
-            </Box>
+            </S.DetailsBox>
           </Box>
+
           <Box>
             <Typography variant="c1"> Location</Typography>
             <S.Data variant="p4">{location} </S.Data>
@@ -58,11 +59,11 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
             </S.Data>
           </Box>
         </Box>
-      </S.TicketDetailsCardLeft>
-      <S.TicketDetailsCardRight>
+      </S.DataCard>
+      <S.QrCodeCard>
         <img src={qrCode} alt="QR Code" />
-      </S.TicketDetailsCardRight>
-    </Box>
+      </S.QrCodeCard>
+    </S.TicketDetailsCard>
   </Container>
 )
 
