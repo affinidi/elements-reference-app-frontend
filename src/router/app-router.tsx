@@ -26,7 +26,7 @@ const AppRouter: FC = () => {
   if (authState.loading) {
     return (
       <>
-        <Container fullWidthCenter>
+        <Container>
           <Spinner />
         </Container>
       </>

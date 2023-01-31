@@ -6,10 +6,7 @@ import {
   useGetCredentialQuery,
   useShareCredentialMutation,
 } from 'modules/holder/pages/hooks/useCredentials'
-import { getTitles } from 'utils'
 import { PATHS } from 'router/paths'
-
-import { BackIcon } from 'assets'
 import { Container, Header, Spinner } from 'components'
 import { Credential } from 'modules/holder/components/Credential'
 
@@ -36,12 +33,9 @@ export const CredentialView: FC = () => {
 
   return (
     <>
-      <Header
-        title={credential.credentialSubject.eventName || ''}
-        icon={<BackIcon />}
-        path={PATHS.HOLDER.HOME}
-      />
-      <Container fullWidth>
+      <Header title={credential.credentialSubject.eventName || ''} path={PATHS.HOLDER.HOME} />
+
+      <Container>
         <Credential
           credentialSubject={credential.credentialSubject}
           qrCode={shareCredentialData?.qrCode}

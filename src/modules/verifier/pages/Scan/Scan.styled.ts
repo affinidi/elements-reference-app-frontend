@@ -3,7 +3,7 @@ import { pxToRem } from 'utils'
 import { Typography } from 'components'
 
 export const ScannerText = styled(Typography)`
-  @media (max-width: ${pxToRem(500)}) {
+  @media (max-width: 1024px) {
     color: #ffffff;
     position: absolute;
     top: ${pxToRem(40)};

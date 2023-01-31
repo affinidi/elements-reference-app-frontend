@@ -98,6 +98,7 @@ export const useConfirmSignIn = (message?: string) => {
   const inputs = Array.from({ length: INPUT_ELEMENTS_AMOUNT }, (_, index) => {
     return (
       <S.VerificationField
+        onChange={() => ({})}
         value={verifyCode[index] || ''}
         onPaste={onPaste}
         key={index}

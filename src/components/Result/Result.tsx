@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { PATHS } from 'router/paths'
 import { Box, Container, Header, Spinner, Typography } from 'components'
-import { BackIcon } from 'assets'
 import { ResultContent } from './ResultContent'
 import { ErrorResponse } from 'hooks/useAuthentication'
 import * as S from './Result.styled'
@@ -26,8 +25,11 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
   if (isLoading) {
     return (
       <>
-        <Header title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'} />
-        <Container fullWidthLeft>
+        <Header
+          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
+          hasBackIcon
+        />
+        <Container>
           <Spinner />
         </Container>
       </>
@@ -39,9 +41,9 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     <>
       <Header
         title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket issued'}
-        icon={<BackIcon />}
+        hasBackIcon
       />
-      <Container fullWidthCenter>
+      <Container>
         <Box alignItems="center">
           <ResultContent isValid={checkValidity} isIssuance={authState.appFlow === 'issuer'} />
           <S.ResultPara variant="p1">

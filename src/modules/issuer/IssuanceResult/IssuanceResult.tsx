@@ -18,9 +18,5 @@ export const IssuanceResult: FC = () => {
     navigate(PATHS.HOME)
   }
 
-  return (
-    <>
-      <Result isLoading={isLoading} error={error} isValid={isValid} pathTo={pathTo} />
-    </>
-  )
+  return <Result isLoading={isLoading} error={error} isValid={isValid} pathTo={pathTo} />
 }

@@ -3,14 +3,14 @@ import { format } from 'date-fns'
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
-import { AnyData } from 'services/cloud-wallet/cloud-wallet.api'
 
 import { Container, Header, Spinner, Typography, Box } from 'components'
 import NoTicket from 'assets/noTicket'
-import TicketCard from './TicketCard/TicketCard'
-import * as S from './Home.styled'
 
 import { JSON_SCHEMA_URL } from 'utils'
+
+import TicketCard from './TicketCard/TicketCard'
+import * as S from './Home.styled'
 
 export const Home: FC = () => {
   const { data, error, isLoading } = useCredentialsQuery()
@@ -19,7 +19,7 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidth>
+        <Container>
           <Spinner />
         </Container>
       </>
@@ -30,8 +30,10 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidthCenter>
-          {error && <Typography variant="e1">{error?.message}</Typography>}
+        <Container>
+          <div className="grid justify-content-center">
+            {error && <Typography variant="e1">{error?.message}</Typography>}
+          </div>
         </Container>
       </>
     )
@@ -46,11 +48,15 @@ export const Home: FC = () => {
     return (
       <>
         <Header title="Your tickets" />
-        <Container fullWidthCenter>
-          <Typography variant="p2">You don't have any tickets yet.</Typography>
-          <S.IconContainer>
-            <NoTicket />
-          </S.IconContainer>
+        <Container>
+          <div className="grid justify-content-center">
+            <Typography align="center" variant="p2">
+              You don't have any tickets yet.
+            </Typography>
+            <S.IconContainer>
+              <NoTicket />
+            </S.IconContainer>
+          </div>
         </Container>
       </>
     )
@@ -74,32 +80,29 @@ export const Home: FC = () => {
   }: {
     tickets: StoredW3CCredential[]
     isValid: boolean
-  }) => {
-    return tickets.map((credentialItem: StoredW3CCredential) => {
-      const credentialSubject = credentialItem?.credentialSubject
-
+  }) =>
+    tickets.map((credentialItem: StoredW3CCredential) => {
       const credential: Credential = {
-        title: credentialSubject?.eventName,
-        date: format(new Date(credentialSubject?.startDate), 'dd.MM.yyyy'),
-        time: format(new Date(credentialSubject?.startDate), 'HH:mm'),
+        title: credentialItem?.credentialSubject?.eventName,
+        date: format(new Date(credentialItem?.credentialSubject?.startDate), 'dd.MM.yyyy'),
+        time: format(new Date(credentialItem?.credentialSubject?.startDate), 'HH:mm'),
         credentialId: credentialItem?.id,
       }
 
       return <TicketCard key={credentialItem.id} credential={credential} isValid={isValid} />
     })
-  }
 
   return (
     <>
       <Header title="Your tickets" />
 
-      <Container isGrid>
+      <Container>
         {validTickets && getTicketCards({ tickets: validTickets, isValid: true })}
       </Container>
 
       {expiredTickets.length !== 0 && <Header title="Expired tickets" />}
 
-      <Container isGrid>
+      <Container>
         {expiredTickets && getTicketCards({ tickets: expiredTickets, isValid: false })}
       </Container>
     </>
