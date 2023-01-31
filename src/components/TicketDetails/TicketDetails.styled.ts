@@ -23,6 +23,17 @@ export const QrCodeCard = styled(Box)`
   background-color: ${(props) => props.theme.colors.utility.info['100']};
   position: relative;
   padding: ${pxToRem(40)};
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: ${pxToRem(16)};
+    height: ${pxToRem(16)};
+    background: ${(props) => props.theme.colors.neutral.secondary['100']};
+    border-radius: 50%;
+    bottom: ${pxToRem(-9)};
+  }
 
   @media (max-width: 500px) {
     border-bottom: 3px dashed #fff;
@@ -30,13 +41,6 @@ export const QrCodeCard = styled(Box)`
     border-top-right-radius: 8px;
     &::before,
     &::after {
-      content: '';
-      position: absolute;
-      display: block;
-      width: ${pxToRem(16)};
-      height: ${pxToRem(16)};
-      background: ${(props) => props.theme.colors.neutral.secondary['100']};
-      border-radius: 50%;
       bottom: ${pxToRem(-9)};
     }
     &::before {
@@ -53,13 +57,6 @@ export const QrCodeCard = styled(Box)`
     border-bottom-right-radius: 8px;
     &::before,
     &::after {
-      content: '';
-      position: absolute;
-      display: block;
-      width: ${pxToRem(16)};
-      height: ${pxToRem(16)};
-      background: ${(props) => props.theme.colors.neutral.secondary['100']};
-      border-radius: 50%;
       left: ${pxToRem(-9)};
     }
     &::before {
