@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({ title, hasBackIcon, path }) => {
           </S.IconWrapper>
         )}
 
-        <S.Title variant="h1">{title}</S.Title>
+        <S.Title variant="h4">{title}</S.Title>
       </S.Container>
     </Container>
   )

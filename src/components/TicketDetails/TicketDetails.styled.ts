@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { pxToRem } from 'utils'
 import { Box, Typography } from 'components'
 
-export const DataCard = styled(Box)`
+export const DataCard = styled.div`
   background-color: ${(props) => props.theme.colors.utility.info['100']};
   padding: ${pxToRem(40)};
 
@@ -65,6 +65,11 @@ export const QrCodeCard = styled(Box)`
     &::after {
       bottom: ${pxToRem(-8)};
     }
+  }
+
+  img {
+    height: ${pxToRem(292)};
+    border-radius: 16px;
   }
 `
 
