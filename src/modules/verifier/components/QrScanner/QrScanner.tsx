@@ -48,8 +48,10 @@ const QrScanner: FC<QrScannerProps> = () => {
 
   return (
     <>
-      <S.VideoElement muted id={videoElementId} />
-      <S.Overlay />
+      <S.Overlay>
+        <video muted id={videoElementId} />
+      </S.Overlay>
+
       {!!scanError && <Typography variant="e1">{scanError}</Typography>}
     </>
   )

@@ -79,7 +79,7 @@ export const Onboarding: FC = () => {
   return (
     <>
       <Header title="Onboarding" />
-      <Container fullWidthLeft>
+      <Container>
         {data && (
           <>
             <Credential credentialSubject={data.credentialSubject} />

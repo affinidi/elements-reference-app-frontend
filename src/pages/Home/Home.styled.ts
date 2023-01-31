@@ -1,24 +1,25 @@
-import { Typography } from 'components'
 import styled from 'styled-components'
+
 import { pxToRem } from 'utils'
-import { Box } from 'components'
+import { Box, Typography } from 'components'
 
 export const Card = styled(Box)<{ $disabled?: boolean }>`
   padding: ${pxToRem(24)};
   min-height: initial;
-  cursor: pointer;
   border-radius: 8px;
   box-shadow: 0 ${pxToRem(4)} ${pxToRem(20)} 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   overflow-wrap: anywhere;
-  gap: ${pxToRem(8)};
+  cursor: pointer;
 
   @media (min-width: ${pxToRem(500)}) {
     width: auto;
     padding: ${pxToRem(32)};
   }
+
   ${(props) => (props.$disabled ? `opacity: 0.5; cursor: default;` : null)}
 `
+
 export const Heading = styled(Typography)`
   margin-bottom: ${pxToRem(8)};
   font-size: ${pxToRem(20)};
@@ -26,6 +27,7 @@ export const Heading = styled(Typography)`
   line-height: 1.4;
   letter-spacing: ${pxToRem(-0.2)};
 `
+
 export const Para = styled(Typography)`
   font-size: ${pxToRem(16)};
   font-style: normal;

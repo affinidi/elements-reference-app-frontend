@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { Button, Container, Header, Typography } from 'components'
+import { Box, Button, Container, Header, Typography } from 'components'
 
 import * as S from './ConfirmSignInForm.styled'
 
@@ -22,33 +22,42 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
   return (
     <>
       <Header title="Signin" />
-      <Container fullWidthCenter>
-        <Typography variant="p1">
-          Please enter the verification code you received in your email.
-        </Typography>
-        <S.Label $error={!!error} variant="p4">
-          Verification code
-        </S.Label>
-        <form id="confirmation" onSubmit={onSubmit}>
-          <S.VerificationFieldContainer>{inputs}</S.VerificationFieldContainer>
-          {error && <Typography variant="e1">{error?.message}</Typography>}
-        </form>
-        <Button form="confirmation" type="submit" disabled={isButtonDisabled}>
-          Sign in
-        </Button>
+      <Container>
+        <div className="grid lg:grid-cols-3 lg:gap-16">
+          <div className="lg:col-start-2">
+            <Typography variant="p1">
+              Please enter the verification code you received in your email.
+            </Typography>
+            <S.Label $error={!!error} variant="p4">
+              Verification code
+            </S.Label>
+            <form id="confirmation" onSubmit={onSubmit}>
+              <S.VerificationFieldContainer direction="row" justifyContent="center">
+                {inputs}
+              </S.VerificationFieldContainer>
+              {error && <Typography variant="e1">{error?.message}</Typography>}
+            </form>
 
-        <S.Message variant="p2">
-          Didn’t receive a code? Click{' '}
-          <span
-            onClick={() => handleResendCode()}
-            onKeyPress={() => handleResendCode()}
-            role="button"
-            tabIndex={0}
-          >
-            here
-          </span>{' '}
-          to send it again
-        </S.Message>
+            <Button form="confirmation" type="submit" disabled={isButtonDisabled}>
+              Sign in
+            </Button>
+
+            <Box>
+              <S.Message variant="p2">
+                Didn’t receive a code? Click{' '}
+                <span
+                  onClick={() => handleResendCode()}
+                  onKeyPress={() => handleResendCode()}
+                  role="button"
+                  tabIndex={0}
+                >
+                  here
+                </span>{' '}
+                to send it again
+              </S.Message>
+            </Box>
+          </div>
+        </div>
       </Container>
     </>
   )

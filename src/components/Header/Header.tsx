@@ -1,23 +1,35 @@
-import { FC, SVGAttributes } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { BackIcon } from 'assets'
+
+import Container from '../Container/Container'
 
 import * as S from './Header.styled'
 
 export type HeaderProps = {
   title: string
-  icon?: SVGAttributes<SVGElement>
+  hasBackIcon?: boolean
   path?: string
 }
 
-const Header: FC<HeaderProps> = ({ title, icon, path }) => {
+const Header: FC<HeaderProps> = ({ title, hasBackIcon, path }) => {
   const navigate = useNavigate()
+
   return (
-    <S.Container>
-      <S.IconWrapper onClick={() => (path ? navigate(path) : icon ? navigate(-1) : null)}>
-        {icon}
-      </S.IconWrapper>
-      <S.Title variant="h1">{title}</S.Title>
-    </S.Container>
+    <Container>
+      <S.Container justifyContent="flex-end">
+        {hasBackIcon && (
+          <S.IconWrapper
+            onClick={() => (path ? navigate(path) : hasBackIcon ? navigate(-1) : null)}
+          >
+            <BackIcon />
+          </S.IconWrapper>
+        )}
+
+        <S.Title variant="h1">{title}</S.Title>
+      </S.Container>
+    </Container>
   )
 }
 

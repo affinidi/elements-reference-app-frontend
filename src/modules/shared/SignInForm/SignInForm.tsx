@@ -34,25 +34,27 @@ export const SignInForm: FC<SignInFormProps> = ({
   return (
     <>
       <Header title={`Sign in as ${role}`} />
-      <Container fullWidthCenter>
-        <ContainerForm onSubmit={handleSignIn}>
-          <Typography variant="p1">Please enter your email address to sign in.</Typography>
-          <Input
-            autoComplete="off"
-            id="username"
-            label="Email address"
-            placeholder="Enter your email address"
-            onChange={(e) => {
-              setInputError(null)
-              setSignInInput({ username: e.target.value })
-            }}
-            error={inputError || error?.message}
-          ></Input>
-          <Button disabled={disabled} type="submit">
-            send verification code
-          </Button>
-          {isLoading && <Spinner />}
-        </ContainerForm>
+      <Container>
+        <div className="grid lg:grid-cols-3 lg:gap-16">
+          <ContainerForm className="lg:col-start-2" onSubmit={handleSignIn}>
+            <Typography variant="p1">Please enter your email address to sign in.</Typography>
+            <Input
+              id="email"
+              type="email"
+              label="Email address"
+              placeholder="Enter your email address"
+              onChange={(e) => {
+                setInputError(null)
+                setSignInInput({ username: e.target.value })
+              }}
+              error={inputError || error?.message}
+            />
+            <Button disabled={disabled} type="submit">
+              send verification code
+            </Button>
+            {isLoading && <Spinner />}
+          </ContainerForm>
+        </div>
       </Container>
     </>
   )
