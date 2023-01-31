@@ -35,6 +35,11 @@ export const QrCodeCard = styled(Box)`
     bottom: ${pxToRem(-9)};
   }
 
+  img {
+    height: ${pxToRem(248)};
+    border-radius: 16px;
+  }
+
   @media (max-width: 500px) {
     border-bottom: 3px dashed #fff;
     border-top-left-radius: 8px;
@@ -65,11 +70,10 @@ export const QrCodeCard = styled(Box)`
     &::after {
       bottom: ${pxToRem(-8)};
     }
-  }
 
-  img {
-    height: ${pxToRem(292)};
-    border-radius: 16px;
+    img {
+      height: ${pxToRem(292)};
+    }
   }
 `
 
