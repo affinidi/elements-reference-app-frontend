@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Input, Typography } from 'components'
+import { Box, Input, Typography } from 'components'
 import { InputProps } from 'components/Input/Input'
 import { pxToRem } from 'utils'
 
@@ -16,12 +16,9 @@ export const Label = styled(Typography)<{ $error: boolean }>`
   ${(props) => (props.$error ? `color: #e73c5b` : null)};
 `
 
-export const VerificationFieldContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  @media (min-width: ${pxToRem(500)}) {
-    gap: ${pxToRem(22)};
+export const VerificationFieldContainer = styled(Box)`
+  @media (max-width: 1024px) {
+    gap: ${pxToRem(16)};
   }
 `
 

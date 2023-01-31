@@ -8,11 +8,11 @@ export const NavBar = styled.div<{ $isMenuOpen: boolean }>`
   height: 100vh;
   width: 100vw;
   z-index: 50;
-  background: #0e1533;
-  @media (min-width: ${pxToRem(500)}) {
+  background-color: ${(props) => (props.$isMenuOpen ? `rgba(6, 15, 95, 0.5)` : `none`)};
+
+  @media (min-width: 1024px) {
     padding: ${pxToRem(108)} ${pxToRem(100)};
   }
-  background-color: ${(props) => (props.$isMenuOpen ? `rgba(6, 15, 95, 0.5)` : `none`)};
 `
 
 export const Container = styled.div`
@@ -22,12 +22,11 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
   z-index: 100;
-
   display: flex;
   justify-content: space-between;
   align-items: start;
 
-  @media (min-width: ${pxToRem(500)}) {
+  @media (min-width: 1024px) {
     padding: ${pxToRem(22)} ${pxToRem(100)};
     height: ${pxToRem(72)};
   }
@@ -45,7 +44,8 @@ export const MenuContainer = styled.div<{ $isOpen: boolean }>`
   text-align: right;
   transform: ${(props) =>
     props.$isOpen ? `translateX(${pxToRem(0)})` : `translateX(${pxToRem(524)})`};
-  @media (min-width: ${pxToRem(500)}) {
+
+  @media (min-width: 1024px) {
     padding: ${pxToRem(108)} ${pxToRem(100)};
   }
 `
@@ -58,7 +58,7 @@ export const Logo = styled.img`
   cursor: pointer;
   width: ${pxToRem(100)};
   height: ${pxToRem(24)};
-  @media (min-width: ${pxToRem(500)}) {
+  @media (min-width: 1024px) {
     width: ${pxToRem(139)};
     height: ${pxToRem(32)};
   }
@@ -67,7 +67,7 @@ export const Icon = styled.img`
   cursor: pointer;
   width: ${pxToRem(24)};
   height: ${pxToRem(24)};
-  @media (min-width: ${pxToRem(500)}) {
+  @media (min-width: 1024px) {
     width: ${pxToRem(32)};
     height: ${pxToRem(32)};
   }

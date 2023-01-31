@@ -23,7 +23,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
   location,
   qrCode,
 }) => (
-  <Container fullWidthCenter>
+  <Container>
     <Box direction="row">
       <S.TicketDetailsCardLeft>
         <Box justifyContent="space-between" gap={20}>
