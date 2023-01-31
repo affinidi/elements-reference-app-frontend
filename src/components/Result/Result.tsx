@@ -36,7 +36,8 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     )
   }
 
-  const checkValidity = isValid && !error
+  const isResultValid = isValid && !error
+
   return (
     <>
       <Header
@@ -46,10 +47,10 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
       <Container>
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
           <Box className="lg:col-start-2" alignItems="center">
-            <ResultContent isValid={checkValidity} isIssuance={authState.appFlow === 'issuer'} />
+            <ResultContent isValid={isResultValid} isIssuance={authState.appFlow === 'issuer'} />
             <S.ResultPara variant="p1">
               {authState.appFlow === 'verifier'
-                ? checkValidity
+                ? isResultValid
                   ? 'Ticket successfully checked.'
                   : 'Ticket is invalid'
                 : 'Your ticket has been issued.'}
