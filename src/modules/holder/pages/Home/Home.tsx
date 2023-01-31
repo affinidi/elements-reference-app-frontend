@@ -4,7 +4,7 @@ import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import { useCredentialsQuery } from 'modules/holder/pages/hooks/useCredentials'
 import { Credential } from 'modules/holder/pages/types'
 
-import { Container, Header, Spinner, Typography, Box } from 'components'
+import { Container, Header, Spinner, Typography } from 'components'
 import NoTicket from 'assets/noTicket'
 
 import { JSON_SCHEMA_URL } from 'utils'
