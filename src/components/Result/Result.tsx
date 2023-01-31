@@ -36,19 +36,7 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
     )
   }
 
-  if (error) {
-    return (
-      <>
-        <Header
-          title={authState.appFlow === 'verifier' ? 'QR code scanned' : 'Ticket Issued'}
-          hasBackIcon
-        />
-        <Container>
-          <Typography variant="e1">There was an error, please try again.</Typography>
-        </Container>
-      </>
-    )
-  }
+  const isResultValid = isValid && !error
 
   return (
     <>
@@ -59,10 +47,10 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
       <Container>
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
           <Box className="lg:col-start-2" alignItems="center">
-            <ResultContent isValid={isValid} isIssuance={authState.appFlow === 'issuer'} />
+            <ResultContent isValid={isResultValid} isIssuance={authState.appFlow === 'issuer'} />
             <S.ResultPara variant="p1">
               {authState.appFlow === 'verifier'
-                ? isValid
+                ? isResultValid
                   ? 'Ticket successfully checked.'
                   : 'Ticket is invalid'
                 : 'Your ticket has been issued.'}
