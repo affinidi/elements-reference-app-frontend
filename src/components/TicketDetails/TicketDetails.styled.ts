@@ -7,13 +7,13 @@ export const DataCard = styled.div`
   background-color: ${(props) => props.theme.colors.utility.info['100']};
   padding: ${pxToRem(40)};
 
-  @media (max-width: 500px) {
+  @media (max-width: 1024px) {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding: ${pxToRem(24)};
   }
 
-  @media (min-width: 500px) {
+  @media (min-width: 1024px) {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
   }
@@ -40,7 +40,7 @@ export const QrCodeCard = styled(Box)`
     border-radius: 16px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1024px) {
     border-bottom: 3px dashed #fff;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -56,7 +56,7 @@ export const QrCodeCard = styled(Box)`
     }
   }
 
-  @media (min-width: 500px) {
+  @media (min-width: 1024px) {
     border-left: 3px dashed #fff;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -84,7 +84,7 @@ export const Data = styled(Typography)`
 export const TicketDetailsCard = styled(Box)`
   flex-direction: row;
 
-  @media (max-width: 500px) {
+  @media (max-width: 1024px) {
     flex-direction: column-reverse;
   }
 `
@@ -92,7 +92,7 @@ export const TicketDetailsCard = styled(Box)`
 export const DetailsBox = styled(Box)`
   width: ${pxToRem(132)};
 
-  @media (min-width: 500px) {
+  @media (min-width: 1024px) {
     width: ${pxToRem(246)};
   }
 `
