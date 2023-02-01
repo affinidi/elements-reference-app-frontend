@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from 'react'
+import { SyntheticEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
@@ -12,10 +12,9 @@ export const useHolderConfirmSignIn = () => {
   const storage = useSessionStorage()
   const navigate = useNavigate()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync } = useConfirmSignInMutation()
+  const { data, error, mutateAsync, isLoading } = useConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useHolderSignInMutation()
   const { pathTo, computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
-  const [isLoading, setIsLoading] = useState(false)
 
   const handleResendCode = async () => {
     if (!authState.username) {
@@ -27,7 +26,6 @@ export const useHolderConfirmSignIn = () => {
 
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
-    setIsLoading(true)
 
     await mutateAsync({
       token: storage.getItem('signUpToken') || '',
@@ -59,12 +57,6 @@ export const useHolderConfirmSignIn = () => {
       storage.setItem('signUpToken', signInData)
     }
   }, [signInData, storage])
-
-  useEffect(() => {
-    if (error?.message) {
-      setIsLoading(false)
-    }
-  }, [error?.message, setIsLoading])
 
   return { error, onSubmit, inputs, isButtonDisabled, handleResendCode, isLoading }
 }
