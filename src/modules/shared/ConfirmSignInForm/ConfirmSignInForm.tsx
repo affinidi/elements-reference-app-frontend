@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { Box, Button, Container, Header, Typography } from 'components'
+import { Box, Container, Header, Typography } from 'components'
 
 import * as S from './ConfirmSignInForm.styled'
 
@@ -9,6 +9,7 @@ type ConfirmSignInFormProps = {
   onSubmit(): void
   inputs: ReactNode
   isButtonDisabled: boolean
+  isLoading: boolean
   handleResendCode(): void
 }
 
@@ -17,6 +18,7 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
   onSubmit,
   inputs,
   isButtonDisabled,
+  isLoading,
   handleResendCode,
 }) => {
   return (
@@ -24,39 +26,49 @@ export const ConfirmSignInForm: FC<ConfirmSignInFormProps> = ({
       <Header title="Signin" />
       <Container>
         <div className="grid lg:grid-cols-3 lg:gap-16">
-          <div className="lg:col-start-2">
-            <Typography variant="p1">
+          <S.Wrapper className="lg:col-start-2">
+            <S.Title variant="p1">
               Please enter the verification code you received in your email.
-            </Typography>
-            <S.Label $error={!!error} variant="p4">
-              Verification code
-            </S.Label>
+            </S.Title>
+
             <form id="confirmation" onSubmit={onSubmit}>
-              <S.VerificationFieldContainer direction="row" justifyContent="center">
-                {inputs}
-              </S.VerificationFieldContainer>
-              {error && <Typography variant="e1">{error?.message}</Typography>}
+              <Box gap={4}>
+                <S.Label hasError={Boolean(error)} variant="p4">
+                  Verification code
+                </S.Label>
+
+                <S.VerificationFieldContainer direction="row" gap={30}>
+                  {inputs}
+                </S.VerificationFieldContainer>
+
+                {error && <Typography variant="e1">{error?.message}</Typography>}
+              </Box>
             </form>
 
-            <Button form="confirmation" type="submit" disabled={isButtonDisabled}>
-              Sign in
-            </Button>
+            <S.SignInButton
+              fullWidth
+              form="confirmation"
+              type="submit"
+              disabled={isButtonDisabled}
+              loading={isLoading}
+            >
+              Log in
+            </S.SignInButton>
 
-            <Box>
-              <S.Message variant="p2">
-                Didn’t receive a code? Click{' '}
-                <span
-                  onClick={() => handleResendCode()}
-                  onKeyPress={() => handleResendCode()}
-                  role="button"
-                  tabIndex={0}
-                >
-                  here
-                </span>{' '}
-                to send it again
-              </S.Message>
-            </Box>
-          </div>
+            <Typography variant="p1">
+              Didn’t receive a code? Click{' '}
+              <Typography
+                variant="l1"
+                onClick={handleResendCode}
+                role="button"
+                tabIndex={0}
+                tag="span"
+              >
+                here
+              </Typography>{' '}
+              to send it again
+            </Typography>
+          </S.Wrapper>
         </div>
       </Container>
     </>

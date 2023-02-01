@@ -1,5 +1,7 @@
 import React, { forwardRef, TextareaHTMLAttributes } from 'react'
 
+import Box from '../Box/Box'
+
 import * as S from './Textarea.styled'
 
 export interface TextareaProps
@@ -8,19 +10,19 @@ export interface TextareaProps
   variant?: string
   hasError?: boolean
   helpText?: string
-  onChange?: (value: string, e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  onChange?: (value: string, event: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ onChange, hasError, helpText, label, className, ...props }, ref) => {
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       if (onChange) {
-        onChange(e.target.value, e)
+        onChange(event.target.value, event)
       }
     }
 
     return (
-      <S.Wrapper direction="column" gap={4} className={className}>
+      <Box direction="column" gap={4} className={className}>
         {label && (
           <S.Label variant="p4" tag="label" $hasError={hasError} $disabled={props.disabled}>
             {label}
@@ -40,7 +42,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             {helpText}
           </S.HelpText>
         )}
-      </S.Wrapper>
+      </Box>
     )
   },
 )

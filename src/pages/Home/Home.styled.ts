@@ -12,6 +12,10 @@ export const Card = styled(Box)<{ $disabled?: boolean }>`
   overflow-wrap: anywhere;
   cursor: pointer;
 
+  * {
+    cursor: pointer;
+  }
+
   @media (min-width: ${pxToRem(500)}) {
     width: auto;
     padding: ${pxToRem(32)};

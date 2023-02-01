@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Formik } from 'formik'
 
-import { Button, Container, Header, Input, Textarea, Typography } from 'components'
+import { Container, Header, Input, Textarea } from 'components'
 
 import { initialValues, useCredentialForm } from './useCredentialForm'
 import * as S from './CredentialForm.styled'
@@ -20,7 +20,7 @@ export const adjustForUTCOffset = (date: Date) => {
 }
 
 export const CredentialForm: FC = () => {
-  const { handleSubmit, validate } = useCredentialForm()
+  const { handleSubmit, validate, isCreating } = useCredentialForm()
 
   return (
     <>
@@ -32,56 +32,52 @@ export const CredentialForm: FC = () => {
             <Formik initialValues={initialValues} onSubmit={handleSubmit} validate={validate}>
               {(formikProps) => (
                 <form id="form" onSubmit={formikProps.handleSubmit}>
-                  <Typography variant="p1">
+                  <S.Title variant="p1">
                     Please fill in the form below to issue a credential.
-                  </Typography>
+                  </S.Title>
+
                   <Input label="Schema URL" value={JSON_SCHEMA_URL} disabled />
-                  <S.Heading variant="h7">Event details</S.Heading>
+
+                  <S.Heading variant="h6">Event details</S.Heading>
 
                   <div className="grid lg:grid-cols-2 lg:gap-x-8">
-                    <Input
+                    <S.InputWrapper
                       label="Event name"
                       placeholder="Enter event name"
                       name="eventName"
                       maxLength={100}
                       value={formikProps.values.eventName}
-                      onChange={formikProps.handleChange}
-                      error={formikProps.touched.eventName ? formikProps.errors.eventName : ''}
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.eventName)}
+                      helpText={formikProps.errors.eventName}
                     />
-                    <Input
+                    <S.InputWrapper
                       label="Event location"
                       placeholder="Enter event location"
                       name="eventLocation"
                       maxLength={500}
                       value={formikProps.values.eventLocation}
-                      onChange={formikProps.handleChange}
-                      error={
-                        formikProps.touched.eventLocation ? formikProps.errors.eventLocation : ''
-                      }
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.eventLocation)}
+                      helpText={formikProps.errors.eventLocation}
                     />
-                    <Input
+                    <S.InputWrapper
                       label="Start date & time"
                       name="eventStartDateTime"
                       type="datetime-local"
                       value={formikProps.values.eventStartDateTime}
-                      onChange={formikProps.handleChange}
-                      error={
-                        formikProps.touched.eventStartDateTime
-                          ? formikProps.errors.eventStartDateTime
-                          : ''
-                      }
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.eventStartDateTime)}
+                      helpText={formikProps.errors.eventStartDateTime}
                     />
-                    <Input
+                    <S.InputWrapper
                       label="End date & time"
                       name="eventEndDateTime"
                       type="datetime-local"
                       value={formikProps.values.eventEndDateTime}
-                      onChange={formikProps.handleChange}
-                      error={
-                        formikProps.touched.eventEndDateTime
-                          ? formikProps.errors.eventEndDateTime
-                          : ''
-                      }
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.eventEndDateTime)}
+                      helpText={formikProps.errors.eventEndDateTime}
                     />
                     <Textarea
                       label="Event description"
@@ -90,38 +86,45 @@ export const CredentialForm: FC = () => {
                       maxLength={1000}
                       value={formikProps.values.eventDescription}
                       onChange={(value, e) => formikProps.handleChange(e)}
-                      hasError={!!formikProps.errors.eventDescription}
+                      hasError={Boolean(formikProps.errors.eventDescription)}
                       helpText={formikProps.errors.eventDescription}
                     />
                   </div>
 
-                  <S.Heading variant="h7">Ticket holder information</S.Heading>
+                  <S.Heading variant="h6">Ticket holder information</S.Heading>
 
-                  <div className="grid lg:grid-cols-2 lg:gap-x-16 lg:gap-y-12">
-                    <Input
+                  <div className="grid lg:grid-cols-2 lg:gap-x-8">
+                    <S.InputWrapper
                       label="Ticket holder name"
                       name="name"
                       maxLength={100}
                       placeholder="Enter ticket holder name"
                       value={formikProps.values.name}
-                      onChange={formikProps.handleChange}
-                      error={formikProps.touched.name ? formikProps.errors.name : ''}
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.name)}
+                      helpText={formikProps.errors.name}
                     />
-                    <Input
+                    <S.InputWrapper
                       label="Ticket holder email"
                       name="email"
                       type="email"
                       placeholder="Enter ticket holder email"
                       maxLength={100}
                       value={formikProps.values.email}
-                      onChange={formikProps.handleChange}
-                      error={formikProps.touched.email ? formikProps.errors.email : ''}
+                      onChange={(_, event) => formikProps.handleChange(event)}
+                      hasError={Boolean(formikProps.errors.email)}
+                      helpText={formikProps.errors.email}
                     />
                   </div>
 
-                  <Button type="submit" form="form">
+                  <S.ButtonWrapper
+                    type="submit"
+                    form="form"
+                    disabled={!(formikProps.isValid && formikProps.dirty)}
+                    loading={isCreating}
+                  >
                     Issue ticket
-                  </Button>
+                  </S.ButtonWrapper>
                 </form>
               )}
             </Formik>

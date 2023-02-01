@@ -1,10 +1,12 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router'
+
 import { useAuthContext } from 'hooks/useAuthContext'
-import { PATHS } from 'router/paths'
-import { Box, Container, Header, Spinner, Typography } from 'components'
-import { ResultContent } from './ResultContent'
 import { ErrorResponse } from 'hooks/useAuthentication'
+import { PATHS } from 'router/paths'
+import { Box, Button, Container, Header, Spinner } from 'components'
+
+import { ResultContent } from './ResultContent'
 import * as S from './Result.styled'
 
 export type ResultProps = {
@@ -56,9 +58,9 @@ const Result: FC<ResultProps> = ({ isLoading, isValid, error, pathTo }) => {
                 : 'Your ticket has been issued.'}
             </S.ResultPara>
 
-            <S.IssueTicketButton variant="outlined" onClick={() => navigate(pathTo)}>
+            <Button fullWidth variant="outlined" onClick={() => navigate(pathTo)}>
               {authState.appFlow === 'verifier' ? 'SCAN NEXT QR CODE' : 'ISSUE NEXT TICKET'}
-            </S.IssueTicketButton>
+            </Button>
           </Box>
         </div>
       </Container>

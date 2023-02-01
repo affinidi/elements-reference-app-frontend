@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import Typography from '../Typography/Typography'
+
 import { pxToRem } from 'utils'
-import { Button } from 'components'
+
+import Typography from '../Typography/Typography'
 
 export const ResultTitle = styled(Typography)<{ $isVerified?: boolean; $isIssuance?: boolean }>`
   color: ${(props) =>
@@ -13,8 +14,4 @@ export const ResultTitle = styled(Typography)<{ $isVerified?: boolean; $isIssuan
 
 export const ResultPara = styled(Typography)`
   margin-bottom: ${pxToRem(48)};
-`
-
-export const IssueTicketButton = styled(Button)`
-  width: 100%;
 `
