@@ -1,14 +1,13 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { SignInInput } from 'services/cloud-wallet/cloud-wallet.api'
 import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useIssuerSignInMutation } from 'hooks/useAuthentication'
 import { PATHS } from 'router/paths'
 
 export const useIssuerSignIn = () => {
-  const [signInInput, setSignInInput] = useState<SignInInput>({ username: '' })
+  const [username, setUsername] = useState('')
   const [inputError, setInputError] = useState<string | null>(null)
   const navigate = useNavigate()
   const storage = useSessionStorage()
@@ -23,11 +22,11 @@ export const useIssuerSignIn = () => {
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault()
     setInputError(null)
-    if (!validateEmail(signInInput.username)) {
+    if (!validateEmail(username)) {
       setInputError('This is not a valid email address.')
       return
     }
-    await mutateAsync(signInInput)
+    await mutateAsync({ username })
   }
 
   useEffect(() => {
@@ -36,13 +35,13 @@ export const useIssuerSignIn = () => {
     }
 
     storage.setItem('signUpToken', data.token)
-    updateAuthState({ ...authState, username: signInInput.username })
+    updateAuthState({ ...authState, username: username })
     if (!error) {
       navigate(`${PATHS.ISSUER.CONFIRM_SIGNIN}${data.signup ? '?signup=true' : ''}`)
     }
-  }, [data, error, storage, navigate, authState, updateAuthState, signInInput])
+  }, [data, error, storage, navigate, authState, updateAuthState, username])
 
-  const disabled = !signInInput.username || isLoading
+  const disabled = !username || isLoading
 
   return {
     disabled,
@@ -50,7 +49,7 @@ export const useIssuerSignIn = () => {
     isLoading,
 
     handleSignIn,
-    setSignInInput,
+    setUsername,
     inputError,
     setInputError,
   }

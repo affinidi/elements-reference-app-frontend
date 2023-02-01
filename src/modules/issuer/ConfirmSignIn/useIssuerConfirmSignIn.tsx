@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect } from 'react'
+import { SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
@@ -17,9 +17,11 @@ export const useIssuerConfirmSignIn = () => {
   const { data, error, mutateAsync } = useIssuerConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useIssuerSignInMutation()
   const { pathTo, computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
+    setIsLoading(true)
 
     const isSignUp = queryString.parse(window.location.search).signup === 'true'
 
@@ -58,5 +60,5 @@ export const useIssuerConfirmSignIn = () => {
     }
   }, [signInData, storage])
 
-  return { error, onSubmit, inputs, isButtonDisabled, handleResendCode }
+  return { error, onSubmit, inputs, isButtonDisabled, isLoading, handleResendCode }
 }

@@ -1,10 +1,17 @@
 import styled, { css } from 'styled-components'
 
-import { pxToRem } from '../../utils'
-import Typography from '../Typography/Typography'
-import Box from '../Box/Box'
+import { pxToRem } from 'utils'
+import { Theme } from 'utils/theme'
 
-const getTextColor = (props) => {
+import Typography from '../Typography/Typography'
+
+type Props = {
+  $hasError?: boolean
+  $disabled?: boolean
+  theme: Theme
+}
+
+const getTextColor = (props: Props) => {
   if (props.$hasError) {
     return props.theme.colors.utility.danger['100']
   }
@@ -15,10 +22,6 @@ const getTextColor = (props) => {
 
   return ''
 }
-
-export const Wrapper = styled(Box)`
-  margin: ${pxToRem(24)} 0;
-`
 
 export const Label = styled(Typography)<{ $hasError?: boolean; $disabled?: boolean }>`
   color: ${getTextColor};
@@ -45,10 +48,10 @@ export const Textarea = styled.textarea<{ $hasError?: boolean }>`
   ${(props) =>
     props.$hasError &&
     css`
+      color: ${props.theme.colors.utility.danger['100']};
       padding: ${pxToRem(15)} ${pxToRem(11)};
       border: 2px solid ${props.theme.colors.utility.danger['100']};
     `}
-
   ${(props) =>
     !props.$hasError &&
     css`
@@ -59,14 +62,13 @@ export const Textarea = styled.textarea<{ $hasError?: boolean }>`
         }
       }
     `}
-
   ::placeholder {
     font-weight: 500;
-    color: ${(props) => props.theme.colors.neutral.primary['50']};
+    color: ${(props) => props.theme.colors.neutral.primary['30']};
   }
 
   &[disabled] {
-    color: ${(props) => props.theme.colors.neutral.primary['50']};
+    color: ${(props) => props.theme.colors.neutral.primary['30']};
   }
 `
 
