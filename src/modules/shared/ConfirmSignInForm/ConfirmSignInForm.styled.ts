@@ -1,19 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { Box, Input, Typography } from 'components'
-import { InputProps } from 'components/Input/Input'
 import { pxToRem } from 'utils'
+import { Box, Button, Input, Typography } from 'components'
 
-export const Message = styled(Typography)`
-  span {
-    text-transform: uppercase;
-    font-weight: 600;
-    cursor: pointer;
-  }
+export const Wrapper = styled.div`
+  padding-bottom: ${pxToRem(40)};
 `
 
-export const Label = styled(Typography)<{ $error: boolean }>`
-  ${(props) => (props.$error ? `color: #e73c5b` : null)};
+export const Title = styled(Typography)`
+  margin: ${pxToRem(40)} 0;
 `
 
 export const VerificationFieldContainer = styled(Box)`
@@ -22,19 +17,33 @@ export const VerificationFieldContainer = styled(Box)`
   }
 `
 
-export const VerificationField = styled(Input)<InputProps>`
-  margin: ${pxToRem(10)} ${pxToRem(10)} ${pxToRem(10)} 0;
+export const Label = styled(Typography)<{ hasError: boolean }>`
+  ${(props) =>
+    props.hasError &&
+    css`
+      color: ${props.theme.colors.utility.danger['100']};
+    `}
+`
 
+export const VerificationField = styled(Input)`
   input {
     text-align: center;
     padding: ${pxToRem(4)} ${pxToRem(8)};
     border-radius: ${pxToRem(8)};
-    font-family: Montserrat;
     font-size: ${pxToRem(28)};
     font-weight: bold;
-    line-height: 1.29;
-    letter-spacing: ${pxToRem(0.2)};
-    color: #464e66;
-    background: #f8f8f9;
+    background: ${(props) => props.theme.colors.brand.primary['3']};
+
+    &:focus {
+      padding: ${pxToRem(4)} ${pxToRem(8)} !important;
+    }
+  }
+`
+
+export const SignInButton = styled(Button)`
+  margin: ${pxToRem(48)} 0;
+
+  @media (max-width: 1024px) {
+    margin: ${pxToRem(40)} 0;
   }
 `

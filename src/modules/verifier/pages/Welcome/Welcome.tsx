@@ -1,12 +1,15 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router'
+
 import { PATHS } from 'router/paths'
-import { Box, Container, Header } from 'components'
 import { ScanQr } from 'assets'
+import { Box, Button, Container, Header } from 'components'
+
 import * as S from './Welcome.styled'
 
 export const Welcome: FC = () => {
   const navigate = useNavigate()
+
   return (
     <>
       <Header title="Welcome" hasBackIcon />
@@ -15,10 +18,14 @@ export const Welcome: FC = () => {
         <div className="grid lg:grid-cols-3 lg:gap-16">
           <Box alignItems="center" className="lg:col-start-2">
             <ScanQr />
-            <S.WelcomeMessage variant="p1">
+
+            <S.WelcomeMessage align="center" variant="p1">
               Welcome to the Eventi ticket scanner. Click “scan QR code” to start checking tickets.
             </S.WelcomeMessage>
-            <S.ScanButton onClick={() => navigate(PATHS.VERIFIER.SCAN)}>SCAN QR CODE</S.ScanButton>
+
+            <Button fullWidth onClick={() => navigate(PATHS.VERIFIER.SCAN)}>
+              SCAN QR CODE
+            </Button>
           </Box>
         </div>
       </Container>

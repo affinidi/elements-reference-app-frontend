@@ -14,7 +14,7 @@ export const useIssuerConfirmSignIn = () => {
   const storage = useSessionStorage()
   const navigate = useNavigate()
   const { authState, updateAuthState } = useAuthContext()
-  const { data, error, mutateAsync } = useIssuerConfirmSignInMutation()
+  const { data, error, mutateAsync, isLoading } = useIssuerConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useIssuerSignInMutation()
   const { pathTo, computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
 
@@ -58,5 +58,5 @@ export const useIssuerConfirmSignIn = () => {
     }
   }, [signInData, storage])
 
-  return { error, onSubmit, inputs, isButtonDisabled, handleResendCode }
+  return { error, onSubmit, inputs, isButtonDisabled, isLoading, handleResendCode }
 }

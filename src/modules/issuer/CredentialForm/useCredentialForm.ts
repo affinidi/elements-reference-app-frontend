@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 import { format } from 'date-fns'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import * as EmailValidator from 'email-validator'
 
 import { parseSchemaURL } from 'services/issuance/parse.schema.url'
@@ -38,9 +38,12 @@ export const initialValues: EventSubjectData = {
 
 export const useCredentialForm = () => {
   const navigate = useNavigate()
+  const [isCreating, setIsCreating] = useState(false)
 
   const handleSubmit = useCallback(
     async (values: EventSubjectData) => {
+      setIsCreating(true)
+
       const walletUrl = `${window.location.origin}/holder/claim`
       const issuerDid = import.meta.env.VITE_PROJECT_DID || ''
       const projectId = import.meta.env.VITE_PROJECT_ID || ''
@@ -87,10 +90,14 @@ export const useCredentialForm = () => {
         },
       }
 
-      const issuanceId = await issuanceService.createIssuance(apiKeyHash, issuanceJson)
-      await issuanceService.createOffer(apiKeyHash, issuanceId.id, offerInput)
+      try {
+        const issuanceId = await issuanceService.createIssuance(apiKeyHash, issuanceJson)
+        await issuanceService.createOffer(apiKeyHash, issuanceId.id, offerInput)
 
-      navigate(PATHS.ISSUER.RESULT)
+        navigate(PATHS.ISSUER.RESULT)
+      } catch {
+        setIsCreating(false)
+      }
     },
     [navigate],
   )
@@ -142,6 +149,6 @@ export const useCredentialForm = () => {
   return {
     handleSubmit,
     validate,
+    isCreating,
   }
 }
-

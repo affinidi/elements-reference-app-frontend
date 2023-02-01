@@ -1,5 +1,7 @@
 import { FC, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+
+import { PATHS } from 'router/paths'
 import { useAuthContext } from 'hooks/useAuthContext'
 import {
   useRetrieveSharedCredentialQuery,
@@ -8,7 +10,7 @@ import {
 import { getQueryParams } from 'utils'
 import { Button, Container, Header, Spinner, Typography } from 'components'
 import { Credential } from 'modules/holder/components/Credential'
-import { PATHS } from 'router/paths'
+
 import * as S from './Onboarding.styled'
 
 export const Onboarding: FC = () => {
@@ -35,12 +37,6 @@ export const Onboarding: FC = () => {
   const handleDeleteCredential = () => {
     navigate(PATHS.HOLDER.HOME)
   }
-  useEffect(() => {
-    if (storedCredentialData) {
-      navigate(PATHS.HOLDER.HOME)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storedCredentialData])
 
   const handleLink = () => {
     if (!params) return
@@ -53,9 +49,17 @@ export const Onboarding: FC = () => {
   }
 
   useEffect(() => {
+    if (storedCredentialData) {
+      navigate(PATHS.HOLDER.HOME)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storedCredentialData])
+
+  useEffect(() => {
     handleLink()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
   if (isLoading) {
     return (
       <>
@@ -83,9 +87,10 @@ export const Onboarding: FC = () => {
         {data && (
           <>
             <Credential credentialSubject={data.credentialSubject} />
+
             <S.ButtonContainer direction="row" justifyContent="space-between">
-              <Button onClick={() => handleStoreCredential()}>Save</Button>
-              <Button variant="outlined" onClick={() => handleDeleteCredential()}>
+              <Button onClick={handleStoreCredential}>Save</Button>
+              <Button variant="outlined" onClick={handleDeleteCredential}>
                 Reject
               </Button>
             </S.ButtonContainer>

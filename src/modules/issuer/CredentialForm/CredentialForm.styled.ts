@@ -1,13 +1,20 @@
 import styled from 'styled-components'
 
 import { pxToRem } from 'utils'
-import { Typography } from 'components'
+import { Button, Input, Typography } from 'components'
 
 export const Heading = styled(Typography)`
-  margin-bottom: ${pxToRem(12)};
-  @media (min-width: 250px) {
-    font-size: ${pxToRem(20)};
-    line-height: ${pxToRem(28)};
-    margin-top: ${pxToRem(27)};
-  }
+  margin: ${pxToRem(48)} 0 ${pxToRem(24)};
+`
+
+export const Title = styled(Typography)`
+  margin-bottom: ${pxToRem(24)};
+`
+
+export const InputWrapper = styled(Input)`
+  margin-bottom: ${pxToRem(24)};
+`
+
+export const ButtonWrapper = styled(Button)`
+  margin-bottom: ${pxToRem(40)};
 `
