@@ -23,10 +23,10 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
   location,
   qrCode,
 }) => (
-  <Box direction="row">
-    <S.TicketDetailsCardLeft>
-      <Box justifyContent="space-between" gap={20}>
-        <div className="grid lg:grid-cols-3 lg:gap-16">
+  <S.TicketDetailsCard>
+    <S.DataCard>
+      <Box justifyContent="space-between" gap={24}>
+        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
           <Box>
             <Typography variant="c1"> Start Date</Typography>
             <S.Data variant="p4">{startDate} </S.Data>
@@ -37,7 +37,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
           </Box>
         </div>
 
-        <div className="grid lg:grid-cols-3 lg:gap-16">
+        <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
           <Box alignItems="start">
             <Typography variant="c1"> Start Time</Typography>
             <S.Data variant="p4">{startTime} </S.Data>
@@ -60,12 +60,12 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
           </S.Data>
         </Box>
       </Box>
-    </S.TicketDetailsCardLeft>
+    </S.DataCard>
 
-    <S.TicketDetailsCardRight>
+    <S.QrCodeCard>
       <img src={qrCode} alt="QR Code" />
-    </S.TicketDetailsCardRight>
-  </Box>
+    </S.QrCodeCard>
+  </S.TicketDetailsCard>
 )
 
 export default TicketDetails
