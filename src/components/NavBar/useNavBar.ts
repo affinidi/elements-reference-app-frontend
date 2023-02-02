@@ -12,6 +12,10 @@ export const useNavBar = () => {
 
   const isAuthorized = authState.authorizedAsIssuer || authState.authorizedAsHolder
 
+  const handleGoHomePage = () => {
+    navigate(PATHS.HOME)
+  }
+
   const handleLogOut = useCallback(async () => {
     await logout(authState)
     updateAuthState({
@@ -22,5 +26,5 @@ export const useNavBar = () => {
     navigate(PATHS.HOME)
   }, [authState, navigate, updateAuthState])
 
-  return { isMenuOpen, handleLogOut, setIsMenuOpen, navigate, isAuthorized }
+  return { isMenuOpen, handleLogOut, setIsMenuOpen, handleGoHomePage, isAuthorized }
 }
