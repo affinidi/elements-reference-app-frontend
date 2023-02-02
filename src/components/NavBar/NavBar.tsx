@@ -1,61 +1,45 @@
 import { FC } from 'react'
-
-import { PATHS } from 'router/paths'
-import { Typography } from 'components'
-import eventiLogoIcon from '../../assets/svg/eventi-logo-icon.svg'
-import iconClose from '../../assets/svg/icon-close.svg'
-import iconOpen from '../../assets/svg/icon-menu.svg'
+import { CloseIcon, MenuIcon } from 'assets'
+import eventiLogoIcon from 'assets/svg/eventi-logo-icon.svg'
+import { Container, Modal, Typography } from 'components'
 
 import { useNavBar } from './useNavBar'
 
 import * as S from './NavBar.styled'
 
 const NavBar: FC = () => {
-  const { isMenuOpen, setIsMenuOpen, handleLogOut, navigate, isAuthorized } = useNavBar()
+  const { isMenuOpen, setIsMenuOpen, handleLogOut, handleGoHomePage, isAuthorized } = useNavBar()
 
   return (
     <>
-      <S.Container>
-        <S.Logo
-          onClick={() => navigate(PATHS.HOME)}
-          src={eventiLogoIcon}
-          aria-label="wallet-logo"
-        />
+      <Container>
+        <S.Container justifyContent="space-between" alignItems="center" direction="row">
+          <S.Logo onClick={handleGoHomePage} src={eventiLogoIcon} aria-label="app-logo" />
 
-        {isAuthorized && (
-          <div>
-            {isMenuOpen ? (
-              <S.Icon
-                aria-label="menu-close-icon"
-                onClick={() => setIsMenuOpen(false)}
-                src={iconClose}
-              />
-            ) : (
-              <S.Icon
-                aria-label="menu-open-icon"
-                onClick={() => setIsMenuOpen(true)}
-                src={iconOpen}
-              />
-            )}
-          </div>
-        )}
-      </S.Container>
-      {isAuthorized && isMenuOpen && (
-        <S.NavBar $isMenuOpen={isMenuOpen}>
-        <S.MenuContainer $isOpen={isMenuOpen}>
-          <S.ButtonContainer
-            onClick={() => {
-              setIsMenuOpen(false)
-              navigate(PATHS.HOME)
-            }}
-          >
-            <Typography variant="b1">HOME</Typography>
-          </S.ButtonContainer>
-          <S.ButtonContainer onClick={() => handleLogOut()}>
-            <Typography variant="b1">LOG OUT</Typography>
-          </S.ButtonContainer>
-        </S.MenuContainer>
-        </S.NavBar>
+          {isAuthorized && (
+            <>
+              {isMenuOpen ? (
+                <S.IconWrapper>
+                  <CloseIcon onClick={() => setIsMenuOpen(false)} aria-label="menu-close-icon" />
+                </S.IconWrapper>
+              ) : (
+                <S.IconWrapper>
+                  <MenuIcon onClick={() => setIsMenuOpen(true)} aria-label="menu-open-icon" />
+                </S.IconWrapper>
+              )}
+            </>
+          )}
+        </S.Container>
+      </Container>
+
+      {isAuthorized && (
+        <Modal open={isMenuOpen} onClose={() => setIsMenuOpen(false)} position="rightSide">
+          <S.Content alignItems="flex-end">
+            <S.ButtonContainer onClick={handleLogOut}>
+              <Typography variant="b1">Log out</Typography>
+            </S.ButtonContainer>
+          </S.Content>
+        </Modal>
       )}
     </>
   )

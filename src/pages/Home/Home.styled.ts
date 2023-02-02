@@ -16,8 +16,7 @@ export const Card = styled(Box)<{ $disabled?: boolean }>`
     cursor: pointer;
   }
 
-  @media (min-width: ${pxToRem(500)}) {
-    width: auto;
+  @media (min-width: 1024px) {
     padding: ${pxToRem(32)};
   }
 
@@ -44,7 +43,7 @@ export const Details = styled.div`
 `
 
 export const Icon = styled.img`
-  @media (min-width: ${pxToRem(500)}) {
+  @media (min-width: 1024px) {
     width: ${pxToRem(48)};
     height: ${pxToRem(48)};
   }
