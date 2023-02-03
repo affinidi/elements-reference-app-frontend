@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
+import { PATHS } from 'router/paths'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useIssuerSignInMutation } from 'hooks/useAuthentication'
-import { PATHS } from 'router/paths'
+import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
 
 export const useIssuerSignIn = () => {
   const [username, setUsername] = useState('')
@@ -21,7 +21,9 @@ export const useIssuerSignIn = () => {
 
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault()
+
     setInputError(null)
+
     if (!validateEmail(username)) {
       setInputError('This is not a valid email address.')
       return
@@ -30,14 +32,13 @@ export const useIssuerSignIn = () => {
   }
 
   useEffect(() => {
-    if (!data) {
-      return
-    }
+    if (data) {
+      storage.setItem('signUpToken', data.token)
+      updateAuthState({ ...authState, username: username })
 
-    storage.setItem('signUpToken', data.token)
-    updateAuthState({ ...authState, username: username })
-    if (!error) {
-      navigate(`${PATHS.ISSUER.CONFIRM_SIGNIN}${data.signup ? '?signup=true' : ''}`)
+      if (!error) {
+        navigate(`${PATHS.ISSUER.CONFIRM_SIGNIN}${data.signup ? '?signup=true' : ''}`)
+      }
     }
   }, [data, error, storage, navigate, authState, updateAuthState, username])
 
@@ -47,7 +48,6 @@ export const useIssuerSignIn = () => {
     disabled,
     error,
     isLoading,
-
     handleSignIn,
     setUsername,
     inputError,

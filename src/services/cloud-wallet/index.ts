@@ -7,7 +7,6 @@ import {
   Api as CloudWalletApi,
   ConfirmSignInInput,
   ErrorObject,
-  SaveCredentialInput,
   SignInInput,
 } from './cloud-wallet.api'
 
@@ -18,6 +17,7 @@ export const isHttpError = (
 } => {
   return Object.prototype.hasOwnProperty.call(object, 'error')
 }
+
 class CloudWalletService {
   constructor(
     private readonly client = new CloudWalletApi({
@@ -162,19 +162,6 @@ class CloudWalletService {
   retrieveSharedCredential = async (hash: string, key: string) => {
     try {
       const response = await this.client.share.retrieveSharedCredential(hash, { key })
-      return response.data
-    } catch (error: any) {
-      throw new Error(error?.error?.message)
-    }
-  }
-
-  storeCredentials = async (data: SaveCredentialInput) => {
-    try {
-      const response = await this.client.wallet.storeCredentials(data, {
-        headers: {
-          Authorization: getItemFromSessionStorage('accessToken') || '',
-        },
-      })
       return response.data
     } catch (error: any) {
       throw new Error(error?.error?.message)

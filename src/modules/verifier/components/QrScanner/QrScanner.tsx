@@ -1,6 +1,6 @@
 import { FC, useCallback, useState } from 'react'
 import { Exception, Result } from '@zxing/library'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { PATHS } from 'router/paths'
 import { extractHashAndKeyFromVSShareUrl } from 'utils'
 import { useScanner } from 'modules/verifier/hooks/useScanner'

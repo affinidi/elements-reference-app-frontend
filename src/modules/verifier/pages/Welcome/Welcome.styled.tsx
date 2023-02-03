@@ -4,9 +4,12 @@ import { pxToRem } from 'utils'
 import { Typography } from 'components'
 
 export const WelcomeMessage = styled(Typography)`
-  margin-top: ${pxToRem(40)};
+  margin: ${pxToRem(48)} 0;
+`
 
-  @media (min-width: 1024px) {
-    margin: ${pxToRem(48)} 0 ${pxToRem(8)};
+export const ImgWrapper = styled.div`
+  svg {
+    max-width: 100%;
+    height: auto;
   }
 `

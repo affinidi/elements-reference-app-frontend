@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react'
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 import { StoredW3CCredential } from 'services/cloud-wallet/cloud-wallet.api'
 import {

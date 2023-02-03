@@ -16,21 +16,31 @@ export const ClaimVc: FC = () => {
     if (credentialOfferRequestToken !== null) {
       updateAuthState({ vcOfferToken: credentialOfferRequestToken as string })
     }
+
     if (!authState.authorizedAsHolder) {
       navigate(PATHS.HOLDER.SIGNIN)
     }
+
     refetch()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams])
+  }, [
+    searchParams,
+    refetch,
+    credentialOfferRequestToken,
+    updateAuthState,
+    navigate,
+    authState.authorizedAsHolder,
+  ])
 
   useEffect(() => {
-    if (data) navigate(`${PATHS.HOLDER.CREDENTIAL}/${data.credentialIds[0]}`)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+    if (data) {
+      navigate(`${PATHS.HOLDER.CREDENTIAL}/${data.credentialIds[0]}`)
+    }
+  }, [data, navigate])
 
   return (
     <>
       <Header title="Claim credential" />
+
       <Container>
         <Spinner />
       </Container>

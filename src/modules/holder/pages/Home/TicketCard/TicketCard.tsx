@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 import { Credential } from 'modules/holder/pages/types'
 import { PATHS } from 'router/paths'

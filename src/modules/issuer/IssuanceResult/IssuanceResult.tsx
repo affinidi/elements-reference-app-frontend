@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { PATHS } from 'router/paths'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { Result } from 'components'
 

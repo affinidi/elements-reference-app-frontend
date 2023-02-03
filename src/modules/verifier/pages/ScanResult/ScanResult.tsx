@@ -1,17 +1,18 @@
 import { FC, useEffect } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
+
 import { PATHS } from 'router/paths'
 import { W3CCredential } from 'services/verifier/verifier.api'
+import { Result } from 'components'
 import { useVerifyCredentialsMutation } from 'modules/verifier/hooks/useVerification'
 import { useRetrieveSharedCredentialQuery } from 'modules/holder/pages/hooks/useCredentials'
-import { Result } from 'components'
 
 export const ScanResult: FC = () => {
   const location = useLocation()
 
   const { data, isLoading, error } = useRetrieveSharedCredentialQuery(
-    location.state.hash,
-    location.state.key,
+    location.state?.hash,
+    location.state?.key,
   )
   const {
     data: verifyCredentialData,
@@ -27,13 +28,11 @@ export const ScanResult: FC = () => {
   }, [data, mutateAsync])
 
   return (
-    <>
-      <Result
-        isLoading={isLoading || verifyCredentialIsLoading}
-        error={error || verifyCredentialError}
-        isValid={!!verifyCredentialData?.isValid}
-        pathTo={PATHS.VERIFIER.SCAN}
-      />
-    </>
+    <Result
+      isLoading={isLoading || verifyCredentialIsLoading}
+      error={error || verifyCredentialError}
+      isValid={!!verifyCredentialData?.isValid}
+      pathTo={PATHS.VERIFIER.SCAN}
+    />
   )
 }

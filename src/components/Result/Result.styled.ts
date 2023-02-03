@@ -15,3 +15,10 @@ export const ResultTitle = styled(Typography)<{ $isVerified?: boolean; $isIssuan
 export const ResultPara = styled(Typography)`
   margin-bottom: ${pxToRem(48)};
 `
+
+export const ImgWrapper = styled.div`
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+`
