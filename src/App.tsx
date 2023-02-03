@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
-
 import AppRouter from 'router/app-router'
-import { AuthProvider } from 'contexts/AuthContext'
-import { ThemeProvider } from 'styled-components'
-import { theme } from 'utils/theme'
 import { Bootstrap } from 'bootstrap'
+import { ThemeProvider } from 'styled-components'
+
+import { theme } from 'utils/theme'
+import { AuthProvider } from 'contexts/AuthContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +19,7 @@ const queryClient = new QueryClient({
 const App: FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient} contextSharing={true}>
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <AuthProvider>
             <Bootstrap>

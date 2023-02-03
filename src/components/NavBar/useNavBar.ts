@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
 import { useAuthContext } from 'hooks/useAuthContext'
 import { logout } from 'hooks/useAuthentication'

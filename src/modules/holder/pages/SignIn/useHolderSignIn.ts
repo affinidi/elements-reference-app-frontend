@@ -1,10 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
+import { PATHS } from 'router/paths'
 import { useAuthContext } from 'hooks/useAuthContext'
 import { useHolderSignInMutation } from 'hooks/useAuthentication'
-import { PATHS } from 'router/paths'
+import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
 
 export const useHolderSignIn = () => {
   const [username, setUsername] = useState('')
@@ -21,7 +21,9 @@ export const useHolderSignIn = () => {
 
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault()
+
     setInputError(null)
+
     if (!validateEmail(username)) {
       setInputError('This is not a valid email address.')
       return
@@ -33,7 +35,10 @@ export const useHolderSignIn = () => {
     if (data) {
       storage.setItem('signUpToken', data)
       updateAuthState({ ...authState, username: username })
-      if (!error) navigate(PATHS.HOLDER.CONFIRM_SIGNIN)
+
+      if (!error) {
+        navigate(PATHS.HOLDER.CONFIRM_SIGNIN)
+      }
     }
   }, [data, error, storage, navigate, authState, updateAuthState, username])
 
@@ -43,7 +48,6 @@ export const useHolderSignIn = () => {
     disabled,
     error,
     isLoading,
-
     handleSignIn,
     setUsername,
     inputError,

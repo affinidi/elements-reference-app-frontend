@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import { useCallback, useState } from 'react'
 import * as EmailValidator from 'email-validator'

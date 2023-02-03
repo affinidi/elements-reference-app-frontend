@@ -1,6 +1,4 @@
 import { ClipboardEventHandler, KeyboardEvent, useMemo, useRef, useState } from 'react'
-
-import { PATHS } from 'router/paths'
 import { Keys } from 'enums/keys'
 
 import * as S from './ConfirmSignInForm.styled'
@@ -18,17 +16,6 @@ const FROM_ZERO_TO_NINE = Array(10)
   .map((_, idx) => idx.toString())
 
 export const useConfirmSignIn = (message?: string) => {
-  const pathTo = (appFlow: string | null) => {
-    switch (appFlow) {
-      case 'holder':
-        return PATHS.HOLDER.HOME
-      case 'issuer':
-        return PATHS.ISSUER.CREDENTIAL_FORM
-      default:
-        return PATHS.HOME
-    }
-  }
-
   const [verifyCode, setVerifyCode] = useState<OTPCode>({
     0: null,
     1: null,
@@ -112,7 +99,6 @@ export const useConfirmSignIn = (message?: string) => {
   ))
 
   return {
-    pathTo,
     computedCode,
     inputs,
     isButtonDisabled,

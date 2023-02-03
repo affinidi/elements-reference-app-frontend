@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { AuthRoute } from 'components/Authorisation/AuthRoute'
-import { PATHS } from './paths'
-import { useAuthContext } from 'hooks/useAuthContext'
 
+import { useAuthContext } from 'hooks/useAuthContext'
+import { AuthRedirect } from 'components/Authorisation/AuthRedirect'
 import { Home } from 'pages/Home/Home'
 import { Home as HolderHome } from 'modules/holder/pages/Home/Home'
 import { HolderConfirmSignIn } from 'modules/holder/pages/ConfirmSignIn/HolderConfirmSignIn'
@@ -19,6 +18,8 @@ import { Container, NavBar, Spinner } from 'components'
 import { HolderSignIn } from 'modules/holder/pages/SignIn/HolderSignIn'
 import { IssuerSignIn } from 'modules/issuer/SignIn/IssuerSignIn'
 import { IssuerConfirmSignIn } from 'modules/issuer/ConfirmSignIn/IssuerConfirmSignIn'
+
+import { PATHS } from './paths'
 
 const AppRouter: FC = () => {
   const { authState } = useAuthContext()
@@ -48,18 +49,18 @@ const AppRouter: FC = () => {
         <Route
           path={PATHS.HOLDER.HOME}
           element={
-            <AuthRoute>
+            <AuthRedirect>
               <HolderHome />
-            </AuthRoute>
+            </AuthRedirect>
           }
         />
 
         <Route
           path={`${PATHS.HOLDER.CREDENTIAL}/:credentialId`}
           element={
-            <AuthRoute>
+            <AuthRedirect>
               <CredentialView />
-            </AuthRoute>
+            </AuthRedirect>
           }
         />
         <Route path={PATHS.VERIFIER.WELCOME} element={<Welcome />} />
@@ -69,17 +70,17 @@ const AppRouter: FC = () => {
         <Route
           path={PATHS.ISSUER.CREDENTIAL_FORM}
           element={
-            <AuthRoute>
+            <AuthRedirect>
               <CredentialForm />
-            </AuthRoute>
+            </AuthRedirect>
           }
         />
         <Route
           path={PATHS.ISSUER.RESULT}
           element={
-            <AuthRoute>
+            <AuthRedirect>
               <IssuanceResult />
-            </AuthRoute>
+            </AuthRedirect>
           }
         />
       </Routes>

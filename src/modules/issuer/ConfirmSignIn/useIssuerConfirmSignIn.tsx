@@ -1,14 +1,12 @@
 import { SyntheticEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import queryString from 'query-string'
 
+import { PATHS } from 'router/paths'
 import { useSessionStorage } from 'modules/holder/pages/hooks/useSessionStorage'
 import { useConfirmSignIn } from 'modules/shared/ConfirmSignInForm/useConfirmSignIn'
 import { useIssuerConfirmSignInMutation, useIssuerSignInMutation } from 'hooks/useAuthentication'
 import { useAuthContext } from 'hooks/useAuthContext'
-
-import { PATHS } from 'router/paths'
-
-import queryString from 'query-string'
 
 export const useIssuerConfirmSignIn = () => {
   const storage = useSessionStorage()
@@ -16,7 +14,7 @@ export const useIssuerConfirmSignIn = () => {
   const { authState, updateAuthState } = useAuthContext()
   const { data, error, mutateAsync, isLoading } = useIssuerConfirmSignInMutation()
   const { data: signInData, mutateAsync: signInMutateAsync } = useIssuerSignInMutation()
-  const { pathTo, computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
+  const { computedCode, inputs, isButtonDisabled } = useConfirmSignIn(error?.message)
 
   const onSubmit = async (e?: SyntheticEvent) => {
     e?.preventDefault()
@@ -45,12 +43,14 @@ export const useIssuerConfirmSignIn = () => {
         loading: false,
         authorizedAsIssuer: true,
       })
-      navigate(pathTo(authState.appFlow))
+
+      navigate(PATHS.ISSUER.CREDENTIAL_FORM)
     }
+
     if (authState.username === '') {
       navigate(PATHS.ISSUER.SIGNIN)
     }
-  }, [data, error, authState, updateAuthState, navigate, storage, pathTo])
+  }, [data, error, authState, updateAuthState, navigate, storage])
 
   useEffect(() => {
     if (signInData) {

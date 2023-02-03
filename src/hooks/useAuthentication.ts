@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { cloudWalletService } from 'services/cloud-wallet'
-import { userManagementService, AuthConfirmationInput, isHttpError } from 'services/user-management'
+import { AuthConfirmationInput, isHttpError, userManagementService } from 'services/user-management'
 import {
   ConfirmSignInInput,
   ConfirmSignInOutput,
@@ -153,6 +153,7 @@ export const useAuthentication = () => {
     if (location.pathname.includes('/issuer')) {
       try {
         const response = await userManagementService.me()
+
         if (response) {
           updateAuthState({ loading: false, authorizedAsIssuer: true })
         }
@@ -165,6 +166,7 @@ export const useAuthentication = () => {
 
     try {
       const response = await cloudWalletService.getDid()
+
       if (response) {
         updateAuthState({ loading: false, authorizedAsHolder: true })
       }

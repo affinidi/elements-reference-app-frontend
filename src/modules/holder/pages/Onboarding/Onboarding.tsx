@@ -31,7 +31,9 @@ export const Onboarding: FC = () => {
   } = useStoreCredentialMutation()
 
   const handleStoreCredential = async () => {
-    if (data) await mutateAsync({ data: [data] })
+    if (data) {
+      await mutateAsync({ data: [data] })
+    }
   }
 
   const handleDeleteCredential = () => {
@@ -39,9 +41,9 @@ export const Onboarding: FC = () => {
   }
 
   const handleLink = () => {
-    if (!params) return
-    if (params!.hash && params!.key) {
-      updateAuthState({ vcHash: params!.hash, vcKey: params!.key })
+    if (params?.hash && params?.key) {
+      updateAuthState({ vcHash: params.hash, vcKey: params.key })
+
       if (!authState.authorizedAsHolder) {
         navigate(PATHS.HOLDER.SIGNIN)
       }
@@ -52,13 +54,11 @@ export const Onboarding: FC = () => {
     if (storedCredentialData) {
       navigate(PATHS.HOLDER.HOME)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [storedCredentialData])
+  }, [storedCredentialData, navigate])
 
   useEffect(() => {
     handleLink()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [handleLink])
 
   if (isLoading) {
     return (
