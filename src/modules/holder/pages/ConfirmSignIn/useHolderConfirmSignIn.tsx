@@ -46,9 +46,6 @@ export const useHolderConfirmSignIn = () => {
       // NOTE: after email link click
       if (authState.vcOfferToken) {
         navigate(PATHS.HOLDER.CLAIM_VC)
-        // NOTE: after onboarding page with query params
-      } else if (authState.vcHash && authState.vcKey) {
-        navigate(PATHS.HOLDER.ONBOARD)
       } else {
         navigate(PATHS.HOLDER.HOME)
       }

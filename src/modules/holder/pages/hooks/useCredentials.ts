@@ -4,8 +4,6 @@ import {
   AnyData,
   ClaimCredentialOutput,
   GetCredentialsOutput,
-  SaveCredentialInput,
-  SaveCredentialOutput,
   ShareCredentialOutput,
   StoredCredential,
 } from 'services/cloud-wallet/cloud-wallet.api'
@@ -40,13 +38,10 @@ export const shareCredential = (id: string): Promise<ShareCredentialOutput | und
   return cloudWalletService.shareCredential(id)
 }
 
-export const storeCredentials = (data: SaveCredentialInput) => {
-  return cloudWalletService.storeCredentials(data)
-}
-
 export const retrieveSharedCredential = (hash: string, key: string) => {
   return cloudWalletService.retrieveSharedCredential(hash, key)
 }
+
 export const useCredentialsQuery = () => {
   return useQuery<GetCredentialsOutput, ErrorResponse>(['credentials'], () => getAllCredentials())
 }
@@ -70,12 +65,6 @@ export const useClaimCredentialQuery = (token: string) => {
 export const useShareCredentialMutation = () => {
   return useMutation<ShareCredentialOutput | undefined, ErrorResponse, string, () => void>(
     (id: string) => shareCredential(id),
-  )
-}
-
-export const useStoreCredentialMutation = () => {
-  return useMutation<SaveCredentialOutput, ErrorResponse, SaveCredentialInput, () => void>(
-    (data: SaveCredentialInput) => storeCredentials(data),
   )
 }
 

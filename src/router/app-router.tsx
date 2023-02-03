@@ -7,7 +7,6 @@ import { Home } from 'pages/Home/Home'
 import { Home as HolderHome } from 'modules/holder/pages/Home/Home'
 import { HolderConfirmSignIn } from 'modules/holder/pages/ConfirmSignIn/HolderConfirmSignIn'
 import { CredentialView } from 'modules/holder/pages/CredentialView/CredentialView'
-import { Onboarding } from 'modules/holder/pages/Onboarding/Onboarding'
 import { ClaimVc } from 'modules/holder/pages/ClaimVc/ClaimVc'
 import { Welcome } from 'modules/verifier/pages/Welcome/Welcome'
 import { Scan } from 'modules/verifier/pages/Scan/Scan'
@@ -44,7 +43,6 @@ const AppRouter: FC = () => {
         <Route path={PATHS.ISSUER.CONFIRM_SIGNIN} element={<IssuerConfirmSignIn />} />
         <Route path={PATHS.HOLDER.CONFIRM_SIGNIN} element={<HolderConfirmSignIn />} />
 
-        <Route path={PATHS.HOLDER.ONBOARD} element={<Onboarding />} />
         <Route path={PATHS.HOLDER.CLAIM_VC} element={<ClaimVc />} />
         <Route
           path={PATHS.HOLDER.HOME}
