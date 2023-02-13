@@ -25,7 +25,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
 }) => (
   <S.TicketDetailsCard>
     <S.DataCard>
-      <Box justifyContent="space-between" gap={24}>
+      <Box justifyContent="space-around" gap={24}>
         <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
           <Box>
             <Typography variant="c1"> Start Date</Typography>
@@ -55,8 +55,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
 
         <Box>
           <S.Data variant="p1">
-            This is your event ticket for {eventName}. This ticket will be scanned upon entry. This
-            QR code can only be used one time.
+            This is your event ticket for {eventName}. This ticket will be scanned upon entry.
           </S.Data>
         </Box>
       </Box>
