@@ -25,7 +25,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
 }) => (
   <S.TicketDetailsCard>
     <S.DataCard>
-      <Box justifyContent="space-around" gap={24}>
+      <Box justifyContent="space-between" gap={24}>
         <div className="grid grid-cols-2 lg:grid-cols-3 lg:gap-16">
           <Box>
             <Typography variant="c1"> Start Date</Typography>
