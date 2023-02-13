@@ -55,8 +55,7 @@ export const TicketDetails: FC<TicketDetailsProps> = ({
 
         <Box>
           <S.Data variant="p1">
-            This is your event ticket for {eventName}. This ticket will be scanned upon entry. This
-            QR code can only be used one time.
+            This is your event ticket for {eventName}. This ticket will be scanned upon entry.
           </S.Data>
         </Box>
       </Box>
